@@ -1,0 +1,347 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1C72FD0616C6FCA3000A6FE8 /* menuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C72FD0416C6FCA3000A6FE8 /* menuIcon.png */; };
+		1C72FD0716C6FCA3000A6FE8 /* menuIconHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C72FD0516C6FCA3000A6FE8 /* menuIconHighlighted.png */; };
+		1C890ABC16C7337F002CE42F /* icons.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 1C890ABB16C7337F002CE42F /* icons.iconset */; };
+		1CC520F016B66128001951D8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC520EF16B66128001951D8 /* Cocoa.framework */; };
+		1CC5211416B66BEC001951D8 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC5211316B66BEC001951D8 /* libicucore.dylib */; };
+		1CD4E9AE16C5CDD300BDF1B3 /* NetworkMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CD4E9AA16C5CDD300BDF1B3 /* NetworkMenu.xib */; };
+		1CD4E9AF16C5CDD300BDF1B3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD4E9AC16C5CDD300BDF1B3 /* AppDelegate.m */; };
+		1CD4E9B316C5CDFF00BDF1B3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD4E9B216C5CDFF00BDF1B3 /* main.m */; };
+		1CD4E9BB16C5CE1100BDF1B3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1CD4E9B816C5CE1100BDF1B3 /* InfoPlist.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1C72FD0416C6FCA3000A6FE8 /* menuIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menuIcon.png; path = "commotion-meshbook/Images/menuIcon.png"; sourceTree = SOURCE_ROOT; };
+		1C72FD0516C6FCA3000A6FE8 /* menuIconHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menuIconHighlighted.png; path = "commotion-meshbook/Images/menuIconHighlighted.png"; sourceTree = SOURCE_ROOT; };
+		1C890ABB16C7337F002CE42F /* icons.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; name = icons.iconset; path = "commotion-meshbook/Images/icons.iconset"; sourceTree = SOURCE_ROOT; };
+		1CC520EB16B66128001951D8 /* commotion-meshbook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "commotion-meshbook.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CC520EF16B66128001951D8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		1CC520F216B66128001951D8 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		1CC520F316B66128001951D8 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		1CC520F416B66128001951D8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1CC5211316B66BEC001951D8 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		1CD4E9A716C5CDD300BDF1B3 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "commotion-meshbook/AppDelegate.h"; sourceTree = SOURCE_ROOT; };
+		1CD4E9AB16C5CDD300BDF1B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "commotion-meshbook/en.lproj/NetworkMenu.xib"; sourceTree = SOURCE_ROOT; };
+		1CD4E9AC16C5CDD300BDF1B3 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = "commotion-meshbook/AppDelegate.m"; sourceTree = SOURCE_ROOT; };
+		1CD4E9B116C5CDFF00BDF1B3 /* commotion-meshbook-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "commotion-meshbook-Prefix.pch"; path = "commotion-meshbook/commotion-meshbook-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		1CD4E9B216C5CDFF00BDF1B3 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "commotion-meshbook/main.m"; sourceTree = SOURCE_ROOT; };
+		1CD4E9B716C5CE1100BDF1B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = "commotion-meshbook/en.lproj/Credits.rtf"; sourceTree = SOURCE_ROOT; };
+		1CD4E9B916C5CE1100BDF1B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "commotion-meshbook/en.lproj/InfoPlist.strings"; sourceTree = SOURCE_ROOT; };
+		1CD4E9BF16C5CF1C00BDF1B3 /* commotion-meshbook-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "commotion-meshbook-Info.plist"; path = "commotion-meshbook/commotion-meshbook-Info.plist"; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1CC520E816B66128001951D8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CC5211416B66BEC001951D8 /* libicucore.dylib in Frameworks */,
+				1CC520F016B66128001951D8 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1C72FCED16C6E9C5000A6FE8 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				1C890ABB16C7337F002CE42F /* icons.iconset */,
+				1C72FD0416C6FCA3000A6FE8 /* menuIcon.png */,
+				1C72FD0516C6FCA3000A6FE8 /* menuIconHighlighted.png */,
+			);
+			name = Images;
+			path = "gp-meshconnect";
+			sourceTree = "<group>";
+		};
+		1CC520E016B66128001951D8 = {
+			isa = PBXGroup;
+			children = (
+				1CC520F516B66128001951D8 /* commotion-meshbook */,
+				1C72FCED16C6E9C5000A6FE8 /* Images */,
+				1CC520F616B66128001951D8 /* Supporting Files */,
+				1CC5210C16B66247001951D8 /* Libraries */,
+				1CC520EE16B66128001951D8 /* Frameworks */,
+				1CC520EC16B66128001951D8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1CC520EC16B66128001951D8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1CC520EB16B66128001951D8 /* commotion-meshbook.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1CC520EE16B66128001951D8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1CC520EF16B66128001951D8 /* Cocoa.framework */,
+				1CC520F116B66128001951D8 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1CC520F116B66128001951D8 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1CC520F216B66128001951D8 /* AppKit.framework */,
+				1CC520F316B66128001951D8 /* CoreData.framework */,
+				1CC520F416B66128001951D8 /* Foundation.framework */,
+				1CC5211316B66BEC001951D8 /* libicucore.dylib */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		1CC520F516B66128001951D8 /* commotion-meshbook */ = {
+			isa = PBXGroup;
+			children = (
+				1CD4E9A716C5CDD300BDF1B3 /* AppDelegate.h */,
+				1CD4E9AC16C5CDD300BDF1B3 /* AppDelegate.m */,
+				1CD4E9AA16C5CDD300BDF1B3 /* NetworkMenu.xib */,
+			);
+			name = "commotion-meshbook";
+			path = "gp-meshconnect";
+			sourceTree = "<group>";
+		};
+		1CC520F616B66128001951D8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1CD4E9B116C5CDFF00BDF1B3 /* commotion-meshbook-Prefix.pch */,
+				1CD4E9BF16C5CF1C00BDF1B3 /* commotion-meshbook-Info.plist */,
+				1CD4E9B216C5CDFF00BDF1B3 /* main.m */,
+				1CD4E9B616C5CE1100BDF1B3 /* Credits.rtf */,
+				1CD4E9B816C5CE1100BDF1B3 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			path = "gp-meshconnect";
+			sourceTree = "<group>";
+		};
+		1CC5210C16B66247001951D8 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Libraries;
+			path = "gp-meshconnect";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1CC520EA16B66128001951D8 /* commotion-meshbook */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1CC5210916B66129001951D8 /* Build configuration list for PBXNativeTarget "commotion-meshbook" */;
+			buildPhases = (
+				1CC520E716B66128001951D8 /* Sources */,
+				1CC520E816B66128001951D8 /* Frameworks */,
+				1CC520E916B66128001951D8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "commotion-meshbook";
+			productName = "gp-meshconnect";
+			productReference = 1CC520EB16B66128001951D8 /* commotion-meshbook.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1CC520E216B66128001951D8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Scal.io, LLC";
+			};
+			buildConfigurationList = 1CC520E516B66128001951D8 /* Build configuration list for PBXProject "commotion-meshbook" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1CC520E016B66128001951D8;
+			productRefGroup = 1CC520EC16B66128001951D8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1CC520EA16B66128001951D8 /* commotion-meshbook */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1CC520E916B66128001951D8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CD4E9AE16C5CDD300BDF1B3 /* NetworkMenu.xib in Resources */,
+				1CD4E9BB16C5CE1100BDF1B3 /* InfoPlist.strings in Resources */,
+				1C72FD0616C6FCA3000A6FE8 /* menuIcon.png in Resources */,
+				1C72FD0716C6FCA3000A6FE8 /* menuIconHighlighted.png in Resources */,
+				1C890ABC16C7337F002CE42F /* icons.iconset in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1CC520E716B66128001951D8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CD4E9AF16C5CDD300BDF1B3 /* AppDelegate.m in Sources */,
+				1CD4E9B316C5CDFF00BDF1B3 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		1CD4E9AA16C5CDD300BDF1B3 /* NetworkMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1CD4E9AB16C5CDD300BDF1B3 /* en */,
+			);
+			name = NetworkMenu.xib;
+			sourceTree = "<group>";
+		};
+		1CD4E9B616C5CE1100BDF1B3 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1CD4E9B716C5CE1100BDF1B3 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		1CD4E9B816C5CE1100BDF1B3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1CD4E9B916C5CE1100BDF1B3 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1CC5210716B66129001951D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		1CC5210816B66129001951D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		1CC5210A16B66129001951D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "commotion-meshbook/commotion-meshbook-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/commotion-meshbook/commotion-meshbook-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "commotion-meshbook";
+				VALID_ARCHS = "i386 x86_64";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1CC5210B16B66129001951D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "commotion-meshbook/commotion-meshbook-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/commotion-meshbook/commotion-meshbook-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "commotion-meshbook";
+				VALID_ARCHS = "i386 x86_64";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1CC520E516B66128001951D8 /* Build configuration list for PBXProject "commotion-meshbook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1CC5210716B66129001951D8 /* Debug */,
+				1CC5210816B66129001951D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1CC5210916B66129001951D8 /* Build configuration list for PBXNativeTarget "commotion-meshbook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1CC5210A16B66129001951D8 /* Debug */,
+				1CC5210B16B66129001951D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1CC520E216B66128001951D8 /* Project object */;
+}
