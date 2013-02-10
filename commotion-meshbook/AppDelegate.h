@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "RegexKitLite.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
 
