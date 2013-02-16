@@ -9,10 +9,31 @@
 /* Begin PBXBuildFile section */
 		1C72FD0616C6FCA3000A6FE8 /* menuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C72FD0416C6FCA3000A6FE8 /* menuIcon.png */; };
 		1C72FD0716C6FCA3000A6FE8 /* menuIconHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C72FD0516C6FCA3000A6FE8 /* menuIconHighlighted.png */; };
+		1C8302DC16CEFA97003A59FB /* ProfilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8302DA16CEFA97003A59FB /* ProfilesViewController.m */; };
+		1C8302E516CEFBA8003A59FB /* StatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8302E316CEFBA8003A59FB /* StatusViewController.m */; };
+		1C8302E616CEFBA8003A59FB /* StatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C8302E416CEFBA8003A59FB /* StatusViewController.xib */; };
+		1C8302F016CF21F5003A59FB /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C8302ED16CF21F5003A59FB /* MASPreferencesWindow.xib */; };
+		1C8302F116CF21F5003A59FB /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8302EF16CF21F5003A59FB /* MASPreferencesWindowController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		1C8302FC16CF64E5003A59FB /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C8302F916CF64E5003A59FB /* HelpViewController.xib */; };
+		1C8302FD16CF64E5003A59FB /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8302FA16CF64E5003A59FB /* HelpViewController.m */; };
+		1C83030116CF64F5003A59FB /* LogViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C8302FE16CF64F5003A59FB /* LogViewController.xib */; };
+		1C83030216CF64F5003A59FB /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8302FF16CF64F5003A59FB /* LogViewController.m */; };
+		1C83030416CF65A9003A59FB /* ProfilesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C83030316CF65A9003A59FB /* ProfilesViewController.xib */; };
+		1C83030816CF67D9003A59FB /* tabStatus.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C83030716CF67D9003A59FB /* tabStatus.png */; };
+		1C83031016CF6F16003A59FB /* tabHelp.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C83030916CF6F16003A59FB /* tabHelp.png */; };
+		1C83031116CF6F16003A59FB /* tabHelp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C83030A16CF6F16003A59FB /* tabHelp@2x.png */; };
+		1C83031216CF6F16003A59FB /* tabLog.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C83030B16CF6F16003A59FB /* tabLog.png */; };
+		1C83031316CF6F16003A59FB /* tabLog@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C83030C16CF6F16003A59FB /* tabLog@2x.png */; };
+		1C83031416CF6F16003A59FB /* tabProfiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C83030D16CF6F16003A59FB /* tabProfiles.png */; };
+		1C83031516CF6F16003A59FB /* tabProfiles@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C83030E16CF6F16003A59FB /* tabProfiles@2x.png */; };
+		1C83031616CF6F16003A59FB /* tabStatus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C83030F16CF6F16003A59FB /* tabStatus@2x.png */; };
+		1C83031A16CF7B7B003A59FB /* ProfileData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C83031916CF7B7B003A59FB /* ProfileData.m */; };
+		1C83031D16CF880D003A59FB /* profileThumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C83031B16CF880D003A59FB /* profileThumb.png */; };
+		1C83031E16CF880D003A59FB /* profileThumb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C83031C16CF880D003A59FB /* profileThumb@2x.png */; };
 		1C890ABC16C7337F002CE42F /* icons.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 1C890ABB16C7337F002CE42F /* icons.iconset */; };
 		1CC520F016B66128001951D8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC520EF16B66128001951D8 /* Cocoa.framework */; };
 		1CC5211416B66BEC001951D8 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC5211316B66BEC001951D8 /* libicucore.dylib */; };
-		1CD4E9AE16C5CDD300BDF1B3 /* NetworkMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CD4E9AA16C5CDD300BDF1B3 /* NetworkMenu.xib */; };
+		1CD4E9AE16C5CDD300BDF1B3 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CD4E9AA16C5CDD300BDF1B3 /* MainMenu.xib */; };
 		1CD4E9AF16C5CDD300BDF1B3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD4E9AC16C5CDD300BDF1B3 /* AppDelegate.m */; };
 		1CD4E9B316C5CDFF00BDF1B3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD4E9B216C5CDFF00BDF1B3 /* main.m */; };
 		1CD4E9BB16C5CE1100BDF1B3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1CD4E9B816C5CE1100BDF1B3 /* InfoPlist.strings */; };
@@ -21,6 +42,34 @@
 /* Begin PBXFileReference section */
 		1C72FD0416C6FCA3000A6FE8 /* menuIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menuIcon.png; path = "commotion-meshbook/Images/menuIcon.png"; sourceTree = SOURCE_ROOT; };
 		1C72FD0516C6FCA3000A6FE8 /* menuIconHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menuIconHighlighted.png; path = "commotion-meshbook/Images/menuIconHighlighted.png"; sourceTree = SOURCE_ROOT; };
+		1C8302D916CEFA97003A59FB /* ProfilesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfilesViewController.h; path = "commotion-meshbook/ViewControllers/ProfilesViewController.h"; sourceTree = SOURCE_ROOT; };
+		1C8302DA16CEFA97003A59FB /* ProfilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfilesViewController.m; path = "commotion-meshbook/ViewControllers/ProfilesViewController.m"; sourceTree = SOURCE_ROOT; };
+		1C8302E216CEFBA8003A59FB /* StatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatusViewController.h; path = "commotion-meshbook/ViewControllers/StatusViewController.h"; sourceTree = SOURCE_ROOT; };
+		1C8302E316CEFBA8003A59FB /* StatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatusViewController.m; path = "commotion-meshbook/ViewControllers/StatusViewController.m"; sourceTree = SOURCE_ROOT; };
+		1C8302E416CEFBA8003A59FB /* StatusViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StatusViewController.xib; path = "commotion-meshbook/ViewControllers/StatusViewController.xib"; sourceTree = SOURCE_ROOT; };
+		1C8302EC16CF21F5003A59FB /* MASPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASPreferencesViewController.h; sourceTree = "<group>"; };
+		1C8302ED16CF21F5003A59FB /* MASPreferencesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MASPreferencesWindow.xib; sourceTree = "<group>"; };
+		1C8302EE16CF21F5003A59FB /* MASPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASPreferencesWindowController.h; sourceTree = "<group>"; };
+		1C8302EF16CF21F5003A59FB /* MASPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASPreferencesWindowController.m; sourceTree = "<group>"; };
+		1C8302F916CF64E5003A59FB /* HelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HelpViewController.xib; path = "commotion-meshbook/ViewControllers/HelpViewController.xib"; sourceTree = SOURCE_ROOT; };
+		1C8302FA16CF64E5003A59FB /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpViewController.m; path = "commotion-meshbook/ViewControllers/HelpViewController.m"; sourceTree = SOURCE_ROOT; };
+		1C8302FB16CF64E5003A59FB /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpViewController.h; path = "commotion-meshbook/ViewControllers/HelpViewController.h"; sourceTree = SOURCE_ROOT; };
+		1C8302FE16CF64F5003A59FB /* LogViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LogViewController.xib; path = "commotion-meshbook/ViewControllers/LogViewController.xib"; sourceTree = SOURCE_ROOT; };
+		1C8302FF16CF64F5003A59FB /* LogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogViewController.m; path = "commotion-meshbook/ViewControllers/LogViewController.m"; sourceTree = SOURCE_ROOT; };
+		1C83030016CF64F5003A59FB /* LogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogViewController.h; path = "commotion-meshbook/ViewControllers/LogViewController.h"; sourceTree = SOURCE_ROOT; };
+		1C83030316CF65A9003A59FB /* ProfilesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfilesViewController.xib; path = "commotion-meshbook/ViewControllers/ProfilesViewController.xib"; sourceTree = SOURCE_ROOT; };
+		1C83030716CF67D9003A59FB /* tabStatus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tabStatus.png; path = "commotion-meshbook/Images/tabStatus.png"; sourceTree = SOURCE_ROOT; };
+		1C83030916CF6F16003A59FB /* tabHelp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tabHelp.png; path = "commotion-meshbook/Images/tabHelp.png"; sourceTree = SOURCE_ROOT; };
+		1C83030A16CF6F16003A59FB /* tabHelp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabHelp@2x.png"; path = "commotion-meshbook/Images/tabHelp@2x.png"; sourceTree = SOURCE_ROOT; };
+		1C83030B16CF6F16003A59FB /* tabLog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tabLog.png; path = "commotion-meshbook/Images/tabLog.png"; sourceTree = SOURCE_ROOT; };
+		1C83030C16CF6F16003A59FB /* tabLog@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabLog@2x.png"; path = "commotion-meshbook/Images/tabLog@2x.png"; sourceTree = SOURCE_ROOT; };
+		1C83030D16CF6F16003A59FB /* tabProfiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tabProfiles.png; path = "commotion-meshbook/Images/tabProfiles.png"; sourceTree = SOURCE_ROOT; };
+		1C83030E16CF6F16003A59FB /* tabProfiles@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabProfiles@2x.png"; path = "commotion-meshbook/Images/tabProfiles@2x.png"; sourceTree = SOURCE_ROOT; };
+		1C83030F16CF6F16003A59FB /* tabStatus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabStatus@2x.png"; path = "commotion-meshbook/Images/tabStatus@2x.png"; sourceTree = SOURCE_ROOT; };
+		1C83031816CF7B7B003A59FB /* ProfileData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileData.h; path = "commotion-meshbook/Model/ProfileData.h"; sourceTree = SOURCE_ROOT; };
+		1C83031916CF7B7B003A59FB /* ProfileData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileData.m; path = "commotion-meshbook/Model/ProfileData.m"; sourceTree = SOURCE_ROOT; };
+		1C83031B16CF880D003A59FB /* profileThumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = profileThumb.png; path = "commotion-meshbook/Images/profileThumb.png"; sourceTree = SOURCE_ROOT; };
+		1C83031C16CF880D003A59FB /* profileThumb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "profileThumb@2x.png"; path = "commotion-meshbook/Images/profileThumb@2x.png"; sourceTree = SOURCE_ROOT; };
 		1C890ABB16C7337F002CE42F /* icons.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; name = icons.iconset; path = "commotion-meshbook/Images/icons.iconset"; sourceTree = SOURCE_ROOT; };
 		1CC520EB16B66128001951D8 /* commotion-meshbook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "commotion-meshbook.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CC520EF16B66128001951D8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -29,7 +78,7 @@
 		1CC520F416B66128001951D8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1CC5211316B66BEC001951D8 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		1CD4E9A716C5CDD300BDF1B3 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "commotion-meshbook/AppDelegate.h"; sourceTree = SOURCE_ROOT; };
-		1CD4E9AB16C5CDD300BDF1B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "commotion-meshbook/en.lproj/NetworkMenu.xib"; sourceTree = SOURCE_ROOT; };
+		1CD4E9AB16C5CDD300BDF1B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "commotion-meshbook/en.lproj/MainMenu.xib"; sourceTree = SOURCE_ROOT; };
 		1CD4E9AC16C5CDD300BDF1B3 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = "commotion-meshbook/AppDelegate.m"; sourceTree = SOURCE_ROOT; };
 		1CD4E9B116C5CDFF00BDF1B3 /* commotion-meshbook-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "commotion-meshbook-Prefix.pch"; path = "commotion-meshbook/commotion-meshbook-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		1CD4E9B216C5CDFF00BDF1B3 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "commotion-meshbook/main.m"; sourceTree = SOURCE_ROOT; };
@@ -57,9 +106,93 @@
 				1C890ABB16C7337F002CE42F /* icons.iconset */,
 				1C72FD0416C6FCA3000A6FE8 /* menuIcon.png */,
 				1C72FD0516C6FCA3000A6FE8 /* menuIconHighlighted.png */,
+				1C83030716CF67D9003A59FB /* tabStatus.png */,
+				1C83030F16CF6F16003A59FB /* tabStatus@2x.png */,
+				1C83030D16CF6F16003A59FB /* tabProfiles.png */,
+				1C83030E16CF6F16003A59FB /* tabProfiles@2x.png */,
+				1C83030916CF6F16003A59FB /* tabHelp.png */,
+				1C83030A16CF6F16003A59FB /* tabHelp@2x.png */,
+				1C83030B16CF6F16003A59FB /* tabLog.png */,
+				1C83030C16CF6F16003A59FB /* tabLog@2x.png */,
+				1C83031B16CF880D003A59FB /* profileThumb.png */,
+				1C83031C16CF880D003A59FB /* profileThumb@2x.png */,
 			);
 			name = Images;
 			path = "gp-meshconnect";
+			sourceTree = "<group>";
+		};
+		1C8302DF16CEFAA6003A59FB /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				1C8302F216CF63BD003A59FB /* Status */,
+				1C8302F416CF63CC003A59FB /* Profiles */,
+				1C8302F716CF6418003A59FB /* Help */,
+				1C8302F816CF64D2003A59FB /* Log */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		1C8302EB16CF21F5003A59FB /* MASPreferences */ = {
+			isa = PBXGroup;
+			children = (
+				1C8302EC16CF21F5003A59FB /* MASPreferencesViewController.h */,
+				1C8302EE16CF21F5003A59FB /* MASPreferencesWindowController.h */,
+				1C8302EF16CF21F5003A59FB /* MASPreferencesWindowController.m */,
+				1C8302ED16CF21F5003A59FB /* MASPreferencesWindow.xib */,
+			);
+			name = MASPreferences;
+			path = "commotion-meshbook/Libraries/MASPreferences";
+			sourceTree = SOURCE_ROOT;
+		};
+		1C8302F216CF63BD003A59FB /* Status */ = {
+			isa = PBXGroup;
+			children = (
+				1C8302E216CEFBA8003A59FB /* StatusViewController.h */,
+				1C8302E316CEFBA8003A59FB /* StatusViewController.m */,
+				1C8302E416CEFBA8003A59FB /* StatusViewController.xib */,
+			);
+			name = Status;
+			path = "commotion-meshbook/ViewControllers";
+			sourceTree = "<group>";
+		};
+		1C8302F416CF63CC003A59FB /* Profiles */ = {
+			isa = PBXGroup;
+			children = (
+				1C83031716CF7988003A59FB /* Model */,
+				1C8302D916CEFA97003A59FB /* ProfilesViewController.h */,
+				1C8302DA16CEFA97003A59FB /* ProfilesViewController.m */,
+				1C83030316CF65A9003A59FB /* ProfilesViewController.xib */,
+			);
+			name = Profiles;
+			sourceTree = "<group>";
+		};
+		1C8302F716CF6418003A59FB /* Help */ = {
+			isa = PBXGroup;
+			children = (
+				1C8302FB16CF64E5003A59FB /* HelpViewController.h */,
+				1C8302FA16CF64E5003A59FB /* HelpViewController.m */,
+				1C8302F916CF64E5003A59FB /* HelpViewController.xib */,
+			);
+			name = Help;
+			sourceTree = "<group>";
+		};
+		1C8302F816CF64D2003A59FB /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				1C83030016CF64F5003A59FB /* LogViewController.h */,
+				1C8302FF16CF64F5003A59FB /* LogViewController.m */,
+				1C8302FE16CF64F5003A59FB /* LogViewController.xib */,
+			);
+			name = Log;
+			sourceTree = "<group>";
+		};
+		1C83031716CF7988003A59FB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1C83031816CF7B7B003A59FB /* ProfileData.h */,
+				1C83031916CF7B7B003A59FB /* ProfileData.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		1CC520E016B66128001951D8 = {
@@ -107,7 +240,8 @@
 			children = (
 				1CD4E9A716C5CDD300BDF1B3 /* AppDelegate.h */,
 				1CD4E9AC16C5CDD300BDF1B3 /* AppDelegate.m */,
-				1CD4E9AA16C5CDD300BDF1B3 /* NetworkMenu.xib */,
+				1CD4E9AA16C5CDD300BDF1B3 /* MainMenu.xib */,
+				1C8302DF16CEFAA6003A59FB /* Settings */,
 			);
 			name = "commotion-meshbook";
 			path = "gp-meshconnect";
@@ -129,6 +263,7 @@
 		1CC5210C16B66247001951D8 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				1C8302EB16CF21F5003A59FB /* MASPreferences */,
 			);
 			name = Libraries;
 			path = "gp-meshconnect";
@@ -185,11 +320,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1CD4E9AE16C5CDD300BDF1B3 /* NetworkMenu.xib in Resources */,
+				1CD4E9AE16C5CDD300BDF1B3 /* MainMenu.xib in Resources */,
 				1CD4E9BB16C5CE1100BDF1B3 /* InfoPlist.strings in Resources */,
 				1C72FD0616C6FCA3000A6FE8 /* menuIcon.png in Resources */,
 				1C72FD0716C6FCA3000A6FE8 /* menuIconHighlighted.png in Resources */,
 				1C890ABC16C7337F002CE42F /* icons.iconset in Resources */,
+				1C8302E616CEFBA8003A59FB /* StatusViewController.xib in Resources */,
+				1C8302F016CF21F5003A59FB /* MASPreferencesWindow.xib in Resources */,
+				1C8302FC16CF64E5003A59FB /* HelpViewController.xib in Resources */,
+				1C83030116CF64F5003A59FB /* LogViewController.xib in Resources */,
+				1C83030416CF65A9003A59FB /* ProfilesViewController.xib in Resources */,
+				1C83030816CF67D9003A59FB /* tabStatus.png in Resources */,
+				1C83031016CF6F16003A59FB /* tabHelp.png in Resources */,
+				1C83031116CF6F16003A59FB /* tabHelp@2x.png in Resources */,
+				1C83031216CF6F16003A59FB /* tabLog.png in Resources */,
+				1C83031316CF6F16003A59FB /* tabLog@2x.png in Resources */,
+				1C83031416CF6F16003A59FB /* tabProfiles.png in Resources */,
+				1C83031516CF6F16003A59FB /* tabProfiles@2x.png in Resources */,
+				1C83031616CF6F16003A59FB /* tabStatus@2x.png in Resources */,
+				1C83031D16CF880D003A59FB /* profileThumb.png in Resources */,
+				1C83031E16CF880D003A59FB /* profileThumb@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,18 +352,24 @@
 			files = (
 				1CD4E9AF16C5CDD300BDF1B3 /* AppDelegate.m in Sources */,
 				1CD4E9B316C5CDFF00BDF1B3 /* main.m in Sources */,
+				1C8302DC16CEFA97003A59FB /* ProfilesViewController.m in Sources */,
+				1C8302E516CEFBA8003A59FB /* StatusViewController.m in Sources */,
+				1C8302F116CF21F5003A59FB /* MASPreferencesWindowController.m in Sources */,
+				1C8302FD16CF64E5003A59FB /* HelpViewController.m in Sources */,
+				1C83030216CF64F5003A59FB /* LogViewController.m in Sources */,
+				1C83031A16CF7B7B003A59FB /* ProfileData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		1CD4E9AA16C5CDD300BDF1B3 /* NetworkMenu.xib */ = {
+		1CD4E9AA16C5CDD300BDF1B3 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				1CD4E9AB16C5CDD300BDF1B3 /* en */,
 			);
-			name = NetworkMenu.xib;
+			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 		1CD4E9B616C5CE1100BDF1B3 /* Credits.rtf */ = {
