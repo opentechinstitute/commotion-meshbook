@@ -27,7 +27,6 @@
     IBOutlet NSMenuItem *menuMeshProfile;
     
     int executionCount;
-    
 }
 
 @property (nonatomic, readonly) NSWindowController *settingsWindowController;

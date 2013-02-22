@@ -72,7 +72,7 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
 {
-    return YES;
+    return NO;
 }
 
 
