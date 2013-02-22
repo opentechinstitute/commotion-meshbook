@@ -14,5 +14,6 @@
 - (IBAction)addProfile:(id)sender;
 - (IBAction)deleteProfile:(id)sender;
 - (IBAction)profileDidEndEdit:(id)sender;
+- (IBAction)clearUserDefaults: (id)sender;
 
 @end

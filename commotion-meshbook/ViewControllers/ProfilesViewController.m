@@ -28,7 +28,20 @@
 {
     self = [super initWithNibName:@"ProfilesViewController" bundle:nil];
     if (self) {
-        // Initialization code here.
+
+        /**
+         NSLog(@"ssid: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"ssid"]);
+         NSLog(@"bssid: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"bssid"]);
+         NSLog(@"channel: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"channel"]);
+         NSLog(@"ip: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"ip"]);
+         NSLog(@"ipgenerate: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"ipgenerate"]);
+         NSLog(@"netmask: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"netmask"]);
+         NSLog(@"dns: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"dns"]);
+         **/
+        
+        // Default Preferences
+        //userPrefs = [NSUserDefaults standardUserDefaults];
+        
         
         // Setup sample data
         ProfileData *profile1 = [[ProfileData alloc] initWithSSID:@"Commotion 1" bssid:@"" channel:@"" ip:@"" ipgenerate:@"" netmask:@"" dns:@"" thumbImage:[NSImage imageNamed:@"profileThumb"]];
@@ -200,7 +213,30 @@
 
 
 
-
+-(IBAction) clearUserDefaults: (id)sender {
+    
+    NSLog(@"\n\n");
+    NSLog(@"CLEARING USER DEFAULTS");
+    
+    // clear user defaults (text the user inputs into pref pane)
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ssid"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"bssid"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"channel"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ip"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ipgenerate"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"netmask"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"dns"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSLog(@"CLEARED ssid: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"ssid"]);
+    NSLog(@"CLEARED bssid: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"bssid"]);
+    NSLog(@"CLEARED channel: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"channel"]);
+    NSLog(@"CLEARED ip: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"ip"]);
+    NSLog(@"CLEARED ipgenerate: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"ipgenerate"]);
+    NSLog(@"CLEARED netmask: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"netmask"]);
+    NSLog(@"CLEARED dns: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"dns"]);
+    
+}
 
 
 
@@ -222,5 +258,16 @@
 {
     return NSLocalizedString(@"Profiles", @"Toolbar item name for the Profiles pane");
 }
+
+/**
+
+- (NSView *)initialKeyView
+{
+    NSInteger focusedControlIndex = [[NSApp valueForKeyPath:@"delegate.focusedAdvancedControlIndex"] integerValue];
+    return (focusedControlIndex == 0 ? self.textField : self.tableView);
+}
+ 
+ **/
+
 
 @end

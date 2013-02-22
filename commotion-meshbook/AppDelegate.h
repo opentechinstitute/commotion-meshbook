@@ -9,26 +9,45 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
 
-    //NSWindow *_window;
+    // view controller setup
     NSWindowController *_settingsWindowController;
     
-	NSStatusItem *statusItem;       
+    // Menu Items
+	NSStatusItem *statusItem;
 	IBOutlet NSMenu *statusMenu;
-	IBOutlet NSMenuItem *menuStatus;
-    IBOutlet NSMenuItem *menuProfile;
-    IBOutlet NSMenuItem *menuNetwork;
 	IBOutlet NSMenuItem *menuQuit;
+
+    // Menu Items - Network
+	IBOutlet NSMenuItem *menuNetworkStatus;
+    IBOutlet NSMenuItem *menuNetworkSSID;
+    IBOutlet NSMenuItem *menuNetworkBSSID;
+    IBOutlet NSMenuItem *menuNetworkChannel;
+    // Menu Items - Mesh
+    IBOutlet NSMenuItem *menuMeshStatus;
+    IBOutlet NSMenuItem *menuMeshProfile;
     
-	//NSUserDefaults *userPrefs;
+    int executionCount;
+    
 }
 
-@property (assign) IBOutlet NSWindow *window;
 @property (nonatomic, readonly) NSWindowController *settingsWindowController;
-@property (nonatomic) NSInteger focusedAdvancedControlIndex;
+@property (nonatomic) NSInteger focusedAdvancedControlIndex; // maspref 
 
--(NSMutableDictionary*) getProfileInfo;
--(IBAction)openSettings:(id)sender;
--(IBAction) updateProfileInfo: (id)sender;
--(IBAction) clearUserDefaults: (id)sender;
+#pragma mark -
+#pragma mark Network / Mesh Data Setup & Processing
+- (void)initNetworkInterface;
+- (void)initMeshInterface;
+- (void)initOLSRDService;
+- (void)OLSRDServiceExecuteSuccess:(NSNotification*)aNotification;
+- (void)executeMeshDataPolling;
+- (void) updateNetworkMenuItems:(NSDictionary *)fetchedNetworkData;
+- (void)updateMeshMenuItems:(NSNotification *)fetchedMeshData;
+
+#pragma mark -
+#pragma mark Menu / Window Controller
+- (NSWindowController *)settingsWindowController;
+- (IBAction) openSettings:(id)sender;
+- (NSInteger)focusedAdvancedControlIndex;
+- (void)setFocusedAdvancedControlIndex:(NSInteger)focusedAdvancedControlIndex;
 
 @end

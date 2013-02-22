@@ -38,4 +38,6 @@ __attribute__((__visibility__("default")))
 - (IBAction)goNextTab:(id)sender;
 - (IBAction)goPreviousTab:(id)sender;
 
+- (void)changeViewFromNotification:(NSNotification *)notification;
+
 @end

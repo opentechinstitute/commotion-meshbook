@@ -67,6 +67,7 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
 
 - (void)windowDidLoad
 {
+        
     if ([self.title length] > 0)
         [[self window] setTitle:self.title];
 
@@ -79,6 +80,8 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidMove:)   name:NSWindowDidMoveNotification object:self.window];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResize:) name:NSWindowDidResizeNotification object:self.window];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeViewFromNotification:) name:@"kMenuItemChangeViewControllerTab" object:nil];
+
 }
 
 - (NSViewController <MASPreferencesViewController> *)firstViewController {
@@ -251,18 +254,14 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
     }
 
     [[self.window toolbar] setSelectedItemIdentifier:controller.identifier];
+    
+    //NSLog(@"controller.identifier %@ ", controller.identifier);
 
     // Record new selected controller in user defaults
     [[NSUserDefaults standardUserDefaults] setObject:controller.identifier forKey:kMASPreferencesSelectedViewKey];
     
     NSView *controllerView = controller.view;
 
-    
-    
-    
-    
-    
-    
     // Retrieve current and minimum frame size for the view
     NSString *oldViewRectString = [[NSUserDefaults standardUserDefaults] stringForKey:PreferencesKeyForViewBounds(controller.identifier)];
     NSString *minViewRectString = [_minimumViewRects objectForKey:controller.identifier];
@@ -349,6 +348,17 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
     while ([_viewControllers objectAtIndex:selectedIndex] == [NSNull null]);
 
     [self selectControllerAtIndex:selectedIndex];
+}
+
+#pragma mark -
+#pragma mark ChangeViewFromNotification
+- (void)changeViewFromNotification:(NSNotification *)notification
+{
+    //NSLog(@"notification: %@", [notification object]);
+    
+    NSString *itemIdentifier = [notification object];
+    
+    self.selectedViewController = [self viewControllerForIdentifier:itemIdentifier];
 }
 
 @end
