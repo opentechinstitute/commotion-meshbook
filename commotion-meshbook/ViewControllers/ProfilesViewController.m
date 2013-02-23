@@ -29,16 +29,16 @@
     self = [super initWithNibName:@"ProfilesViewController" bundle:nil];
     if (self) {
 
-        /**
-         NSLog(@"ssid: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"ssid"]);
-         NSLog(@"bssid: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"bssid"]);
-         NSLog(@"channel: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"channel"]);
-         NSLog(@"ip: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"ip"]);
-         NSLog(@"ipgenerate: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"ipgenerate"]);
-         NSLog(@"netmask: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"netmask"]);
-         NSLog(@"dns: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"dns"]);
-         **/
         
+        NSLog(@"ssid: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"ssid"]);
+        NSLog(@"bssid: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"bssid"]);
+        NSLog(@"channel: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"channel"]);
+        NSLog(@"ip: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"ip"]);
+        NSLog(@"ipgenerate: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"ipgenerate"]);
+        NSLog(@"netmask: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"netmask"]);
+        NSLog(@"dns: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"dns"]);
+
+
         // Default Preferences
         //userPrefs = [NSUserDefaults standardUserDefaults];
         

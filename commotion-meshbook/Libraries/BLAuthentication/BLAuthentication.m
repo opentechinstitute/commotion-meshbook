@@ -292,15 +292,36 @@
 			i++;
 		}
 		args[i] = NULL;
+        
+        //NSLog(@"[pathToCommand fileSystemRepresentation]: %s", [pathToCommand fileSystemRepresentation]);
 
 		err = AuthorizationExecuteWithPrivileges(authorizationRef, [pathToCommand fileSystemRepresentation],
 												0, args, &pipe);
 	}
 
+    
+    
+    #define MAXLEN 256
+    
+
+    
     /**
-     * DISPLAYS PROGRAM OUTPUT -- LEAKS IF LEFT TURNED ON
+     * DISPLAYS PROGRAM OUTPUT -- BLOCKS UI IF LEFT ON
      */
+    
     /**
+    int n;
+    char buf[MAXLEN];
+    while((n = read(fileno(pipe),buf,sizeof(buf))) != 0){
+        NSLog(@"output: %d:",n);
+        fflush(stdout);
+        write(1,buf,n);
+    }
+    **/
+    
+    
+    /**
+     OR
     char readBuffer[128];
     if (err == errAuthorizationSuccess) {
         for (;;) {
@@ -311,6 +332,7 @@
         }
     }
      **/
+   
      
      
     

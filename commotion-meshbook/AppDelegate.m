@@ -111,7 +111,7 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
     NSString* olsrdConfPath = [myBundle pathForResource:@"olsrd" ofType:@"conf"];
     //NSLog(@"myBundle olsrd path: %@", olsrdPath);  // shows: commotion-meshbook.app/Contents/Resources/olsrd
     
-    NSArray *args = [NSArray arrayWithObjects:@"-f", olsrdConfPath, @"-i", @"en1", @"-d", @"1", nil];
+    NSArray *args = [NSArray arrayWithObjects:@"-f", olsrdConfPath, @"-i", @"en1", @"-d", @"3", nil];
     [[BLAuthentication sharedInstance] executeCommand:olsrdPath withArgs:args andType:@"olsrd"];
 }
 
