@@ -6,7 +6,9 @@
 //
 
 #import "ProfilesViewController.h"
-#import "ProfileData.h"
+#import "ProfilesDoc.h"
+#import "ProfilesData.h"
+#import "ProfilesDatabase.h"
 
 @interface ProfilesViewController ()
 
@@ -24,32 +26,25 @@
 
 @implementation ProfilesViewController
 
+//==========================================================
+#pragma mark Init
+//==========================================================
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:@"ProfilesViewController" bundle:nil];
     if (self) {
-
         
-        NSLog(@"ssid: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"ssid"]);
-        NSLog(@"bssid: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"bssid"]);
-        NSLog(@"channel: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"channel"]);
-        NSLog(@"ip: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"ip"]);
-        NSLog(@"ipgenerate: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"ipgenerate"]);
-        NSLog(@"netmask: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"netmask"]);
-        NSLog(@"dns: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"dns"]);
-
-
-        // Default Preferences
-        //userPrefs = [NSUserDefaults standardUserDefaults];
+        // load all profiles from our data store
+        self.profiles = [ProfilesDatabase loadProfilesDocs];
+    
+        //NSLog(@"%s-profiles: %@", __FUNCTION__, self.profiles);
+        //self.profiles = [[NSMutableArray alloc] init];
+        //NSLog(@"self.profiles: %@", self.profiles);
         
-        
-        // Setup sample data
-        ProfileData *profile1 = [[ProfileData alloc] initWithSSID:@"Commotion 1" bssid:@"" channel:@"" ip:@"" ipgenerate:@"" netmask:@"" dns:@"" thumbImage:[NSImage imageNamed:@"profileThumb"]];
-        ProfileData *profile2 = [[ProfileData alloc] initWithSSID:@"Commotion 2" bssid:@"" channel:@"" ip:@"" ipgenerate:@"" netmask:@"" dns:@"" thumbImage:[NSImage imageNamed:@"profileThumb"]];
-        ProfileData *profile3 = [[ProfileData alloc] initWithSSID:@"Commotion 3" bssid:@"" channel:@"" ip:@"" ipgenerate:@"" netmask:@"" dns:@"" thumbImage:[NSImage imageNamed:@"profileThumb"]];
-        ProfileData *profile4 = [[ProfileData alloc] initWithSSID:@"Commotion 4" bssid:@"" channel:@"" ip:@"" ipgenerate:@"" netmask:@"" dns:@"" thumbImage:[NSImage imageNamed:@"profileThumb"]];
-        
-        self.profiles = [NSMutableArray arrayWithObjects:profile1, profile2, profile3, profile4, nil];
+        // get default profile set OLD BEFORE DATA STORE
+        //ProfilesData *profilesData = [[ProfilesData alloc] init];
+        //self.profiles = [profilesData profileDefaults];
         
     }
     
@@ -57,9 +52,13 @@
 }
 
 
+//==========================================================
 #pragma mark TableView
+//==========================================================
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+    
+    //NSLog(@"%s-row: %lu", __FUNCTION__, row);
     
     // Get a new ViewCell
     NSTableCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
@@ -69,37 +68,41 @@
     if( [tableColumn.identifier isEqualToString:@"ProfileColumn"] )
     {
         // get data from our model
-        ProfileData *profileData = [self.profiles objectAtIndex:row];
-        cellView.imageView.image = profileData.thumbImage;
-        cellView.textField.stringValue = profileData.ssid;
+        ProfilesDoc *profilesDoc = [self.profiles objectAtIndex:row];
+        cellView.imageView.image = [NSImage imageNamed:@"profileThumb"];
+        cellView.textField.stringValue = profilesDoc.data.ssid;
         return cellView;
     }
+    
     return cellView;
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
+    
+    //NSLog(@"[self.profiles count]: %lu", [self.profiles count]);
+
     return [self.profiles count];
 }
 
-
-
-
-
-
--(ProfileData*)selectedProfile
+-(ProfilesDoc*)selectedProfile
 {
     NSInteger selectedRow = [self.profilesTableView selectedRow];
+    
     if( selectedRow >=0 && self.profiles.count > selectedRow )
     {
-        ProfileData *selectedProfileRow = [self.profiles objectAtIndex:selectedRow];
+        ProfilesDoc *selectedProfileRow = [self.profiles objectAtIndex:selectedRow];
+                
         return selectedProfileRow;
     }
     return nil;
     
 }
 
--(void)setDetailInfo:(ProfileData*)profile
+-(void)setDetailInfo:(ProfilesDoc*)profile
 {
+    
+    //NSLog(@"%s-ssid: %@", __FUNCTION__, profile.data.ssid);
+    
     NSString *ssid = @"";
     NSString *bssid = @"";
     NSString *channel = @"";
@@ -110,13 +113,13 @@
 
     if( profile != nil )
     {
-        ssid = profile.ssid;
-        bssid = profile.bssid;
-        channel = profile.channel;
-        ip = profile.ip;
-        ipgenerate = profile.ipgenerate;
-        netmask = profile.netmask;
-        dns = profile.dns;
+        ssid = profile.data.ssid;
+        bssid = profile.data.bssid;
+        channel = profile.data.channel;
+        ip = profile.data.ip;
+        ipgenerate = profile.data.ipgenerate;
+        netmask = profile.data.netmask;
+        dns = profile.data.dns;
     }
     
     [self.profilesSSIDView setStringValue:ssid];
@@ -131,7 +134,9 @@
 
 - (void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
-    ProfileData *selectedProfileRow = [self selectedProfile];
+    ProfilesDoc *selectedProfileRow = [self selectedProfile];
+    
+    //NSLog(@"%s-ssid: %@", __FUNCTION__, selectedProfileRow.data.ssid);
     
     // Update info
     [self setDetailInfo:selectedProfileRow];
@@ -151,33 +156,44 @@
 - (IBAction)profileDidEndEdit:(id)sender {
     
     // 1. Get selected profile
-    ProfileData *selectedProfileRow = [self selectedProfile];
-    
+    ProfilesDoc *selectedProfileRow = [self selectedProfile];
+        
     if (selectedProfileRow)
     {
+        
+        //NSLog(@"%s-ssid: %@", __FUNCTION__, selectedProfileRow.data.ssid);
+
+        
         // 2. Get the new profile name from the text field
-        selectedProfileRow.ssid = [self.profilesSSIDView stringValue];
-        selectedProfileRow.bssid = [self.profilesBSSIDView stringValue];
-        selectedProfileRow.channel = [self.profilesChannelView stringValue];
-        selectedProfileRow.ip = [self.profilesIPView stringValue];
-        selectedProfileRow.ipgenerate = [self.profilesIPGenerateView stringValue];
-        selectedProfileRow.netmask = [self.profilesNetmaskView stringValue];
-        selectedProfileRow.dns = [self.profilesDNSView stringValue];
+        selectedProfileRow.data.ssid = [self.profilesSSIDView stringValue];
+        selectedProfileRow.data.bssid = [self.profilesBSSIDView stringValue];
+        selectedProfileRow.data.channel = [self.profilesChannelView stringValue];
+        selectedProfileRow.data.ip = [self.profilesIPView stringValue];
+        selectedProfileRow.data.ipgenerate = [self.profilesIPGenerateView stringValue];
+        selectedProfileRow.data.netmask = [self.profilesNetmaskView stringValue];
+        selectedProfileRow.data.dns = [self.profilesDNSView stringValue];
         
         // 3. Update the cell
         NSIndexSet * indexSet = [NSIndexSet indexSetWithIndex:[self.profiles indexOfObject:selectedProfileRow]];
         NSIndexSet * columnSet = [NSIndexSet indexSetWithIndex:0];
         [self.profilesTableView reloadDataForRowIndexes:indexSet columnIndexes:columnSet];
+        
+        // 4. Save data to file
+        [selectedProfileRow saveData];
     }
+    
 }
 
 - (IBAction)addProfile:(id)sender {
     
-    // 1. Create a new ProfileData object with a default name
-    ProfileData *newProfile = [[ProfileData alloc] initWithSSID:@"New Mesh Network Name" bssid:@"" channel:@"" ip:@"" ipgenerate:@"" netmask:@"" dns:@"" thumbImage:[NSImage imageNamed:@"profileThumb"]];
+    // 1. Create a new ProfilesData object with a default name
+    ProfilesDoc *newProfile = [[ProfilesDoc alloc] initWithSSID:@"New Mesh Network Name" bssid:@"a" channel:@"b" ip:@"c" ipgenerate:@"d" netmask:@"e" dns:@"f"];
+    
+    //NSLog(@"%s-newProfile SSID: %@", __FUNCTION__, newProfile.data.ssid);
     
     // 2. Add the new profile object to our model (insert into the array)
     [self.profiles addObject:newProfile];
+    
     NSInteger newRowIndex = self.profiles.count-1;
     
     // 3. Insert new row in the table view
@@ -188,61 +204,72 @@
     [self.profilesTableView scrollRowToVisible:newRowIndex];
 }
 
+- (IBAction)addDefaultProfiles:(id)sender {
+    
+    // DELETE ALL EXISTING PROFILES
+    // first we blow away plist data from the doc path -- should probably pop a confirmation page here
+    [ProfilesDatabase wipeAllProfilesDocs];
+    
+    // next we remove all rows from our table
+    [self.profiles removeAllObjects];
+    [self.profilesTableView reloadData];
+
+    // ADD DEFAULT PROFILES
+    // Setup sample data
+    ProfilesDoc *profile1 = [[ProfilesDoc alloc] initWithSSID:@"commotionwireless.net" bssid:@"02:CA:FF:EE:BA:BE" channel:@"5" ip:@"172.29.0.0" ipgenerate:@"true" netmask:@"255.255.0.0" dns:@"8.8.8.8"];
+    ProfilesDoc *profile2 = [[ProfilesDoc alloc] initWithSSID:@"Commotion Test 1" bssid:@"01:CA:FF:EE:BA:BE" channel:@"3" ip:@"5.0.0.0" ipgenerate:@"false" netmask:@"255.255.255.255" dns:@"8.8.8.8"];
+    ProfilesDoc *profile3 = [[ProfilesDoc alloc] initWithSSID:@"Commotion Test 2" bssid:@"01:CA:FF:EE:BB:BE" channel:@"10" ip:@"5.0.0.10" ipgenerate:@"false" netmask:@"255.255.255.255" dns:@"8.8.8.8"];
+    NSMutableArray *defaultProfiles = [NSMutableArray arrayWithObjects:profile1, profile2, profile3, nil];
+    
+    // wipe our current profiles array
+    self.profiles = [[NSMutableArray alloc] init];
+    
+    // loop through our given default profiles to add each row to the table
+    for (int i = 0; i < [defaultProfiles count]; i++) {
+
+        // 1. Add the new profile object to our model (insert from the array)
+        [self.profiles addObject:[defaultProfiles objectAtIndex: i]];
+        
+        // 2. Get the last index position available for insertion
+        NSInteger newRowIndex = self.profiles.count-1;
+        
+        // 3. Insert new row in the table view
+        [self.profilesTableView insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:newRowIndex] withAnimation:NSTableViewAnimationEffectGap];
+        
+        // 4. Select the new profile and scroll to make sure it's visible
+        [self.profilesTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:newRowIndex] byExtendingSelection:NO];
+        //[self.profilesTableView scrollRowToVisible:newRowIndex];
+        
+        // 5. Save the default profile we just added
+        [self profileDidEndEdit:nil];
+    }
+    
+}
+
 - (IBAction)deleteProfile:(id)sender {
     
     // 1. Get selected profile
-    ProfileData *selectedProfileRow = [self selectedProfile];
+    ProfilesDoc *selectedProfileRow = [self selectedProfile];
     
     if (selectedProfileRow)
     {
-        // 2. Remove the profile from the model
+        // 2. Remove the profile from the array
         [self.profiles removeObject:selectedProfileRow];
         
         // 3. Remove the selected row from the table view.
         [self.profilesTableView removeRowsAtIndexes:[NSIndexSet indexSetWithIndex:self.profilesTableView.selectedRow] withAnimation:NSTableViewAnimationSlideUp];
+        
+        // 4. Delete the row from the database (plist directory)
+        [selectedProfileRow deleteDoc];
         
         // Clear detail info
         [self setDetailInfo:nil];
     }
 }
 
-/**
- - (IBAction)saveData:(id)sender {
- }
- **/
-
-
-
--(IBAction) clearUserDefaults: (id)sender {
-    
-    NSLog(@"\n\n");
-    NSLog(@"CLEARING USER DEFAULTS");
-    
-    // clear user defaults (text the user inputs into pref pane)
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ssid"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"bssid"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"channel"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ip"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ipgenerate"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"netmask"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"dns"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    NSLog(@"CLEARED ssid: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"ssid"]);
-    NSLog(@"CLEARED bssid: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"bssid"]);
-    NSLog(@"CLEARED channel: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"channel"]);
-    NSLog(@"CLEARED ip: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"ip"]);
-    NSLog(@"CLEARED ipgenerate: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"ipgenerate"]);
-    NSLog(@"CLEARED netmask: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"netmask"]);
-    NSLog(@"CLEARED dns: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"dns"]);
-    
-}
-
-
-
-
-
+//==========================================================
 #pragma mark MASPreferencesViewController
+//==========================================================
 
 - (NSString *)identifier
 {
@@ -258,16 +285,6 @@
 {
     return NSLocalizedString(@"Profiles", @"Toolbar item name for the Profiles pane");
 }
-
-/**
-
-- (NSView *)initialKeyView
-{
-    NSInteger focusedControlIndex = [[NSApp valueForKeyPath:@"delegate.focusedAdvancedControlIndex"] integerValue];
-    return (focusedControlIndex == 0 ? self.textField : self.tableView);
-}
- 
- **/
 
 
 @end

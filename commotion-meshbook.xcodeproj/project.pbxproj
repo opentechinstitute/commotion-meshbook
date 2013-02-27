@@ -32,7 +32,7 @@
 		1C83031416CF6F16003A59FB /* tabProfiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C83030D16CF6F16003A59FB /* tabProfiles.png */; };
 		1C83031516CF6F16003A59FB /* tabProfiles@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C83030E16CF6F16003A59FB /* tabProfiles@2x.png */; };
 		1C83031616CF6F16003A59FB /* tabStatus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C83030F16CF6F16003A59FB /* tabStatus@2x.png */; };
-		1C83031A16CF7B7B003A59FB /* ProfileData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C83031916CF7B7B003A59FB /* ProfileData.m */; };
+		1C83031A16CF7B7B003A59FB /* ProfilesData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C83031916CF7B7B003A59FB /* ProfilesData.m */; };
 		1C83031D16CF880D003A59FB /* profileThumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C83031B16CF880D003A59FB /* profileThumb.png */; };
 		1C83031E16CF880D003A59FB /* profileThumb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C83031C16CF880D003A59FB /* profileThumb@2x.png */; };
 		1C83035016D087D0003A59FB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C83034F16D087CF003A59FB /* Security.framework */; };
@@ -52,6 +52,8 @@
 		1CD9F84616D19AB70097D188 /* menuNetworkStatus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD9F84216D19AB70097D188 /* menuNetworkStatus@2x.png */; };
 		1CD9F8DB16D2FF080097D188 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD9F8DA16D2FF080097D188 /* CoreFoundation.framework */; };
 		1CD9F8DD16D2FF340097D188 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD9F8DC16D2FF340097D188 /* SystemConfiguration.framework */; };
+		1CFACFD416DC27ED00DBBA58 /* ProfilesDoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CFACFD316DC27ED00DBBA58 /* ProfilesDoc.m */; };
+		1CFACFD716DC2E5700DBBA58 /* ProfilesDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CFACFD616DC2E5600DBBA58 /* ProfilesDatabase.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,8 +90,8 @@
 		1C83030D16CF6F16003A59FB /* tabProfiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tabProfiles.png; path = "commotion-meshbook/Images/tabProfiles.png"; sourceTree = SOURCE_ROOT; };
 		1C83030E16CF6F16003A59FB /* tabProfiles@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabProfiles@2x.png"; path = "commotion-meshbook/Images/tabProfiles@2x.png"; sourceTree = SOURCE_ROOT; };
 		1C83030F16CF6F16003A59FB /* tabStatus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabStatus@2x.png"; path = "commotion-meshbook/Images/tabStatus@2x.png"; sourceTree = SOURCE_ROOT; };
-		1C83031816CF7B7B003A59FB /* ProfileData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileData.h; path = "commotion-meshbook/Data/ProfileData.h"; sourceTree = SOURCE_ROOT; };
-		1C83031916CF7B7B003A59FB /* ProfileData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileData.m; path = "commotion-meshbook/Data/ProfileData.m"; sourceTree = SOURCE_ROOT; };
+		1C83031816CF7B7B003A59FB /* ProfilesData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfilesData.h; path = "commotion-meshbook/Data/ProfilesData.h"; sourceTree = SOURCE_ROOT; };
+		1C83031916CF7B7B003A59FB /* ProfilesData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfilesData.m; path = "commotion-meshbook/Data/ProfilesData.m"; sourceTree = SOURCE_ROOT; };
 		1C83031B16CF880D003A59FB /* profileThumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = profileThumb.png; path = "commotion-meshbook/Images/profileThumb.png"; sourceTree = SOURCE_ROOT; };
 		1C83031C16CF880D003A59FB /* profileThumb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "profileThumb@2x.png"; path = "commotion-meshbook/Images/profileThumb@2x.png"; sourceTree = SOURCE_ROOT; };
 		1C83034F16D087CF003A59FB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -118,6 +120,10 @@
 		1CD9F84216D19AB70097D188 /* menuNetworkStatus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menuNetworkStatus@2x.png"; path = "commotion-meshbook/Images/menuNetworkStatus@2x.png"; sourceTree = SOURCE_ROOT; };
 		1CD9F8DA16D2FF080097D188 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/CoreFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		1CD9F8DC16D2FF340097D188 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
+		1CFACFD216DC27ED00DBBA58 /* ProfilesDoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfilesDoc.h; path = "commotion-meshbook/Data/ProfilesDoc.h"; sourceTree = SOURCE_ROOT; };
+		1CFACFD316DC27ED00DBBA58 /* ProfilesDoc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfilesDoc.m; path = "commotion-meshbook/Data/ProfilesDoc.m"; sourceTree = SOURCE_ROOT; };
+		1CFACFD516DC2E5600DBBA58 /* ProfilesDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfilesDatabase.h; path = "commotion-meshbook/Data/ProfilesDatabase.h"; sourceTree = SOURCE_ROOT; };
+		1CFACFD616DC2E5600DBBA58 /* ProfilesDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfilesDatabase.m; path = "commotion-meshbook/Data/ProfilesDatabase.m"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,8 +264,12 @@
 		1C83031716CF7988003A59FB /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1C83031816CF7B7B003A59FB /* ProfileData.h */,
-				1C83031916CF7B7B003A59FB /* ProfileData.m */,
+				1C83031816CF7B7B003A59FB /* ProfilesData.h */,
+				1C83031916CF7B7B003A59FB /* ProfilesData.m */,
+				1CFACFD216DC27ED00DBBA58 /* ProfilesDoc.h */,
+				1CFACFD316DC27ED00DBBA58 /* ProfilesDoc.m */,
+				1CFACFD516DC2E5600DBBA58 /* ProfilesDatabase.h */,
+				1CFACFD616DC2E5600DBBA58 /* ProfilesDatabase.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -462,10 +472,12 @@
 				1C8302F116CF21F5003A59FB /* MASPreferencesWindowController.m in Sources */,
 				1C8302FD16CF64E5003A59FB /* HelpViewController.m in Sources */,
 				1C83030216CF64F5003A59FB /* LogViewController.m in Sources */,
-				1C83031A16CF7B7B003A59FB /* ProfileData.m in Sources */,
+				1C83031A16CF7B7B003A59FB /* ProfilesData.m in Sources */,
 				1C83036B16D0CC35003A59FB /* BLAuthentication.m in Sources */,
 				1C52876C16D70A7C00C4AEFC /* NetworkDataSync.m in Sources */,
 				1C1D533516D75F94003A8AE8 /* MeshDataSync.m in Sources */,
+				1CFACFD416DC27ED00DBBA58 /* ProfilesDoc.m in Sources */,
+				1CFACFD716DC2E5700DBBA58 /* ProfilesDatabase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -42,10 +42,10 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
                                                object:nil];
     
     // setup menu settings for mesh
-    [self initMeshInterface];
+    //[self initMeshInterface];
     
     // setup menu settings for network
-    [self initNetworkInterface];
+    //[self initNetworkInterface];
     
 	// 'Quit' menu item is enabled always
 	[menuQuit setEnabled:YES];
