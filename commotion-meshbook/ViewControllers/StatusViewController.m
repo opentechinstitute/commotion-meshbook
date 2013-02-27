@@ -19,7 +19,7 @@
 
 - (NSString *)identifier
 {
-    return @"Status";
+    return @"Show Mesh Status";
 }
 
 - (NSImage *)toolbarItemImage

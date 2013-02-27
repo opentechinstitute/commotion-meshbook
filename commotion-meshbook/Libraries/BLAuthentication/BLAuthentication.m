@@ -301,7 +301,6 @@
 
     
     
-    #define MAXLEN 256
     
 
     
@@ -310,6 +309,8 @@
      */
     
     /**
+     #define MAXLEN 256
+
     int n;
     char buf[MAXLEN];
     while((n = read(fileno(pipe),buf,sizeof(buf))) != 0){

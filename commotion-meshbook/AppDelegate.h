@@ -23,6 +23,7 @@
     IBOutlet NSMenuItem *menuNetworkBSSID;
     IBOutlet NSMenuItem *menuNetworkChannel;
     // Menu Items - Mesh
+    IBOutlet NSMenuItem *menuMeshSSID;
     IBOutlet NSMenuItem *menuMeshStatus;
     IBOutlet NSMenuItem *menuMeshProfile;
     
@@ -32,14 +33,14 @@
 @property (nonatomic, readonly) NSWindowController *settingsWindowController;
 @property (nonatomic) NSInteger focusedAdvancedControlIndex; // maspref 
 
+- (void)initProfilesMenuItems;
+- (void)placeholder;
+
 #pragma mark -
 #pragma mark Network / Mesh Data Setup & Processing
 - (void)initNetworkInterface;
 - (void)initMeshInterface;
-- (void)initOLSRDService;
-- (void)OLSRDServiceExecuteSuccess:(NSNotification*)aNotification;
-- (void)executeMeshDataPolling;
-- (void) updateNetworkMenuItems:(NSDictionary *)fetchedNetworkData;
+- (void)updateNetworkMenuItems:(NSDictionary *)fetchedNetworkData;
 - (void)updateMeshMenuItems:(NSNotification *)fetchedMeshData;
 
 #pragma mark -

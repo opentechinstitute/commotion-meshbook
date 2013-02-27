@@ -187,7 +187,7 @@
 - (IBAction)addProfile:(id)sender {
     
     // 1. Create a new ProfilesData object with a default name
-    ProfilesDoc *newProfile = [[ProfilesDoc alloc] initWithSSID:@"New Mesh Network Name" bssid:@"a" channel:@"b" ip:@"c" ipgenerate:@"d" netmask:@"e" dns:@"f"];
+    ProfilesDoc *newProfile = [[ProfilesDoc alloc] initWithSSID:@"New Mesh Network Name" bssid:@"" channel:@"" ip:@"" ipgenerate:@"" netmask:@"" dns:@""];
     
     //NSLog(@"%s-newProfile SSID: %@", __FUNCTION__, newProfile.data.ssid);
     
@@ -273,7 +273,7 @@
 
 - (NSString *)identifier
 {
-    return @"Profiles";
+    return @"Manage Profiles";
 }
 
 - (NSImage *)toolbarItemImage

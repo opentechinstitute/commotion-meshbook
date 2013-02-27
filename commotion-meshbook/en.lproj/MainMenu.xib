@@ -57,7 +57,6 @@
 					<object class="NSMenuItem" id="508395001">
 						<reference key="NSMenu" ref="660030228"/>
 						<bool key="NSIsDisabled">YES</bool>
-						<int key="NSIndent">1</int>
 						<string key="NSTitle">Wi-Fi: Off</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
@@ -67,7 +66,6 @@
 					<object class="NSMenuItem" id="781410685">
 						<reference key="NSMenu" ref="660030228"/>
 						<bool key="NSIsDisabled">YES</bool>
-						<int key="NSIndent">1</int>
 						<string key="NSTitle">Network (SSID):</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
@@ -77,7 +75,6 @@
 					<object class="NSMenuItem" id="246454613">
 						<reference key="NSMenu" ref="660030228"/>
 						<bool key="NSIsDisabled">YES</bool>
-						<int key="NSIndent">1</int>
 						<string key="NSTitle">BSSID:</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
@@ -87,7 +84,6 @@
 					<object class="NSMenuItem" id="382724819">
 						<reference key="NSMenu" ref="660030228"/>
 						<bool key="NSIsDisabled">YES</bool>
-						<int key="NSIndent">1</int>
 						<string key="NSTitle">Channel:</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
@@ -104,33 +100,60 @@
 						<reference key="NSOnImage" ref="457649730"/>
 						<reference key="NSMixedImage" ref="1026303971"/>
 					</object>
-					<object class="NSMenuItem" id="769362584">
+					<object class="NSMenuItem" id="763090935">
 						<reference key="NSMenu" ref="660030228"/>
 						<bool key="NSIsDisabled">YES</bool>
-						<string key="NSTitle">Mesh Status</string>
+						<string key="NSTitle">Active Mesh</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
-						<object class="NSCustomResource" key="NSImage">
+						<object class="NSCustomResource" key="NSImage" id="121387101">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">menuMeshStatus</string>
 						</object>
 						<reference key="NSOnImage" ref="457649730"/>
 						<reference key="NSMixedImage" ref="1026303971"/>
 					</object>
+					<object class="NSMenuItem" id="645083052">
+						<reference key="NSMenu" ref="660030228"/>
+						<bool key="NSIsDisabled">YES</bool>
+						<string key="NSTitle">Network (SSID):</string>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="457649730"/>
+						<reference key="NSMixedImage" ref="1026303971"/>
+					</object>
 					<object class="NSMenuItem" id="1022988786">
 						<reference key="NSMenu" ref="660030228"/>
 						<bool key="NSIsDisabled">YES</bool>
-						<int key="NSIndent">1</int>
 						<string key="NSTitle">OLSRD: Stopped</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="457649730"/>
 						<reference key="NSMixedImage" ref="1026303971"/>
 					</object>
+					<object class="NSMenuItem" id="455456500">
+						<reference key="NSMenu" ref="660030228"/>
+						<bool key="NSIsDisabled">YES</bool>
+						<bool key="NSIsSeparator">YES</bool>
+						<string key="NSTitle"/>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="457649730"/>
+						<reference key="NSMixedImage" ref="1026303971"/>
+					</object>
+					<object class="NSMenuItem" id="769362584">
+						<reference key="NSMenu" ref="660030228"/>
+						<bool key="NSIsDisabled">YES</bool>
+						<string key="NSTitle">Available Profiles</string>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSImage" ref="121387101"/>
+						<reference key="NSOnImage" ref="457649730"/>
+						<reference key="NSMixedImage" ref="1026303971"/>
+					</object>
 					<object class="NSMenuItem" id="874743612">
 						<reference key="NSMenu" ref="660030228"/>
 						<bool key="NSIsDisabled">YES</bool>
-						<int key="NSIndent">1</int>
 						<string key="NSTitle">Profile:</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
@@ -149,7 +172,7 @@
 					</object>
 					<object class="NSMenuItem" id="982038141">
 						<reference key="NSMenu" ref="660030228"/>
-						<string key="NSTitle">Status</string>
+						<string key="NSTitle">Show Mesh Status</string>
 						<string key="NSKeyEquiv">s</string>
 						<int key="NSKeyEquivModMask">1048576</int>
 						<int key="NSMnemonicLoc">2147483647</int>
@@ -158,7 +181,7 @@
 					</object>
 					<object class="NSMenuItem" id="917655546">
 						<reference key="NSMenu" ref="660030228"/>
-						<string key="NSTitle">Profiles</string>
+						<string key="NSTitle">Manage Profiles</string>
 						<string key="NSKeyEquiv">p</string>
 						<int key="NSKeyEquivModMask">1048576</int>
 						<int key="NSMnemonicLoc">2147483647</int>
@@ -167,7 +190,7 @@
 					</object>
 					<object class="NSMenuItem" id="360714497">
 						<reference key="NSMenu" ref="660030228"/>
-						<string key="NSTitle">Help</string>
+						<string key="NSTitle">View Help</string>
 						<string key="NSKeyEquiv">h</string>
 						<int key="NSKeyEquivModMask">1048576</int>
 						<int key="NSMnemonicLoc">2147483647</int>
@@ -176,9 +199,19 @@
 					</object>
 					<object class="NSMenuItem" id="221167011">
 						<reference key="NSMenu" ref="660030228"/>
-						<string key="NSTitle">Log</string>
+						<string key="NSTitle">Show Log</string>
 						<string key="NSKeyEquiv">l</string>
 						<int key="NSKeyEquivModMask">1048576</int>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="457649730"/>
+						<reference key="NSMixedImage" ref="1026303971"/>
+					</object>
+					<object class="NSMenuItem" id="116861106">
+						<reference key="NSMenu" ref="660030228"/>
+						<bool key="NSIsDisabled">YES</bool>
+						<bool key="NSIsSeparator">YES</bool>
+						<string key="NSTitle"/>
+						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="457649730"/>
 						<reference key="NSMixedImage" ref="1026303971"/>
@@ -214,7 +247,7 @@
 						<reference key="source" ref="1021"/>
 						<reference key="destination" ref="976324537"/>
 					</object>
-					<int key="connectionID">665</int>
+					<int key="connectionID">875</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -247,14 +280,6 @@
 						<reference key="destination" ref="508395001"/>
 					</object>
 					<int key="connectionID">854</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">menuNetworkSSID</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="781410685"/>
-					</object>
-					<int key="connectionID">855</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -312,6 +337,14 @@
 					</object>
 					<int key="connectionID">867</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">menuNetworkSSID</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="781410685"/>
+					</object>
+					<int key="connectionID">878</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -358,12 +391,16 @@
 							<reference ref="717959939"/>
 							<reference ref="874743612"/>
 							<reference ref="769362584"/>
-							<reference ref="1022988786"/>
 							<reference ref="246454613"/>
 							<reference ref="382724819"/>
 							<reference ref="360714497"/>
 							<reference ref="221167011"/>
 							<reference ref="917655546"/>
+							<reference ref="455456500"/>
+							<reference ref="763090935"/>
+							<reference ref="645083052"/>
+							<reference ref="1022988786"/>
+							<reference ref="116861106"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Status Menu</string>
@@ -443,6 +480,26 @@
 						<reference key="object" ref="917655546"/>
 						<reference key="parent" ref="660030228"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">868</int>
+						<reference key="object" ref="455456500"/>
+						<reference key="parent" ref="660030228"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">869</int>
+						<reference key="object" ref="763090935"/>
+						<reference key="parent" ref="660030228"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">870</int>
+						<reference key="object" ref="645083052"/>
+						<reference key="parent" ref="660030228"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">874</int>
+						<reference key="object" ref="116861106"/>
+						<reference key="parent" ref="660030228"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -466,12 +523,16 @@
 				<string key="862.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="864.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="866.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="868.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="869.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="870.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="874.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">867</int>
+			<int key="maxID">878</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -491,6 +552,7 @@
 					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="menuMeshProfile">NSMenuItem</string>
+						<string key="menuMeshSSID">NSMenuItem</string>
 						<string key="menuMeshStatus">NSMenuItem</string>
 						<string key="menuNetworkBSSID">NSMenuItem</string>
 						<string key="menuNetworkChannel">NSMenuItem</string>
@@ -502,6 +564,10 @@
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="menuMeshProfile">
 							<string key="name">menuMeshProfile</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="menuMeshSSID">
+							<string key="name">menuMeshSSID</string>
 							<string key="candidateClassName">NSMenuItem</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="menuMeshStatus">

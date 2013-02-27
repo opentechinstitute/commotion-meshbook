@@ -19,7 +19,7 @@
 
 - (NSString *)identifier
 {
-    return @"Log";
+    return @"Show Log";
 }
 
 - (NSImage *)toolbarItemImage

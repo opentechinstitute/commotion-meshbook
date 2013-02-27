@@ -7,14 +7,14 @@
 
 #import "AppDelegate.h"
 #import "MASPreferencesWindowController.h"
-#import "BLAuthentication.h"
-#import "MeshDataSync.h"
 #import "NetworkDataSync.h"
+#import "OLSRDService.h"
 // view controllers
 #import "StatusViewController.h"
 #import "ProfilesViewController.h"
 #import "HelpViewController.h"
 #import "LogViewController.h"
+
 
 
 static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selected Identifier View";
@@ -28,24 +28,18 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     
-    // setup notifications
-    // listen for successful return of olsrd shell process starting
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(OLSRDServiceExecuteSuccess:)
-                                                 name:BLshellCommandExecuteSuccessNotification
-                                               object:[BLAuthentication sharedInstance]];
-    
+    // setup notifications    
     // listen for successful return of json data from localhost
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateMeshMenuItems:)
                                                  name:@"meshDataProcessingComplete"
-                                               object:nil];
+                                            object:nil];
     
     // setup menu settings for mesh
-    //[self initMeshInterface];
-    
+    [self initMeshInterface];
+        
     // setup menu settings for network
-    //[self initNetworkInterface];
+    [self initNetworkInterface];
     
 	// 'Quit' menu item is enabled always
 	[menuQuit setEnabled:YES];
@@ -67,6 +61,11 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
     [statusItem setAlternateImage: [NSImage imageNamed:@"menuIconHighlighted"]];
     
     [statusItem setHighlightMode:YES];
+    
+    
+    // add available profiles to the menubar
+    //[self initProfilesMenuItems];
+    
 	[statusItem setMenu:statusMenu];
 }
 
@@ -76,6 +75,16 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
 }
 
 
+- (void)initProfilesMenuItems {
+ 
+    NSMenuItem *item = [statusMenu insertItemWithTitle:[NSString stringWithFormat:@"%@", @"meh"] action:@selector(placeholder) keyEquivalent:@"" atIndex:11];
+    //[item setEnabled:TRUE];
+    [item setTarget:self];
+}
+
+- (void)placeholder {
+    
+}
 
 //==========================================================
 #pragma mark Network / Mesh Data Setup & Processing
@@ -88,65 +97,14 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
     //NSLog(@"%s-fetchedNetworkData: %@", __FUNCTION__, fetchedNetworkData);
     
     [self updateNetworkMenuItems:fetchedNetworkData];
-
 }
 
 - (void)initMeshInterface {
     
     // Start olsrd process -- this should be started as early as possible
-    [self initOLSRDService];
+    OLSRDService *olsrdProcess = [[OLSRDService alloc] init];
+    [olsrdProcess executeOLSRDService]; 
 }
-
-- (void)initOLSRDService {
-    
-    // BLAuthentication Method - using a deprecated api "AuthorizationExecuteWithPrivileges" -- as of 10.7!  Unfortunately, the "right" way
-    // to auth as root is to sign the app and use SMJobBless() or equivalent.  Can't do that for this app, its open-source. Open to suggestions.
-    
-    // kill existing process (if exists)
-    [[BLAuthentication sharedInstance] killProcess:@"olsrd"];
-    
-    // start new process - setup bundle paths so we're looking in the app dir   
-    NSBundle* myBundle = [NSBundle mainBundle];
-    NSString* olsrdPath = [myBundle pathForResource:@"olsrd" ofType:nil];
-    NSString* olsrdConfPath = [myBundle pathForResource:@"olsrd" ofType:@"conf"];
-    //NSLog(@"myBundle olsrd path: %@", olsrdPath);  // shows: commotion-meshbook.app/Contents/Resources/olsrd
-    
-    NSArray *args = [NSArray arrayWithObjects:@"-f", olsrdConfPath, @"-i", @"en1", @"-d", @"3", nil];
-    [[BLAuthentication sharedInstance] executeCommand:olsrdPath withArgs:args andType:@"olsrd"];
-}
-
-- (void)OLSRDServiceExecuteSuccess:(NSNotification*)aNotification {
-    
-    // our olsrd shell command executed successfully -- now ok to fetch (poll) json data from localhost:9090
-    // BEGIN POLLING
-    
-    executionCount = 0;
-    
-    // runs on main thread
-    [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(executeMeshDataPolling) userInfo:nil repeats:YES];
-    
-    // ASYNC timer GOES OFF INTO SPACE on new thread
-    //NSTimer *timer = [NSTimer timerWithTimeInterval:2.0 target:self selector:@selector(executeMeshDataPolling) userInfo:nil repeats:NO];
-    //[[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
-}
-
-- (void)executeMeshDataPolling {
-    
-    // create operation queue and start mesh data polling
-    //NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
-    //[operationQueue setMaxConcurrentOperationCount:1];
-    //MeshDataSync *meshSyncClass = [[MeshDataSync alloc] init];
-    //[operationQueue addOperation: meshSyncClass];
-    
-    MeshDataSync *meshSyncClass = [[MeshDataSync alloc] init];
-    [meshSyncClass fetchMeshData];
-    
-    executionCount++;
-    
-    //NSLog(@"executionCount: %i", executionCount);
-    
-}
-
 
 -(void) updateNetworkMenuItems:(NSDictionary *)fetchedNetworkData {
     
@@ -168,6 +126,7 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
     NSString *meshState = [meshData valueForKey:@"state"];
     
     // update menu items with fetched info
+    //[menuMeshSSID setTitle:[NSString stringWithFormat:@"%@", [fetchedMeshData valueForKey:@"ssid"]]];
     [menuMeshStatus setTitle:[NSString stringWithFormat:@"OLSRD: %@", (meshState ? : @"Stopped")]];
 
 	//[menuMeshProfile setTitle:[NSString stringWithFormat:@"Profile: %@", [data valueForKey:@"profile"]]];

@@ -19,7 +19,7 @@
 
 - (NSString *)identifier
 {
-    return @"Help";
+    return @"View Help";
 }
 
 - (NSImage *)toolbarItemImage

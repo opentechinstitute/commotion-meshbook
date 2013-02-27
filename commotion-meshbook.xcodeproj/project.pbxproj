@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1C1D533516D75F94003A8AE8 /* MeshDataSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1D533416D75F94003A8AE8 /* MeshDataSync.m */; };
-		1C52876716D6AF6600C4AEFC /* olsrd.conf in Resources */ = {isa = PBXBuildFile; fileRef = 1C52876316D6AF6600C4AEFC /* olsrd.conf */; };
-		1C52876816D6AF6600C4AEFC /* olsrd_jsoninfo.so.0.0 in Resources */ = {isa = PBXBuildFile; fileRef = 1C52876516D6AF6600C4AEFC /* olsrd_jsoninfo.so.0.0 */; };
-		1C52876916D6AF6600C4AEFC /* olsrd in Resources */ = {isa = PBXBuildFile; fileRef = 1C52876616D6AF6600C4AEFC /* olsrd */; };
 		1C52876C16D70A7C00C4AEFC /* NetworkDataSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C52876B16D70A7C00C4AEFC /* NetworkDataSync.m */; };
 		1C72FD0616C6FCA3000A6FE8 /* menuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C72FD0416C6FCA3000A6FE8 /* menuIcon.png */; };
 		1C72FD0716C6FCA3000A6FE8 /* menuIconHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C72FD0516C6FCA3000A6FE8 /* menuIconHighlighted.png */; };
@@ -38,6 +35,10 @@
 		1C83035016D087D0003A59FB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C83034F16D087CF003A59FB /* Security.framework */; };
 		1C83036B16D0CC35003A59FB /* BLAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C83036A16D0CC35003A59FB /* BLAuthentication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1C890ABC16C7337F002CE42F /* icons.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 1C890ABB16C7337F002CE42F /* icons.iconset */; };
+		1C988E3B16DEB64C0045324B /* olsrd.conf in Resources */ = {isa = PBXBuildFile; fileRef = 1C988E3816DEB64C0045324B /* olsrd.conf */; };
+		1C988E3C16DEB64C0045324B /* olsrd in Resources */ = {isa = PBXBuildFile; fileRef = 1C988E3916DEB64C0045324B /* olsrd */; };
+		1C988E3D16DEB64C0045324B /* olsrd_jsoninfo.so.0.0 in Resources */ = {isa = PBXBuildFile; fileRef = 1C988E3A16DEB64C0045324B /* olsrd_jsoninfo.so.0.0 */; };
+		1C988E4016DEB6670045324B /* OLSRDService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C988E3F16DEB6670045324B /* OLSRDService.m */; };
 		1CC520F016B66128001951D8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC520EF16B66128001951D8 /* Cocoa.framework */; };
 		1CC5211416B66BEC001951D8 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CC5211316B66BEC001951D8 /* libicucore.dylib */; };
 		1CD4E9AE16C5CDD300BDF1B3 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CD4E9AA16C5CDD300BDF1B3 /* MainMenu.xib */; };
@@ -59,9 +60,6 @@
 /* Begin PBXFileReference section */
 		1C1D533316D75F94003A8AE8 /* MeshDataSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MeshDataSync.h; path = "commotion-meshbook/Data/MeshDataSync.h"; sourceTree = SOURCE_ROOT; };
 		1C1D533416D75F94003A8AE8 /* MeshDataSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MeshDataSync.m; path = "commotion-meshbook/Data/MeshDataSync.m"; sourceTree = SOURCE_ROOT; };
-		1C52876316D6AF6600C4AEFC /* olsrd.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = olsrd.conf; sourceTree = "<group>"; };
-		1C52876516D6AF6600C4AEFC /* olsrd_jsoninfo.so.0.0 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.bundle"; path = olsrd_jsoninfo.so.0.0; sourceTree = "<group>"; };
-		1C52876616D6AF6600C4AEFC /* olsrd */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = olsrd; sourceTree = "<group>"; };
 		1C52876A16D70A7C00C4AEFC /* NetworkDataSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkDataSync.h; path = "commotion-meshbook/Data/NetworkDataSync.h"; sourceTree = SOURCE_ROOT; };
 		1C52876B16D70A7C00C4AEFC /* NetworkDataSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkDataSync.m; path = "commotion-meshbook/Data/NetworkDataSync.m"; sourceTree = SOURCE_ROOT; };
 		1C72FD0416C6FCA3000A6FE8 /* menuIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menuIcon.png; path = "commotion-meshbook/Images/menuIcon.png"; sourceTree = SOURCE_ROOT; };
@@ -99,6 +97,11 @@
 		1C83036916D0CC35003A59FB /* BLAuthentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLAuthentication.h; sourceTree = "<group>"; };
 		1C83036A16D0CC35003A59FB /* BLAuthentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLAuthentication.m; sourceTree = "<group>"; };
 		1C890ABB16C7337F002CE42F /* icons.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; name = icons.iconset; path = "commotion-meshbook/Images/icons.iconset"; sourceTree = SOURCE_ROOT; };
+		1C988E3816DEB64C0045324B /* olsrd.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = olsrd.conf; path = "commotion-meshbook/OLSRD/olsrd.conf"; sourceTree = SOURCE_ROOT; };
+		1C988E3916DEB64C0045324B /* olsrd */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = olsrd; path = "commotion-meshbook/OLSRD/olsrd"; sourceTree = SOURCE_ROOT; };
+		1C988E3A16DEB64C0045324B /* olsrd_jsoninfo.so.0.0 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.bundle"; name = olsrd_jsoninfo.so.0.0; path = "commotion-meshbook/OLSRD/olsrd_jsoninfo.so.0.0"; sourceTree = SOURCE_ROOT; };
+		1C988E3E16DEB6670045324B /* OLSRDService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OLSRDService.h; path = "commotion-meshbook/OLSRD/OLSRDService.h"; sourceTree = SOURCE_ROOT; };
+		1C988E3F16DEB6670045324B /* OLSRDService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OLSRDService.m; path = "commotion-meshbook/OLSRD/OLSRDService.m"; sourceTree = SOURCE_ROOT; };
 		1CC520EB16B66128001951D8 /* commotion-meshbook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "commotion-meshbook.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CC520EF16B66128001951D8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		1CC520F216B66128001951D8 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -147,29 +150,13 @@
 		1C52876116D6AF6600C4AEFC /* olsrd */ = {
 			isa = PBXGroup;
 			children = (
-				1C52876216D6AF6600C4AEFC /* conf */,
-				1C52876416D6AF6600C4AEFC /* lib */,
-				1C52876616D6AF6600C4AEFC /* olsrd */,
+				1C988E3916DEB64C0045324B /* olsrd */,
+				1C988E3816DEB64C0045324B /* olsrd.conf */,
+				1C988E3A16DEB64C0045324B /* olsrd_jsoninfo.so.0.0 */,
 			);
 			name = olsrd;
 			path = "commotion-meshbook/en.lproj/olsrd";
 			sourceTree = SOURCE_ROOT;
-		};
-		1C52876216D6AF6600C4AEFC /* conf */ = {
-			isa = PBXGroup;
-			children = (
-				1C52876316D6AF6600C4AEFC /* olsrd.conf */,
-			);
-			path = conf;
-			sourceTree = "<group>";
-		};
-		1C52876416D6AF6600C4AEFC /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				1C52876516D6AF6600C4AEFC /* olsrd_jsoninfo.so.0.0 */,
-			);
-			path = lib;
-			sourceTree = "<group>";
 		};
 		1C72FCED16C6E9C5000A6FE8 /* Images */ = {
 			isa = PBXGroup;
@@ -318,6 +305,8 @@
 			children = (
 				1CD4E9A716C5CDD300BDF1B3 /* AppDelegate.h */,
 				1CD4E9AC16C5CDD300BDF1B3 /* AppDelegate.m */,
+				1C988E3E16DEB6670045324B /* OLSRDService.h */,
+				1C988E3F16DEB6670045324B /* OLSRDService.m */,
 				1C52876A16D70A7C00C4AEFC /* NetworkDataSync.h */,
 				1C52876B16D70A7C00C4AEFC /* NetworkDataSync.m */,
 				1C1D533316D75F94003A8AE8 /* MeshDataSync.h */,
@@ -452,9 +441,9 @@
 				1CD9F84416D19AB70097D188 /* menuMeshStatus@2x.png in Resources */,
 				1CD9F84516D19AB70097D188 /* menuNetworkStatus.png in Resources */,
 				1CD9F84616D19AB70097D188 /* menuNetworkStatus@2x.png in Resources */,
-				1C52876716D6AF6600C4AEFC /* olsrd.conf in Resources */,
-				1C52876816D6AF6600C4AEFC /* olsrd_jsoninfo.so.0.0 in Resources */,
-				1C52876916D6AF6600C4AEFC /* olsrd in Resources */,
+				1C988E3B16DEB64C0045324B /* olsrd.conf in Resources */,
+				1C988E3C16DEB64C0045324B /* olsrd in Resources */,
+				1C988E3D16DEB64C0045324B /* olsrd_jsoninfo.so.0.0 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,6 +467,7 @@
 				1C1D533516D75F94003A8AE8 /* MeshDataSync.m in Sources */,
 				1CFACFD416DC27ED00DBBA58 /* ProfilesDoc.m in Sources */,
 				1CFACFD716DC2E5700DBBA58 /* ProfilesDatabase.m in Sources */,
+				1C988E4016DEB6670045324B /* OLSRDService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
