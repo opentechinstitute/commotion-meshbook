@@ -338,10 +338,24 @@
      
     
     if(err!=0) {
-		NSBeep();
-		NSLog(@"Error %d in AuthorizationExecuteWithPrivileges",err);
+		//NSBeep();
+		NSLog(@"Error %d in AuthorizationExecuteWithPrivileges -- Let's try to re-authenticate...",err);
         
-        // FIX FIX FIX -- WE NEED TO RETRY HERE
+        // we dont need to alert user, we just retry
+        /**
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setMessageText:@"Authentication Failed"];
+        [alert setInformativeText:[NSString stringWithFormat:@"There was an error when trying to authenticate.  Please quit the program and try again. \n\n<Error %d in AuthorizationExecuteWithPrivileges>", err]];
+        [alert setAlertStyle:NSInformationalAlertStyle];  // or NSCriticalAlertStyle
+        [alert beginSheetModalForWindow:nil modalDelegate:self didEndSelector:nil contextInfo:nil];
+        
+         **/
+        // check to see if type is olsrd
+        if ([type isEqualToString:@"olsrd"]) {
+        // we retry auth here
+            [[NSNotificationCenter defaultCenter] postNotificationName:BLshellCommandExecuteFailureNotification object:self];
+        }
         
 		return NO;
 	}
@@ -393,6 +407,7 @@
 NSString* BLAuthenticatedNotification = @"BLAuthenticatedNotification";
 NSString* BLDeauthenticatedNotification = @"BLDeauthenticatedNotification";
 NSString* BLshellCommandExecuteSuccessNotification = @"BLshellCommandExecuteSuccessNotification";
+NSString* BLshellCommandExecuteFailureNotification = @"BLshellCommandExecuteFailureNotification";
 
 // Sample notification observer:
 /*

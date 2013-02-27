@@ -2,7 +2,9 @@
 //  BLAuthentication.h														//
 //  																		//
 //  Last Modified on Tuesday April 24 2001									//
-//  Copyright 2001 Ben Lachman												//
+//  Copyright 2001 Ben Lachman
+//
+//  Updated again in 2013 by Bradley Greenwood
 //																			//
 //	Thanks to Brian R. Hill <http://personalpages.tds.net/~brian_hill/>		//
 //  ====================================================================== 	//
@@ -35,6 +37,6 @@ extern NSString* BLAuthenticatedNotification;
 extern NSString* BLDeauthenticatedNotification;
 // brads
 extern NSString* BLshellCommandExecuteSuccessNotification;
-
+extern NSString* BLshellCommandExecuteFailureNotification;
 
 

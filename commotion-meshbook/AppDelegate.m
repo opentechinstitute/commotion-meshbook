@@ -62,9 +62,8 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
     
     [statusItem setHighlightMode:YES];
     
-    
     // add available profiles to the menubar
-    //[self initProfilesMenuItems];
+    [self initProfilesMenuItems];
     
 	[statusItem setMenu:statusMenu];
 }

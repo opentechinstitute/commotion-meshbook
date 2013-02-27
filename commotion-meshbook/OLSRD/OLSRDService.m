@@ -26,7 +26,11 @@
                                                  name:BLshellCommandExecuteSuccessNotification
                                                object:[BLAuthentication sharedInstance]];
     
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(OLSRDServiceExecuteFailure:)
+                                                 name:BLshellCommandExecuteFailureNotification
+                                               object:[BLAuthentication sharedInstance]];
+
     
     
     // start new process - setup bundle paths so we're looking in the app dir
@@ -63,6 +67,14 @@
     
     // Note: runs on main thread - I dont see any reason to spin up a new thread as no UI blocking occuring that I can tell
     [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(executeMeshDataPolling) userInfo:nil repeats:YES];
+}
+
+- (void) OLSRDServiceExecuteFailure:(NSNotification*)aNotification {
+    
+    // there was a (sporadic) problem with AuthorizationExecuteWithPriveldges auth
+    // (happens once every few auths -- nature of using deprecated call?
+    [self executeOLSRDService];
+    
 }
 
 - (void) executeMeshDataPolling {

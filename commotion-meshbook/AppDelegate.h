@@ -25,7 +25,6 @@
     // Menu Items - Mesh
     IBOutlet NSMenuItem *menuMeshSSID;
     IBOutlet NSMenuItem *menuMeshStatus;
-    IBOutlet NSMenuItem *menuMeshProfile;
     
     int executionCount;
 }

@@ -151,15 +151,6 @@
 						<reference key="NSOnImage" ref="457649730"/>
 						<reference key="NSMixedImage" ref="1026303971"/>
 					</object>
-					<object class="NSMenuItem" id="874743612">
-						<reference key="NSMenu" ref="660030228"/>
-						<bool key="NSIsDisabled">YES</bool>
-						<string key="NSTitle">Profile:</string>
-						<string key="NSKeyEquiv"/>
-						<int key="NSMnemonicLoc">2147483647</int>
-						<reference key="NSOnImage" ref="457649730"/>
-						<reference key="NSMixedImage" ref="1026303971"/>
-					</object>
 					<object class="NSMenuItem" id="912582149">
 						<reference key="NSMenu" ref="660030228"/>
 						<bool key="NSIsDisabled">YES</bool>
@@ -306,14 +297,6 @@
 					<int key="connectionID">858</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">menuMeshProfile</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="874743612"/>
-					</object>
-					<int key="connectionID">859</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">openSettings:</string>
 						<reference key="source" ref="976324537"/>
@@ -389,7 +372,6 @@
 							<reference ref="982038141"/>
 							<reference ref="926791903"/>
 							<reference ref="717959939"/>
-							<reference ref="874743612"/>
 							<reference ref="769362584"/>
 							<reference ref="246454613"/>
 							<reference ref="382724819"/>
@@ -408,11 +390,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">534</int>
 						<reference key="object" ref="508395001"/>
-						<reference key="parent" ref="660030228"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">535</int>
-						<reference key="object" ref="874743612"/>
 						<reference key="parent" ref="660030228"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -509,7 +486,6 @@
 				<string key="494.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="533.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="534.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="535.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="536.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="537.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="545.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -551,7 +527,6 @@
 						</object>
 					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="menuMeshProfile">NSMenuItem</string>
 						<string key="menuMeshSSID">NSMenuItem</string>
 						<string key="menuMeshStatus">NSMenuItem</string>
 						<string key="menuNetworkBSSID">NSMenuItem</string>
@@ -562,10 +537,6 @@
 						<string key="statusMenu">NSMenu</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="menuMeshProfile">
-							<string key="name">menuMeshProfile</string>
-							<string key="candidateClassName">NSMenuItem</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="menuMeshSSID">
 							<string key="name">menuMeshSSID</string>
 							<string key="candidateClassName">NSMenuItem</string>
