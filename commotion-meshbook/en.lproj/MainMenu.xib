@@ -106,7 +106,7 @@
 						<string key="NSTitle">Active Mesh</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
-						<object class="NSCustomResource" key="NSImage" id="121387101">
+						<object class="NSCustomResource" key="NSImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">menuMeshStatus</string>
 						</object>
@@ -143,14 +143,18 @@
 					</object>
 					<object class="NSMenuItem" id="769362584">
 						<reference key="NSMenu" ref="660030228"/>
+						<bool key="NSIsDisabled">YES</bool>
 						<string key="NSTitle">Available Profiles</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
-						<reference key="NSImage" ref="121387101"/>
+						<object class="NSCustomResource" key="NSImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">profileThumb</string>
+						</object>
 						<reference key="NSOnImage" ref="457649730"/>
 						<reference key="NSMixedImage" ref="1026303971"/>
 					</object>
-					<object class="NSMenuItem" id="958491959">
+					<object class="NSMenuItem" id="270157035">
 						<reference key="NSMenu" ref="660030228"/>
 						<bool key="NSIsDisabled">YES</bool>
 						<bool key="NSIsHidden">YES</bool>
@@ -341,7 +345,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">menuSelectedNetwork</string>
 						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="958491959"/>
+						<reference key="destination" ref="270157035"/>
 					</object>
 					<int key="connectionID">897</int>
 				</object>
@@ -400,7 +404,7 @@
 							<reference ref="645083052"/>
 							<reference ref="1022988786"/>
 							<reference ref="116861106"/>
-							<reference ref="958491959"/>
+							<reference ref="270157035"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Status Menu</string>
@@ -434,11 +438,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">848</int>
 						<reference key="object" ref="926791903"/>
-						<reference key="parent" ref="660030228"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">849</int>
-						<reference key="object" ref="717959939"/>
 						<reference key="parent" ref="660030228"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -500,7 +499,12 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">893</int>
-						<reference key="object" ref="958491959"/>
+						<reference key="object" ref="270157035"/>
+						<reference key="parent" ref="660030228"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">849</int>
+						<reference key="object" ref="717959939"/>
 						<reference key="parent" ref="660030228"/>
 					</object>
 				</array>
@@ -537,7 +541,78 @@
 			<nil key="sourceID"/>
 			<int key="maxID">897</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">AppDelegate</string>
+					<string key="superclassName">NSObject</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">openSettings:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">openSettings:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">openSettings:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="menuMeshSSID">NSMenuItem</string>
+						<string key="menuMeshStatus">NSMenuItem</string>
+						<string key="menuNetworkBSSID">NSMenuItem</string>
+						<string key="menuNetworkChannel">NSMenuItem</string>
+						<string key="menuNetworkSSID">NSMenuItem</string>
+						<string key="menuNetworkStatus">NSMenuItem</string>
+						<string key="menuQuit">NSMenuItem</string>
+						<string key="menuSelectedNetwork">NSMenuItem</string>
+						<string key="statusMenu">NSMenu</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="menuMeshSSID">
+							<string key="name">menuMeshSSID</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="menuMeshStatus">
+							<string key="name">menuMeshStatus</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="menuNetworkBSSID">
+							<string key="name">menuNetworkBSSID</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="menuNetworkChannel">
+							<string key="name">menuNetworkChannel</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="menuNetworkSSID">
+							<string key="name">menuNetworkSSID</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="menuNetworkStatus">
+							<string key="name">menuNetworkStatus</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="menuQuit">
+							<string key="name">menuQuit</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="menuSelectedNetwork">
+							<string key="name">menuSelectedNetwork</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="statusMenu">
+							<string key="name">statusMenu</string>
+							<string key="candidateClassName">NSMenu</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/AppDelegate.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">
@@ -553,8 +628,9 @@
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="NSMenuCheckmark">{11, 11}</string>
 			<string key="NSMenuMixedState">{10, 3}</string>
-			<string key="menuMeshStatus">{35, 35}</string>
-			<string key="menuNetworkStatus">{35, 35}</string>
+			<string key="menuMeshStatus">{20, 20}</string>
+			<string key="menuNetworkStatus">{20, 20}</string>
+			<string key="profileThumb">{20, 20}</string>
 		</dictionary>
 	</data>
 </archive>

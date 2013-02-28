@@ -26,8 +26,6 @@
     IBOutlet NSMenuItem *menuMeshSSID;
     IBOutlet NSMenuItem *menuMeshStatus;
     IBOutlet NSMenuItem *menuSelectedNetwork;
-    
-    int executionCount;
 }
 
 @property (nonatomic, readonly) NSWindowController *settingsWindowController;
@@ -38,7 +36,7 @@
 #pragma mark NSMenu Delegate
 - (void)menuWillOpen:(NSMenu *)menu;
 - (void)menuNeedsUpdate:(NSMenu *)menu;
-- (void)insertItem:(NSMenuItem *)newItem atIndex:(NSInteger)index;
+- (void)setSelectedProfile:(NSMenuItem *)selectedNetwork;
 
 #pragma mark -
 #pragma mark Network / Mesh Data Setup & Processing

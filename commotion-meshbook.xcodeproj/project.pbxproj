@@ -48,9 +48,7 @@
 		1CD9F83A16D18C2B0097D188 /* CoreWLAN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD9F83916D18C2B0097D188 /* CoreWLAN.framework */; };
 		1CD9F83C16D18C3C0097D188 /* SecurityInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD9F83B16D18C3C0097D188 /* SecurityInterface.framework */; };
 		1CD9F84316D19AB70097D188 /* menuMeshStatus.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD9F83F16D19AB70097D188 /* menuMeshStatus.png */; };
-		1CD9F84416D19AB70097D188 /* menuMeshStatus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD9F84016D19AB70097D188 /* menuMeshStatus@2x.png */; };
 		1CD9F84516D19AB70097D188 /* menuNetworkStatus.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD9F84116D19AB70097D188 /* menuNetworkStatus.png */; };
-		1CD9F84616D19AB70097D188 /* menuNetworkStatus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD9F84216D19AB70097D188 /* menuNetworkStatus@2x.png */; };
 		1CD9F8DB16D2FF080097D188 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD9F8DA16D2FF080097D188 /* CoreFoundation.framework */; };
 		1CD9F8DD16D2FF340097D188 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD9F8DC16D2FF340097D188 /* SystemConfiguration.framework */; };
 		1CFACFD416DC27ED00DBBA58 /* ProfilesDoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CFACFD316DC27ED00DBBA58 /* ProfilesDoc.m */; };
@@ -118,9 +116,7 @@
 		1CD9F83916D18C2B0097D188 /* CoreWLAN.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreWLAN.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/CoreWLAN.framework; sourceTree = DEVELOPER_DIR; };
 		1CD9F83B16D18C3C0097D188 /* SecurityInterface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SecurityInterface.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/SecurityInterface.framework; sourceTree = DEVELOPER_DIR; };
 		1CD9F83F16D19AB70097D188 /* menuMeshStatus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menuMeshStatus.png; path = "commotion-meshbook/Images/menuMeshStatus.png"; sourceTree = SOURCE_ROOT; };
-		1CD9F84016D19AB70097D188 /* menuMeshStatus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menuMeshStatus@2x.png"; path = "commotion-meshbook/Images/menuMeshStatus@2x.png"; sourceTree = SOURCE_ROOT; };
 		1CD9F84116D19AB70097D188 /* menuNetworkStatus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menuNetworkStatus.png; path = "commotion-meshbook/Images/menuNetworkStatus.png"; sourceTree = SOURCE_ROOT; };
-		1CD9F84216D19AB70097D188 /* menuNetworkStatus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menuNetworkStatus@2x.png"; path = "commotion-meshbook/Images/menuNetworkStatus@2x.png"; sourceTree = SOURCE_ROOT; };
 		1CD9F8DA16D2FF080097D188 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/CoreFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		1CD9F8DC16D2FF340097D188 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		1CFACFD216DC27ED00DBBA58 /* ProfilesDoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfilesDoc.h; path = "commotion-meshbook/Data/ProfilesDoc.h"; sourceTree = SOURCE_ROOT; };
@@ -165,9 +161,7 @@
 				1C72FD0416C6FCA3000A6FE8 /* menuIcon.png */,
 				1C72FD0516C6FCA3000A6FE8 /* menuIconHighlighted.png */,
 				1CD9F83F16D19AB70097D188 /* menuMeshStatus.png */,
-				1CD9F84016D19AB70097D188 /* menuMeshStatus@2x.png */,
 				1CD9F84116D19AB70097D188 /* menuNetworkStatus.png */,
-				1CD9F84216D19AB70097D188 /* menuNetworkStatus@2x.png */,
 				1C83030716CF67D9003A59FB /* tabStatus.png */,
 				1C83030F16CF6F16003A59FB /* tabStatus@2x.png */,
 				1C83030D16CF6F16003A59FB /* tabProfiles.png */,
@@ -438,9 +432,7 @@
 				1C83031D16CF880D003A59FB /* profileThumb.png in Resources */,
 				1C83031E16CF880D003A59FB /* profileThumb@2x.png in Resources */,
 				1CD9F84316D19AB70097D188 /* menuMeshStatus.png in Resources */,
-				1CD9F84416D19AB70097D188 /* menuMeshStatus@2x.png in Resources */,
 				1CD9F84516D19AB70097D188 /* menuNetworkStatus.png in Resources */,
-				1CD9F84616D19AB70097D188 /* menuNetworkStatus@2x.png in Resources */,
 				1C988E3B16DEB64C0045324B /* olsrd.conf in Resources */,
 				1C988E3C16DEB64C0045324B /* olsrd in Resources */,
 				1C988E3D16DEB64C0045324B /* olsrd_jsoninfo.so.0.0 in Resources */,

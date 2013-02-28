@@ -80,7 +80,7 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
     //NSLog(@"%s", __FUNCTION__);
     
     NSMenuItem *selectedItem = [menu itemAtIndex:11];
-    NSLog(@"%s: selectedItem: %@", __FUNCTION__, selectedItem.title);
+    //NSLog(@"%s: selectedItem: %@", __FUNCTION__, selectedItem.title);
     
     // add available profiles to the menubar (dynamic adds based on data in plist directory)
     // load all profiles from our data store
@@ -107,25 +107,20 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
 - (void)menuNeedsUpdate:(NSMenu *)menu {
     
     //NSLog(@"%s: menu %@", __FUNCTION__, menu);
-    
-    NSMenuItem *selectedItem = [menu itemAtIndex:11];
-    NSLog(@"%s: selectedItem: %@", __FUNCTION__, selectedItem.title);
+    //NSMenuItem *selectedItem = [menu itemAtIndex:11];
+    //NSLog(@"%s: selectedItem: %@", __FUNCTION__, selectedItem.title);
         
-
-    
     // remove dynamic menu items in between the static ones
     for ( NSUInteger i = menu.numberOfItems-8; i >= 12; --i ) {
-        //NSUInteger i = loopIndex - 1;
         
-        NSMenuItem *menuItem = [menu itemAtIndex:i];
-        
-        NSLog(@"%s: index: %lu -- menuItem: %@", __FUNCTION__, i, menuItem.title);
+        //NSMenuItem *menuItem = [menu itemAtIndex:i];
+        //NSLog(@"%s: index: %lu -- menuItem: %@", __FUNCTION__, i, menuItem.title);
         
         [menu removeItemAtIndex:i];
     }
 }
 
-
+// connect to our network
 - (void)setSelectedProfile:(NSMenuItem *)selectedNetwork  {
     
     NSLog(@"%s-selectedMenuItem: %@", __FUNCTION__, selectedNetwork.title);

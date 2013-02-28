@@ -95,7 +95,7 @@
     [archiver finishEncoding];
     [data writeToFile:dataPath atomically:YES];
     
-    NSLog(@"DATA SAVED!: %@", _data);
+    //NSLog(@"DATA SAVED!: %@", _data);
     
 }
 
