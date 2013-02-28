@@ -79,6 +79,9 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
 {
     //NSLog(@"%s", __FUNCTION__);
     
+    NSMenuItem *selectedItem = [menu itemAtIndex:11];
+    NSLog(@"%s: selectedItem: %@", __FUNCTION__, selectedItem.title);
+    
     // add available profiles to the menubar (dynamic adds based on data in plist directory)
     // load all profiles from our data store
     self.profiles = [ProfilesDatabase loadProfilesDocs];
@@ -90,7 +93,12 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
         // get data from our model
         ProfilesDoc *profilesDoc = [self.profiles objectAtIndex:i];
         // add menu item
-        NSMenuItem *item = [statusMenu insertItemWithTitle:[NSString stringWithFormat:@"%@", profilesDoc.data.ssid] action:@selector(setSelectedProfile) keyEquivalent:@"" atIndex:11];
+        NSMenuItem *item = [statusMenu insertItemWithTitle:[NSString stringWithFormat:@"%@", profilesDoc.data.ssid] action:@selector(setSelectedProfile:) keyEquivalent:@"" atIndex:12];
+        
+        if ([selectedItem.title isEqualToString:item.title]) {
+            [item setState: NSOnState];
+        }
+        
         [item setTarget:self];
     }
 }
@@ -98,20 +106,31 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
 // called when we need to update menu items
 - (void)menuNeedsUpdate:(NSMenu *)menu {
     
-    //NSLog(@"%s", __FUNCTION__);
+    //NSLog(@"%s: menu %@", __FUNCTION__, menu);
+    
+    NSMenuItem *selectedItem = [menu itemAtIndex:11];
+    NSLog(@"%s: selectedItem: %@", __FUNCTION__, selectedItem.title);
+        
+
     
     // remove dynamic menu items in between the static ones
-    for ( NSUInteger loopIndex = menu.numberOfItems-7; loopIndex > 11; --loopIndex ) {
-        NSUInteger i = loopIndex - 1;
+    for ( NSUInteger i = menu.numberOfItems-8; i >= 12; --i ) {
+        //NSUInteger i = loopIndex - 1;
         
-        //NSLog(@"%lu", i);
+        NSMenuItem *menuItem = [menu itemAtIndex:i];
+        
+        NSLog(@"%s: index: %lu -- menuItem: %@", __FUNCTION__, i, menuItem.title);
+        
         [menu removeItemAtIndex:i];
-        
     }
 }
 
 
-- (void)setSelectedProfile {
+- (void)setSelectedProfile:(NSMenuItem *)selectedNetwork  {
+    
+    NSLog(@"%s-selectedMenuItem: %@", __FUNCTION__, selectedNetwork.title);
+    
+    [menuSelectedNetwork setTitle:selectedNetwork.title];
 }
 
 

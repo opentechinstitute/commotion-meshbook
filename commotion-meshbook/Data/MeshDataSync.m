@@ -87,7 +87,7 @@
         meshData = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                     state, @"state",
                     nil];
-        NSLog(@"state: %@", state);
+        //NSLog(@"state: %@", state);
     }
     
     // send notification to all listening classes that data is ready -- as a json dict

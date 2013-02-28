@@ -34,7 +34,7 @@
     
     // Get private docs dir
     NSString *documentsDirectory = [ProfilesDatabase getPrivateDocsDir];
-    NSLog(@"Loading profiles from %@", documentsDirectory);
+    //NSLog(@"Loading profiles from %@", documentsDirectory);
     
     // Get contents of documents directory
     NSError *error;
@@ -92,7 +92,7 @@
     
     // Get path of profiles directory
     NSString *documentsDirectory = [ProfilesDatabase getPrivateDocsDir];
-    NSLog(@"Loading profiles from %@", documentsDirectory);
+    //NSLog(@"Loading profiles from %@", documentsDirectory);
     
     // Get contents of documents directory
     NSError *error;
