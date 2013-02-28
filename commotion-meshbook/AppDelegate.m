@@ -7,7 +7,7 @@
 
 #import "AppDelegate.h"
 #import "MASPreferencesWindowController.h"
-#import "NetworkDataSync.h"
+#import "NetworkService.h"
 #import "OLSRDService.h"
 #import "ProfilesDoc.h"
 #import "ProfilesData.h"
@@ -39,11 +39,11 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
                                                  name:@"meshDataProcessingComplete"
                                             object:nil];
     
-    // setup menu settings for mesh
-    [self initMeshInterface];
-        
     // setup menu settings for network
     [self initNetworkInterface];
+    
+    // setup menu settings for mesh
+    [self initMeshInterface];
     
 	// 'Quit' menu item is enabled always
 	[menuQuit setEnabled:YES];
@@ -141,8 +141,8 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
 
 - (void)initNetworkInterface {
     
-    NetworkDataSync *networkSyncClass = [[NetworkDataSync alloc] init];
-    NSDictionary *fetchedNetworkData = [networkSyncClass fetchNetworkData];
+    NetworkService *NetworkServiceClass = [[NetworkService alloc] init];
+    NSDictionary *fetchedNetworkData = [NetworkServiceClass fetchNetworkData];
     //NSLog(@"%s-fetchedNetworkData: %@", __FUNCTION__, fetchedNetworkData);
     
     [self updateNetworkMenuItems:fetchedNetworkData];
@@ -160,7 +160,7 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
     //NSLog(@"fetchedNetworkData: %@", fetchedNetworkData);
     
     // update menu items with fetched info
-	[menuNetworkStatus setTitle:[NSString stringWithFormat:@"Wi-Fi: %@", [fetchedNetworkData valueForKey:@"state"]]];
+	[menuNetworkStatus setTitle:[NSString stringWithFormat:@"Power: %@", [fetchedNetworkData valueForKey:@"state"]]];
 	[menuNetworkSSID setTitle:[NSString stringWithFormat:@"Network (SSID): %@", [fetchedNetworkData valueForKey:@"ssid"]]];
 	[menuNetworkBSSID setTitle:[NSString stringWithFormat:@"BSSID: %@", [fetchedNetworkData valueForKey:@"bssid"]]];
     [menuNetworkChannel setTitle:[NSString stringWithFormat:@"Channel: %@", [fetchedNetworkData valueForKey:@"channel"]]];

@@ -22,12 +22,12 @@
     // setup notifications
     // listen for successful return of olsrd shell process starting
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(OLSRDServiceExecuteSuccess:)
+                                             selector:@selector(shellCommandExecuteSuccess:)
                                                  name:BLshellCommandExecuteSuccessNotification
                                                object:[BLAuthentication sharedInstance]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(OLSRDServiceExecuteFailure:)
+                                             selector:@selector(shellCommandExecuteFailure:)
                                                  name:BLshellCommandExecuteFailureNotification
                                                object:[BLAuthentication sharedInstance]];
 
@@ -60,7 +60,15 @@
     
 }
 
-- (void) OLSRDServiceExecuteSuccess:(NSNotification*)aNotification {
+- (void) executeMeshDataPolling {
+    
+    MeshDataSync *meshSyncClass = [[MeshDataSync alloc] init];
+    [meshSyncClass fetchMeshData];
+    
+}
+
+
+- (void) shellCommandExecuteSuccess:(NSNotification*)aNotification {
     
     // our olsrd shell command executed successfully -- now ok to fetch (poll) json data from localhost:9090
     // BEGIN POLLING
@@ -69,21 +77,13 @@
     [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(executeMeshDataPolling) userInfo:nil repeats:YES];
 }
 
-- (void) OLSRDServiceExecuteFailure:(NSNotification*)aNotification {
+- (void) shellCommandExecuteFailure:(NSNotification*)aNotification {
     
     // there was a (sporadic) problem with AuthorizationExecuteWithPriveldges auth
-    // (happens once every few auths -- nature of using deprecated call?
+    // (happens once every few auths -- nature of using deprecated call?  RETRY
     [self executeOLSRDService];
     
 }
-
-- (void) executeMeshDataPolling {
-    
-    MeshDataSync *meshSyncClass = [[MeshDataSync alloc] init];
-    [meshSyncClass fetchMeshData];
-    
-}
-
 
 
 

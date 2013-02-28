@@ -19,8 +19,12 @@
 
 #pragma mark -
 #pragma mark OLSRD Service & Mesh Polling
-- (void)executeOLSRDService;
-- (void)OLSRDServiceExecuteSuccess:(NSNotification*)aNotification;
-- (void)executeMeshDataPolling;
+- (void) executeOLSRDService;
+- (void) executeMeshDataPolling;
+
+#pragma mark -
+#pragma mark Authentication Notifications
+- (void) shellCommandExecuteSuccess:(NSNotification*)aNotification;
+- (void) shellCommandExecuteFailure:(NSNotification*)aNotification;
 
 @end

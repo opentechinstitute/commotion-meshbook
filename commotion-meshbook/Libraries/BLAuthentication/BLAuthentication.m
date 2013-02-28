@@ -299,11 +299,7 @@
 												0, args, &pipe);
 	}
 
-    
-    
-    
 
-    
     /**
      * DISPLAYS PROGRAM OUTPUT -- BLOCKS UI IF LEFT ON
      */
@@ -333,9 +329,6 @@
         }
     }
      **/
-   
-     
-     
     
     if(err!=0) {
 		//NSBeep();
@@ -352,18 +345,18 @@
         
          **/
         // check to see if type is olsrd
-        if ([type isEqualToString:@"olsrd"]) {
+        //if ([type isEqualToString:@"olsrd"]) {
         // we retry auth here
             [[NSNotificationCenter defaultCenter] postNotificationName:BLshellCommandExecuteFailureNotification object:self];
-        }
+        //}
         
 		return NO;
 	}
 	else {
         // check to see if type is olsrd
-        if ([type isEqualToString:@"olsrd"]) {
+        //if ([type isEqualToString:@"olsrd"]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:BLshellCommandExecuteSuccessNotification object:self];
-        }
+        //}
 		return YES;
 	}
 }

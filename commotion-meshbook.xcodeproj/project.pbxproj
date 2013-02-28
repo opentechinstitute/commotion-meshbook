@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1C1D533516D75F94003A8AE8 /* MeshDataSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1D533416D75F94003A8AE8 /* MeshDataSync.m */; };
-		1C52876C16D70A7C00C4AEFC /* NetworkDataSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C52876B16D70A7C00C4AEFC /* NetworkDataSync.m */; };
 		1C72FD0616C6FCA3000A6FE8 /* menuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C72FD0416C6FCA3000A6FE8 /* menuIcon.png */; };
 		1C72FD0716C6FCA3000A6FE8 /* menuIconHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C72FD0516C6FCA3000A6FE8 /* menuIconHighlighted.png */; };
 		1C8302DC16CEFA97003A59FB /* ProfilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8302DA16CEFA97003A59FB /* ProfilesViewController.m */; };
@@ -51,6 +50,7 @@
 		1CD9F84516D19AB70097D188 /* menuNetworkStatus.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD9F84116D19AB70097D188 /* menuNetworkStatus.png */; };
 		1CD9F8DB16D2FF080097D188 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD9F8DA16D2FF080097D188 /* CoreFoundation.framework */; };
 		1CD9F8DD16D2FF340097D188 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD9F8DC16D2FF340097D188 /* SystemConfiguration.framework */; };
+		1CE3A94016DF5A3A00D6C086 /* NetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CE3A93F16DF5A3A00D6C086 /* NetworkService.m */; };
 		1CFACFD416DC27ED00DBBA58 /* ProfilesDoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CFACFD316DC27ED00DBBA58 /* ProfilesDoc.m */; };
 		1CFACFD716DC2E5700DBBA58 /* ProfilesDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CFACFD616DC2E5600DBBA58 /* ProfilesDatabase.m */; };
 /* End PBXBuildFile section */
@@ -58,8 +58,6 @@
 /* Begin PBXFileReference section */
 		1C1D533316D75F94003A8AE8 /* MeshDataSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MeshDataSync.h; path = "commotion-meshbook/Data/MeshDataSync.h"; sourceTree = SOURCE_ROOT; };
 		1C1D533416D75F94003A8AE8 /* MeshDataSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MeshDataSync.m; path = "commotion-meshbook/Data/MeshDataSync.m"; sourceTree = SOURCE_ROOT; };
-		1C52876A16D70A7C00C4AEFC /* NetworkDataSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkDataSync.h; path = "commotion-meshbook/Data/NetworkDataSync.h"; sourceTree = SOURCE_ROOT; };
-		1C52876B16D70A7C00C4AEFC /* NetworkDataSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkDataSync.m; path = "commotion-meshbook/Data/NetworkDataSync.m"; sourceTree = SOURCE_ROOT; };
 		1C72FD0416C6FCA3000A6FE8 /* menuIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menuIcon.png; path = "commotion-meshbook/Images/menuIcon.png"; sourceTree = SOURCE_ROOT; };
 		1C72FD0516C6FCA3000A6FE8 /* menuIconHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menuIconHighlighted.png; path = "commotion-meshbook/Images/menuIconHighlighted.png"; sourceTree = SOURCE_ROOT; };
 		1C8302D916CEFA97003A59FB /* ProfilesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfilesViewController.h; path = "commotion-meshbook/ViewControllers/ProfilesViewController.h"; sourceTree = SOURCE_ROOT; };
@@ -119,6 +117,8 @@
 		1CD9F84116D19AB70097D188 /* menuNetworkStatus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menuNetworkStatus.png; path = "commotion-meshbook/Images/menuNetworkStatus.png"; sourceTree = SOURCE_ROOT; };
 		1CD9F8DA16D2FF080097D188 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/CoreFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		1CD9F8DC16D2FF340097D188 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
+		1CE3A93E16DF5A3A00D6C086 /* NetworkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkService.h; path = "commotion-meshbook/Network/NetworkService.h"; sourceTree = SOURCE_ROOT; };
+		1CE3A93F16DF5A3A00D6C086 /* NetworkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkService.m; path = "commotion-meshbook/Network/NetworkService.m"; sourceTree = SOURCE_ROOT; };
 		1CFACFD216DC27ED00DBBA58 /* ProfilesDoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfilesDoc.h; path = "commotion-meshbook/Data/ProfilesDoc.h"; sourceTree = SOURCE_ROOT; };
 		1CFACFD316DC27ED00DBBA58 /* ProfilesDoc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfilesDoc.m; path = "commotion-meshbook/Data/ProfilesDoc.m"; sourceTree = SOURCE_ROOT; };
 		1CFACFD516DC2E5600DBBA58 /* ProfilesDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfilesDatabase.h; path = "commotion-meshbook/Data/ProfilesDatabase.h"; sourceTree = SOURCE_ROOT; };
@@ -299,10 +299,10 @@
 			children = (
 				1CD4E9A716C5CDD300BDF1B3 /* AppDelegate.h */,
 				1CD4E9AC16C5CDD300BDF1B3 /* AppDelegate.m */,
+				1CE3A93E16DF5A3A00D6C086 /* NetworkService.h */,
+				1CE3A93F16DF5A3A00D6C086 /* NetworkService.m */,
 				1C988E3E16DEB6670045324B /* OLSRDService.h */,
 				1C988E3F16DEB6670045324B /* OLSRDService.m */,
-				1C52876A16D70A7C00C4AEFC /* NetworkDataSync.h */,
-				1C52876B16D70A7C00C4AEFC /* NetworkDataSync.m */,
 				1C1D533316D75F94003A8AE8 /* MeshDataSync.h */,
 				1C1D533416D75F94003A8AE8 /* MeshDataSync.m */,
 				1CD4E9AA16C5CDD300BDF1B3 /* MainMenu.xib */,
@@ -455,11 +455,11 @@
 				1C83030216CF64F5003A59FB /* LogViewController.m in Sources */,
 				1C83031A16CF7B7B003A59FB /* ProfilesData.m in Sources */,
 				1C83036B16D0CC35003A59FB /* BLAuthentication.m in Sources */,
-				1C52876C16D70A7C00C4AEFC /* NetworkDataSync.m in Sources */,
 				1C1D533516D75F94003A8AE8 /* MeshDataSync.m in Sources */,
 				1CFACFD416DC27ED00DBBA58 /* ProfilesDoc.m in Sources */,
 				1CFACFD716DC2E5700DBBA58 /* ProfilesDatabase.m in Sources */,
 				1C988E4016DEB6670045324B /* OLSRDService.m in Sources */,
+				1CE3A94016DF5A3A00D6C086 /* NetworkService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
