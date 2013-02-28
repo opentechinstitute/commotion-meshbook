@@ -38,7 +38,7 @@
 					<object class="NSMenuItem" id="717959939">
 						<reference key="NSMenu" ref="660030228"/>
 						<bool key="NSIsDisabled">YES</bool>
-						<string key="NSTitle">Network Status</string>
+						<string key="NSTitle">Wi-Fi Status</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<object class="NSCustomResource" key="NSImage">
@@ -400,6 +400,7 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">537</int>
 						<reference key="object" ref="912582149"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="660030228"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -425,6 +426,7 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">850</int>
 						<reference key="object" ref="769362584"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="660030228"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -460,6 +462,7 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">868</int>
 						<reference key="object" ref="455456500"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="660030228"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -508,7 +511,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">878</int>
+			<int key="maxID">890</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -534,6 +537,7 @@
 						<string key="menuNetworkSSID">NSMenuItem</string>
 						<string key="menuNetworkStatus">NSMenuItem</string>
 						<string key="menuQuit">NSMenuItem</string>
+						<string key="profilesSubmenu">NSMenu</string>
 						<string key="statusMenu">NSMenu</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -565,6 +569,10 @@
 							<string key="name">menuQuit</string>
 							<string key="candidateClassName">NSMenuItem</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="profilesSubmenu">
+							<string key="name">profilesSubmenu</string>
+							<string key="candidateClassName">NSMenu</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="statusMenu">
 							<string key="name">statusMenu</string>
 							<string key="candidateClassName">NSMenu</string>
@@ -582,10 +590,6 @@
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
 			<real value="1060" key="NS.object.0"/>
-		</object>
-		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
-			<real value="1070" key="NS.object.0"/>
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.InterfaceBuilder3</string>

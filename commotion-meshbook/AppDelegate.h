@@ -7,7 +7,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface AppDelegate : NSObject <NSApplicationDelegate> {
+@interface AppDelegate : NSObject <NSApplicationDelegate, NSMenuDelegate> {
 
     // view controller setup
     NSWindowController *_settingsWindowController;
@@ -31,9 +31,12 @@
 
 @property (nonatomic, readonly) NSWindowController *settingsWindowController;
 @property (nonatomic) NSInteger focusedAdvancedControlIndex; // maspref 
+@property (strong) NSMutableArray *profiles; // dynamic menu items
 
-- (void)initProfilesMenuItems;
-- (void)placeholder;
+#pragma mark -
+#pragma mark NSMenu Delegate
+- (void)menuWillOpen:(NSMenu *)menu;
+- (void)menuNeedsUpdate:(NSMenu *)menu;
 
 #pragma mark -
 #pragma mark Network / Mesh Data Setup & Processing

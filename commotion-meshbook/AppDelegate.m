@@ -9,6 +9,10 @@
 #import "MASPreferencesWindowController.h"
 #import "NetworkDataSync.h"
 #import "OLSRDService.h"
+#import "ProfilesDoc.h"
+#import "ProfilesData.h"
+#import "ProfilesDatabase.h"
+
 // view controllers
 #import "StatusViewController.h"
 #import "ProfilesViewController.h"
@@ -62,28 +66,60 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
     
     [statusItem setHighlightMode:YES];
     
-    // add available profiles to the menubar
-    [self initProfilesMenuItems];
-    
+    // set our delegate here so 'menuWillOpen' is called
+    [statusMenu setDelegate:self];
 	[statusItem setMenu:statusMenu];
 }
+
+//==========================================================
+#pragma mark NSMenu Delegate
+//==========================================================
+// called every time the user opens the menu
+- (void)menuWillOpen:(NSMenu *)menu
+{
+    //NSLog(@"%s", __FUNCTION__);
+    
+    // add available profiles to the menubar (dynamic adds based on data in plist directory)
+    // load all profiles from our data store
+    self.profiles = [ProfilesDatabase loadProfilesDocs];
+    
+    // here we reverse the loop to display the correct order of profiles
+    for ( NSUInteger loopIndex = [self.profiles count]; loopIndex > 0; --loopIndex ) {
+        NSUInteger i = loopIndex - 1;
+        
+        // get data from our model
+        ProfilesDoc *profilesDoc = [self.profiles objectAtIndex:i];
+        // add menu item
+        NSMenuItem *item = [statusMenu insertItemWithTitle:[NSString stringWithFormat:@"%@", profilesDoc.data.ssid] action:@selector(setSelectedProfile) keyEquivalent:@"" atIndex:11];
+        [item setTarget:self];
+    }
+}
+
+// called when we need to update menu items
+- (void)menuNeedsUpdate:(NSMenu *)menu {
+    
+    //NSLog(@"%s", __FUNCTION__);
+    
+    // remove dynamic menu items in between the static ones
+    for ( NSUInteger loopIndex = menu.numberOfItems-7; loopIndex > 11; --loopIndex ) {
+        NSUInteger i = loopIndex - 1;
+        
+        //NSLog(@"%lu", i);
+        [menu removeItemAtIndex:i];
+        
+    }
+}
+
+
+- (void)setSelectedProfile {
+}
+
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
 {
     return NO;
 }
 
-
-- (void)initProfilesMenuItems {
- 
-    NSMenuItem *item = [statusMenu insertItemWithTitle:[NSString stringWithFormat:@"%@", @"meh"] action:@selector(placeholder) keyEquivalent:@"" atIndex:11];
-    //[item setEnabled:TRUE];
-    [item setTarget:self];
-}
-
-- (void)placeholder {
-    
-}
 
 //==========================================================
 #pragma mark Network / Mesh Data Setup & Processing
@@ -124,10 +160,21 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
     NSDictionary *meshData = [fetchedMeshData userInfo];
     NSString *meshState = [meshData valueForKey:@"state"];
     
+    
+    // if wanting to update menu items dynamically while menu is shown
+    // http://stackoverflow.com/questions/6301338/update-nsmenuitem-while-the-host-menu-is-shown
+    /**
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:
+                                [self methodSignatureForSelector:@selector(doStuff)]];
+    [invocation setTarget:self];
+    [invocation setSelector:@selector(doStuff)];
+    [[NSRunLoop mainRunLoop] addTimer:[NSTimer timerWithTimeInterval:1 invocation:invocation repeats:YES] forMode:NSRunLoopCommonModes];
+    **/
+    
+    
     // update menu items with fetched info
     //[menuMeshSSID setTitle:[NSString stringWithFormat:@"%@", [fetchedMeshData valueForKey:@"ssid"]]];
     [menuMeshStatus setTitle:[NSString stringWithFormat:@"OLSRD: %@", (meshState ? : @"Stopped")]];
-
 	//[menuMeshProfile setTitle:[NSString stringWithFormat:@"Profile: %@", [data valueForKey:@"profile"]]];
 }
 
