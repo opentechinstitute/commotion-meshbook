@@ -5,7 +5,9 @@ MeshBook is an open-source OSX utility app that uses OLSR (a routing protocol fo
 
 ========
 
-Status: Profile and olsrd management in place.
+NOTE: A work-in-progress...
+
+Status:  Profile and olsrd management in place. Next up, ibss scan and adhoc connectivity.
 
 ========
 
