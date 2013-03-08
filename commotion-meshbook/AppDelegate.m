@@ -123,7 +123,7 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
 // connect to our network
 - (void)setSelectedProfile:(NSMenuItem *)selectedNetwork  {
     
-    NSLog(@"%s-selectedMenuItem: %@", __FUNCTION__, selectedNetwork.title);
+    //NSLog(@"%s-selectedMenuItem: %@", __FUNCTION__, selectedNetwork.title);
     
     [menuSelectedNetwork setTitle:selectedNetwork.title];
 }

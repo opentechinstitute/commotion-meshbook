@@ -49,7 +49,7 @@
 	AuthorizationRights *authorizedRights;
 	AuthorizationFlags flags;
 	
-	int numItems = [forCommands count];
+	NSUInteger numItems = [forCommands count];
 	AuthorizationItem *items = malloc( sizeof(AuthorizationItem) * numItems );
 	char paths[20][128]; // only handles upto 20 commands with paths upto 128 characters in length
 	
@@ -127,7 +127,7 @@
 	AuthorizationRights *authorizedRights;
 	AuthorizationFlags flags;
 	
-	int numItems = [forCommands count];
+	NSUInteger numItems = [forCommands count];
 	AuthorizationItem *items = malloc( sizeof(AuthorizationItem) * numItems );
 	char paths[20][128];
 	
@@ -203,7 +203,7 @@
 	NSScanner *outputScanner = nil;
 	NSScanner *intScanner = nil;
 	int pid = 0;
-	int len = 0;
+	NSUInteger len = 0;
     
     outpipe = popen([popenArgs UTF8String],"r");
 
@@ -304,7 +304,7 @@
      * DISPLAYS PROGRAM OUTPUT -- BLOCKS UI IF LEFT ON
      */
     
-    /**
+    
      #define MAXLEN 256
 
     int n;
@@ -314,7 +314,7 @@
         fflush(stdout);
         write(1,buf,n);
     }
-    **/
+    
     
     
     /**
