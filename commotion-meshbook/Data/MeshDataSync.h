@@ -13,6 +13,7 @@
 @property (nonatomic, retain) NSURL *downloadURL;
 @property (nonatomic, retain) NSMutableData *downloadData;
 @property (nonatomic, retain) NSString *downloadPath;
+@property (nonatomic, retain) NSMutableDictionary *meshData;
 
 #pragma mark -
 #pragma mark Initialization & Run Loop

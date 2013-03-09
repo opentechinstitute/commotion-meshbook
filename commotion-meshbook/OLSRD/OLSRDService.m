@@ -5,6 +5,7 @@
 //  Created by Brad : Scal.io, LLC - http://scal.io
 //
 
+#import <Growl/Growl.h>
 #import "OLSRDService.h"
 #import "BLAuthentication.h"
 #import "MeshDataSync.h"
@@ -53,30 +54,35 @@
     // as of 10.7!  Unfortunately, the "right" wayto auth as root is to sign the app and 
     // use SMJobBless() or equivalent.  Can't do that for this app, its open-source. Open to suggestions.
     
-    // kill existing process (if exists)
-    //[[BLAuthentication sharedInstance] killAllProcesses:@"olsrd"];
-    
     dispatch_async(backgroundQueue, ^(void) {
 
         NSArray *args1 = [NSArray arrayWithObjects:@"-9", @"olsrd", nil];
-        [[BLAuthentication sharedInstance] executeCommand:@"/usr/bin/killall" withArgs:args1 andType:@"kill"];
+        [[BLAuthentication sharedInstance] executeCommand:@"/usr/bin/killall" withArgs:args1 andType:@"kill" andMessage:@"Killing existing olsrd processes"];
         
         NSArray *args2 = [NSArray arrayWithObjects:@"-f", olsrdConfPath, @"-i", @"en1", @"-d", @"1", nil];
-        [[BLAuthentication sharedInstance] executeCommand:olsrdPath withArgs:args2 andType:@"olsrd"];
+        [[BLAuthentication sharedInstance] executeCommand:olsrdPath withArgs:args2 andType:@"olsrd" andMessage:@"Starting a new olsrd process"];
+        
     });
     
-    [self shellCommandExecuteSuccess];
+    //[self shellCommandExecuteSuccess:nil];
 }
 
 - (void) executeMeshDataPolling {
     
     MeshDataSync *meshSyncClass = [[MeshDataSync alloc] init];
     [meshSyncClass fetchMeshData];
-    
 }
 
 
-- (void) shellCommandExecuteSuccess {
+- (void) shellCommandExecuteSuccess:(NSNotification*)aNotification {
+    
+    [GrowlApplicationBridge notifyWithTitle:@"Executing Process"
+                                description:@"Begin network data polling"
+                           notificationName:@"meshbookGrowlNotification"
+                                   iconData:nil
+                                   priority:0 // -2 == Low priority. +2 == High Priority. 0 == Neutral
+                                   isSticky:NO
+                               clickContext:nil];
     
     // our olsrd shell command executed successfully -- now ok to fetch (poll) json data from localhost:9090
     // BEGIN POLLING

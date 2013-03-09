@@ -9,7 +9,7 @@
 
 @implementation MeshDataSync
 
-@synthesize downloadURL, downloadData, downloadPath;
+@synthesize downloadURL, downloadData, downloadPath, meshData;
 
 //==========================================================
 #pragma mark Initialization & Run Loop
@@ -24,6 +24,10 @@
     // Construct the URL to be downloaded
 	downloadURL = [[NSURL alloc] initWithString: downloadString];
 	downloadData = [[NSMutableData alloc] init];
+    
+    // setup data dict
+    meshData = [[NSMutableDictionary alloc] init];
+
     
     //NSLog(@"downloadURL: %@",downloadURL);
     
@@ -79,26 +83,22 @@
     // extract specific value...
     NSArray *interfaces = [json objectForKey:@"interfaces"];
     NSArray *links = [json objectForKey:@"links"];
-    
-    NSMutableDictionary *meshData;
-    
+        
     for (NSDictionary *interface in interfaces) {
         NSString *state = ([[interface objectForKey:@"state"] isEqualToString:@"up"] ? @"Running" : @"Stopped");
         
-        meshData = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                    state, @"state",
-                    nil];
-        NSLog(@"state: %@", state);
+        [meshData setObject:state forKey:@"state"];
+        //NSLog(@"state: %@", state);
     }
     
     for (NSDictionary *link in links) {
         NSString *remoteip = [link objectForKey:@"remoteIP"];
         
-        meshData = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                    remoteip, @"remoteIP",
-                    nil];
-        NSLog(@"remoteIP: %@", remoteip);
+        [meshData setObject:remoteip forKey:@"remoteIP"];
+        //NSLog(@"remoteIP: %@", remoteip);
     }
+    
+    NSLog(@"meshData: %@", meshData);
     
     // send notification to all listening classes that data is ready -- as a json dict
     [[NSNotificationCenter defaultCenter] postNotificationName:@"meshDataProcessingComplete" object:nil userInfo:meshData];

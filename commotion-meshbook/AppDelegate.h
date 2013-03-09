@@ -26,11 +26,13 @@
     IBOutlet NSMenuItem *menuMeshSSID;
     IBOutlet NSMenuItem *menuMeshStatus;
     IBOutlet NSMenuItem *menuSelectedNetwork;
+    
 }
 
 @property (nonatomic, readonly) NSWindowController *settingsWindowController;
 @property (nonatomic) NSInteger focusedAdvancedControlIndex; // maspref 
 @property (strong) NSMutableArray *profiles; // dynamic menu items
+@property (strong) NSMutableArray *scannedItems; // dynamic menu items
 
 #pragma mark -
 #pragma mark NSMenu Delegate

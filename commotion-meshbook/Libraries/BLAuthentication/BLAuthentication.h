@@ -27,10 +27,15 @@
 // gets the pid forProcess
 - (int)getPID:(NSString *)forProcess;
 // executes pathToCommand with privileges
-- (BOOL)executeCommand:(NSString *)pathToCommand withArgs:(NSArray *)arguments andType:(NSString*)type;
--(BOOL)executeKillallCommand:(NSString *)pathToCommand withArgs:(NSArray *)arguments andType:(NSString*)type;
+- (BOOL)executeCommand:(NSString *)pathToCommand withArgs:(NSArray *)arguments andType:(NSString*)type andMessage:(NSString*)message;
+
++ (void)postNotification:(NSNotification *)aNotification;
+
+
+//-(BOOL)executeKillallCommand:(NSString *)pathToCommand withArgs:(NSArray *)arguments andType:(NSString*)type;
 // kills the process specified by commandFromPS
-- (BOOL)killProcess:(NSString *)commandFromPS;
+//- (BOOL)killProcess:(NSString *)commandFromPS;
+
 
 @end
 

@@ -10,6 +10,7 @@
 #import "BLAuthentication.h"
 #import <Security/AuthorizationTags.h>
 #include <sys/stat.h>
+#import <Growl/Growl.h>
 
 OSStatus AuthorizationExecuteWithPrivilegesStdErrAndPid (
                                                          AuthorizationRef authorization, 
@@ -395,7 +396,7 @@ OSStatus AuthorizationExecuteWithPrivilegesStdErrAndPid (
 // (eg., /usr/bin/more), arguments should be an array of strings each containing
 // a single argument.
 //
--(BOOL)executeCommand:(NSString *)pathToCommand withArgs:(NSArray *)arguments andType:(NSString*)type {
+-(BOOL)executeCommand:(NSString *)pathToCommand withArgs:(NSArray *)arguments andType:(NSString*)type andMessage:(NSString *)message {
     
     //NSLog(@"%s: ", __FUNCTION__);
     
@@ -447,6 +448,20 @@ OSStatus AuthorizationExecuteWithPrivilegesStdErrAndPid (
 	{
         //NSLog(@"executeCommand--Success!");
 
+        [GrowlApplicationBridge notifyWithTitle:@"Application Launch"
+                                    description:message
+                               notificationName:@"meshbookGrowlNotification"
+                                       iconData:nil
+                                       priority:0 // -2 == Low priority. +2 == High Priority. 0 == Neutral
+                                       isSticky:NO
+                                   clickContext:nil];
+        
+        if ([type isEqualToString:@"olsrd"]) {
+
+            // post notification on MAIN thread
+            [[self class] performSelectorOnMainThread:@selector(postNotification:) withObject:[NSNotification notificationWithName:@"BLshellCommandExecuteSuccessNotification" object:self] waitUntilDone:NO];
+        }
+
         pid_t waitResult;
 		int junkStatus;
         
@@ -460,8 +475,13 @@ OSStatus AuthorizationExecuteWithPrivilegesStdErrAndPid (
 	}
 }
 
++ (void)postNotification:(NSNotification *)aNotification
+{
+    [[NSNotificationCenter defaultCenter] postNotification:aNotification];
+}
+
+/**
 -(BOOL)executeKillallCommand:(NSString *)pathToCommand withArgs:(NSArray *)arguments andType:(NSString*)type  {
-    
     
 	char* args[30]; // can only handle 30 arguments to a given command
 	OSStatus err = 0;
@@ -540,6 +560,7 @@ OSStatus AuthorizationExecuteWithPrivilegesStdErrAndPid (
 		return NO;
 	}
 }
+**/
 
 @end
 

@@ -78,13 +78,15 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
 // called every time the user opens the menu
 - (void)menuWillOpen:(NSMenu *)menu
 {
-    //NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s-menu: %@", __FUNCTION__, menu);
     
     NSMenuItem *selectedItem = [menu itemAtIndex:11];
     //NSLog(@"%s: selectedItem: %@", __FUNCTION__, selectedItem.title);
     
-    // add available profiles to the menubar (dynamic adds based on data in plist directory)
-    // load all profiles from our data store
+    // add available profiles/scanned networks to the menubar
+    
+    /** PROFILES LOOP **/
+    // load all profiles from our data store (dynamic adds based on data in plist directory)
     self.profiles = [ProfilesDatabase loadProfilesDocs];
     
     // here we reverse the loop to display the correct order of profiles
@@ -94,18 +96,39 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
         // get data from our model
         ProfilesDoc *profilesDoc = [self.profiles objectAtIndex:i];
         // add menu item
-        NSMenuItem *item = [statusMenu insertItemWithTitle:[NSString stringWithFormat:@"%@", profilesDoc.data.ssid] action:@selector(setSelectedProfile:) keyEquivalent:@"" atIndex:12];
+        NSMenuItem *profileItem = [statusMenu insertItemWithTitle:[NSString stringWithFormat:@"%@", profilesDoc.data.ssid] action:@selector(setChosenNetwork:) keyEquivalent:@"" atIndex:12];
         
-        if ([selectedItem.title isEqualToString:item.title]) {
-            [item setState: NSOnState];
+        if ([selectedItem.title isEqualToString:profileItem.title]) {
+            [profileItem setState: NSOnState];
         }
         
-        [item setTarget:self];
+        [profileItem setTarget:self];
+    }
+    
+    /** SCANNED LOOP **/
+    self.scannedItems = [[NSMutableArray alloc] initWithObjects:@"BMGNet", @"TookieBoo", @"OhYHEANETWORK", nil];
+
+    // here we reverse the loop to display the correct order of scanned items
+    for ( NSUInteger loopIndex = [self.scannedItems count]; loopIndex > 0; --loopIndex ) {
+        NSUInteger i = loopIndex - 1;
+        
+        // get data from our model
+        NSString *scannedNetwork = [self.scannedItems objectAtIndex:i];
+        // add menu item
+        NSMenuItem *scannedItem = [statusMenu insertItemWithTitle:[NSString stringWithFormat:@"%@", scannedNetwork] action:@selector(setChosenNetwork:) keyEquivalent:@"" atIndex:12];
+        
+        if ([selectedItem.title isEqualToString:scannedItem.title]) {
+            [scannedItem setState: NSOnState];
+        }
+        
+        [scannedItem setTarget:self];
     }
 }
 
 // called when we need to update menu items
 - (void)menuNeedsUpdate:(NSMenu *)menu {
+    
+    NSLog(@"%s-menu: %@", __FUNCTION__, menu);
     
     //NSLog(@"%s: menu %@", __FUNCTION__, menu);
     //NSMenuItem *selectedItem = [menu itemAtIndex:11];
@@ -122,12 +145,13 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
 }
 
 // connect to our network
-- (void)setSelectedProfile:(NSMenuItem *)selectedNetwork  {
+- (void)setChosenNetwork:(NSMenuItem *)selectedNetwork  {
     
     //NSLog(@"%s-selectedMenuItem: %@", __FUNCTION__, selectedNetwork.title);
-    
     [menuSelectedNetwork setTitle:selectedNetwork.title];
 }
+                                         
+            
 
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
