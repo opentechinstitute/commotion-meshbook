@@ -31,7 +31,8 @@
                                                  name:BLshellCommandExecuteFailureNotification
                                                object:[BLAuthentication sharedInstance]];
 
-    
+    // setup background queue (thread)
+    backgroundQueue = dispatch_queue_create("com.blekko.izikBlekko.bgqueue", NULL);
     
     // start new process - setup bundle paths so we're looking in the app dir
     myBundle = [NSBundle mainBundle];
@@ -53,11 +54,18 @@
     // use SMJobBless() or equivalent.  Can't do that for this app, its open-source. Open to suggestions.
     
     // kill existing process (if exists)
-    [[BLAuthentication sharedInstance] killProcess:@"olsrd"];
+    //[[BLAuthentication sharedInstance] killAllProcesses:@"olsrd"];
     
-    NSArray *args = [NSArray arrayWithObjects:@"-f", olsrdConfPath, @"-i", @"en1", @"-d", @"1", nil];
-    [[BLAuthentication sharedInstance] executeCommand:olsrdPath withArgs:args andType:@"olsrd"];
+    dispatch_async(backgroundQueue, ^(void) {
+
+        NSArray *args1 = [NSArray arrayWithObjects:@"-9", @"olsrd", nil];
+        [[BLAuthentication sharedInstance] executeCommand:@"/usr/bin/killall" withArgs:args1 andType:@"kill"];
+        
+        NSArray *args2 = [NSArray arrayWithObjects:@"-f", olsrdConfPath, @"-i", @"en1", @"-d", @"1", nil];
+        [[BLAuthentication sharedInstance] executeCommand:olsrdPath withArgs:args2 andType:@"olsrd"];
+    });
     
+    [self shellCommandExecuteSuccess];
 }
 
 - (void) executeMeshDataPolling {
@@ -68,7 +76,7 @@
 }
 
 
-- (void) shellCommandExecuteSuccess:(NSNotification*)aNotification {
+- (void) shellCommandExecuteSuccess {
     
     // our olsrd shell command executed successfully -- now ok to fetch (poll) json data from localhost:9090
     // BEGIN POLLING
@@ -83,6 +91,16 @@
     // (happens once every few auths -- nature of using deprecated call?  RETRY
     [self executeOLSRDService];
     
+}
+
+- (void)dealloc {
+    
+    NSLog(@"dealloc Background Thread");
+    
+    // release memory for grand central dispatch
+#if !OS_OBJECT_USE_OBJC
+	dispatch_release(backgroundQueue);
+#endif
 }
 
 

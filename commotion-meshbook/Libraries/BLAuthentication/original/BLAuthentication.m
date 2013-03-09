@@ -9,120 +9,6 @@
 
 #import "BLAuthentication.h"
 #import <Security/AuthorizationTags.h>
-#include <sys/stat.h>
-
-OSStatus AuthorizationExecuteWithPrivilegesStdErrAndPid (
-                                                         AuthorizationRef authorization, 
-                                                         const char *pathToTool, 
-                                                         AuthorizationFlags options, 
-                                                         char * const *arguments, 
-                                                         FILE **communicationsPipe,
-                                                         FILE **errPipe,
-                                                         pid_t* processid
-                                                         )
-{  
-    char stderrpath[] = "/tmp/AuthorizationExecuteWithPrivilegesStdErrXXXXXXX.err" ;
-	const char* commandtemplate = "echo $$; \"$@\" 2>%s" ;
-    if (communicationsPipe == errPipe) {
-        commandtemplate = "echo $$; \"$@\" 2>1";
-    } else if (errPipe == 0) {
-        commandtemplate = "echo $$; \"$@\"";
-    }
-	char command[1024];
-	char ** args = nil;
-	OSStatus result;
-	int argcount = 0;
-	int i;
-	int stderrfd = 0;
-	FILE* commPipe = 0;
-	
-	/* Create temporary file for stderr */
-    
-    if (errPipe) {
-        stderrfd = mkstemps (stderrpath, strlen(".err")); 
-        
-        /* create a pipe on that path */ 
-        close(stderrfd); unlink(stderrpath);
-        if (mkfifo(stderrpath,S_IRWXU | S_IRWXG) != 0) {
-            fprintf(stderr,"Error mkfifo:%d\n",errno);
-            return errAuthorizationInternal;
-        }
-        
-        if (stderrfd < 0)
-            return errAuthorizationInternal;
-    }
-    
-	/* Create command to be executed */
-	for (argcount = 0; arguments[argcount] != 0; ++argcount) {}	
-	args = (char**)malloc (sizeof(char*)*(argcount + 5));
-	args[0] = "-c";
-	snprintf (command, sizeof (command), commandtemplate, stderrpath);
-	args[1] = command;
-	args[2] = "";
-	args[3] = (char*)pathToTool;
-	for (i = 0; i < argcount; ++i) {
-		args[i+4] = arguments[i];
-	}
-	args[argcount+4] = 0;
-    
-    /* for debugging: log the executed command */
-	/* printf ("Exec:\n%s", "/bin/sh"); for (i = 0; args[i] != 0; ++i) { printf (" \"%s\"", args[i]); } printf ("\n"); */
-    
-	/* Execute command */
-	result = AuthorizationExecuteWithPrivileges( 
-                                                authorization, "/bin/sh",  options, args, &commPipe );
-	if (result != noErr) {
-		unlink (stderrpath);
-        free( args);
-		return result;
-	}
-	
-    [NSThread sleepForTimeInterval: 0.2];
-    
-	/* Read the first line of stdout => it's the pid */
-	{
-		int stdoutfd = fileno (commPipe);
-		char pidnum[1024];
-		pid_t pid = 0;
-		int i = 0;
-		char ch = 0;
-		while ((read(stdoutfd, &ch, sizeof(ch)) == 1) && (ch != '\n') && (i < sizeof(pidnum))) {
-			pidnum[i++] = ch;
-		}
-		pidnum[i] = 0;
-		if (ch != '\n') {
-			// we shouldn't get there
-			unlink (stderrpath);
-			return errAuthorizationInternal;
-		}
-		sscanf(pidnum, "%d", &pid);
-		if (processid) {
-			*processid = pid;
-		}
-	}
-	
-	if (errPipe) {
-        stderrfd = open(stderrpath, O_RDONLY, 0);
-        *errPipe = fdopen(stderrfd, "r");
-        /* Now it's safe to unlink the stderr file, as the opened handle will be still valid */
-        unlink (stderrpath);
-	} else {
-		unlink(stderrpath);
-	}
-	if (communicationsPipe) {
-		*communicationsPipe = commPipe;
-	} else {
-		fclose (commPipe);
-	}
-    
-    [[NSFileManager defaultManager] removeItemAtPath: [[[NSFileManager defaultManager] currentDirectoryPath] stringByAppendingPathComponent: @"1"] error: nil];
-    
-    if( args)
-        free( args);
-    
-	return noErr;
-}
-
 
 @implementation BLAuthentication
 
@@ -180,9 +66,10 @@ OSStatus AuthorizationExecuteWithPrivilegesStdErrAndPid (
 		err = AuthorizationCreate(&rights, kAuthorizationEmptyEnvironment, flags, &authorizationRef);
 	}
     	
-	if( numItems < 1 )
+    if(!err)
     {
-        free( items);
+            
+        if( numItems < 1 ) {
             return authorized;
         }
 
@@ -206,10 +93,10 @@ OSStatus AuthorizationExecuteWithPrivilegesStdErrAndPid (
         
         authorized = (errAuthorizationSuccess==err);
 
+    }
 	if(authorized)
 		AuthorizationFreeItemSet(authorizedRights);
 	
-    if( items)
 	free(items);
 	
     return authorized;
@@ -249,10 +136,7 @@ OSStatus AuthorizationExecuteWithPrivilegesStdErrAndPid (
 	int i = 0;
 	
 	if( numItems < 1 )
-    {
-        free( items);
 		return authorized;
-	}
 	
 	while( i < numItems && i < 20 )
     {
@@ -317,6 +201,7 @@ OSStatus AuthorizationExecuteWithPrivilegesStdErrAndPid (
 - (int)getPID:(NSString *)forProcess {
 	FILE* outpipe = NULL;
 	NSMutableData* outputData = [NSMutableData data];
+	NSMutableData* tempData = [[NSMutableData alloc] initWithLength:512];
 	NSString *commandOutput = nil;
 	NSString *scannerOutput = nil;
 	NSString *popenArgs = [[NSString alloc] initWithFormat:@"/bin/ps -axwwopid,command | grep \"%@\"",forProcess];
@@ -331,13 +216,11 @@ OSStatus AuthorizationExecuteWithPrivilegesStdErrAndPid (
 
 	if(!outpipe) 
     {
+        [tempData release];
         NSLog(@"Error opening pipe: %@",forProcess);
         NSBeep();
         return 0;
     }
-    
-    NSMutableData* tempData = [[NSMutableData alloc] initWithLength:512];
-
 	
 	do {
         [tempData setLength:512];
@@ -348,7 +231,7 @@ OSStatus AuthorizationExecuteWithPrivilegesStdErrAndPid (
 		}
 	} while(len==512);
     
-    [tempData release];
+	[tempData release];
 
 	pclose(outpipe);
 	
@@ -397,71 +280,6 @@ OSStatus AuthorizationExecuteWithPrivilegesStdErrAndPid (
 //
 -(BOOL)executeCommand:(NSString *)pathToCommand withArgs:(NSArray *)arguments andType:(NSString*)type {
     
-    //NSLog(@"%s: ", __FUNCTION__);
-    
-	char* args[30]; // can only handle 30 arguments to a given command
-	OSStatus err = 0;
-	int i = 0;
-	pid_t processid;
-	
-	if(![self authenticate:[NSArray arrayWithObject:pathToCommand]])
-		return NO;
-	
-	if( arguments == nil || [arguments count] < 1)
-    {
-        err = AuthorizationExecuteWithPrivilegesStdErrAndPid(   authorizationRef, 
-                                                             [pathToCommand UTF8String], 
-                                                             kAuthorizationFlagDefaults, 
-                                                             nil, 
-                                                             nil,
-                                                             nil,
-                                                             &processid);
-	}
-	else
-	{
-		while( i < [arguments count] && i < 19)
-		{
-			args[i] = (char*)[[arguments objectAtIndex:i] cString];
-			i++;
-		}
-		args[i] = NULL;
-        
-        err = AuthorizationExecuteWithPrivilegesStdErrAndPid(   authorizationRef, 
-                                                             [pathToCommand UTF8String], 
-                                                             kAuthorizationFlagDefaults, 
-                                                             args, 
-                                                             nil,
-                                                             nil,
-                                                             &processid);
-	}
-
-    if( err != 0)
-	{
-		NSLog(@"executeCommand--Error %d in AuthorizationExecuteWithPrivileges",(int)err);
-
-        //[[NSNotificationCenter defaultCenter] postNotificationName:BLshellCommandExecuteFailureNotification object:self];
-
-		return NO;
-    }
-	else
-	{
-        //NSLog(@"executeCommand--Success!");
-
-        pid_t waitResult;
-		int junkStatus;
-        
-        do
-        {
-			waitResult = waitpid( processid, &junkStatus, 0);
-        }
-        while((waitResult < 0) && (errno == EINTR));
-    
-		return YES;
-	}
-}
-
--(BOOL)executeKillallCommand:(NSString *)pathToCommand withArgs:(NSArray *)arguments andType:(NSString*)type  {
-    
     
 	char* args[30]; // can only handle 30 arguments to a given command
 	OSStatus err = 0;
@@ -481,29 +299,70 @@ OSStatus AuthorizationExecuteWithPrivilegesStdErrAndPid (
 		}
 		args[i] = NULL;
         
-        
+        //NSLog(@"[pathToCommand fileSystemRepresentation]: %s", [pathToCommand fileSystemRepresentation]);
+
 		err = AuthorizationExecuteWithPrivileges(authorizationRef, [pathToCommand fileSystemRepresentation],
-                                                 0, args, &pipe);
+												0, args, &pipe);
 	}
+
+
+    /**
+     * DISPLAYS PROGRAM OUTPUT -- BLOCKS UI IF LEFT ON
+     */
     
-    //NSLog(@"[pathToCommand fileSystemRepresentation]: %s", [pathToCommand fileSystemRepresentation]);
+    /**
+     #define MAXLEN 256
+
+    int n;
+    char buf[MAXLEN];
+    while((n = read(fileno(pipe),buf,sizeof(buf))) != 0){
+        NSLog(@"output: %d:",n);
+        fflush(stdout);
+        write(1,buf,n);
+    }
+    **/
+    /**
+    char readBuffer[128];
+    if (err == errAuthorizationSuccess) {
+        for (;;) {
+            NSUInteger bytesRead = read(fileno(pipe), readBuffer, sizeof(readBuffer));
+            
+            if (bytesRead < 1) break;
+            write(fileno(stdout), readBuffer, bytesRead);
+        }
+    }
+     **/
+    
+    
+    //[self processBackgroundThread:err withPipe:pipe];
     
     if(err!=0) {
-		NSLog(@"executeKillallCommand--Error %d in AuthorizationExecuteWithPrivileges",(int)err);
+		//NSBeep();
+		NSLog(@"Error %d in AuthorizationExecuteWithPrivileges -- Let's try to re-authenticate...",err);
         
+        // we dont need to alert user, we just retry
+        /**
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setMessageText:@"Authentication Failed"];
+        [alert setInformativeText:[NSString stringWithFormat:@"There was an error when trying to authenticate.  Please quit the program and try again. \n\n<Error %d in AuthorizationExecuteWithPrivileges>", err]];
+        [alert setAlertStyle:NSInformationalAlertStyle];  // or NSCriticalAlertStyle
+        [alert beginSheetModalForWindow:nil modalDelegate:self didEndSelector:nil contextInfo:nil];
+        
+         **/
+        // check to see if type is olsrd
+        //if ([type isEqualToString:@"olsrd"]) {
         // we retry auth here
-        //[[NSNotificationCenter defaultCenter] postNotificationName:BLshellCommandExecuteFailureNotification object:self];
+            [[NSNotificationCenter defaultCenter] postNotificationName:BLshellCommandExecuteFailureNotification object:self];
         //}
         
 		return NO;
 	}
 	else {
-        
-        NSLog(@"executeKillallCommand--Success!");
-
-        
-        //[[NSNotificationCenter defaultCenter] postNotificationName:BLshellCommandExecuteSuccessNotification object:self];
-        
+        // check to see if type is olsrd
+        //if ([type isEqualToString:@"olsrd"]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:BLshellCommandExecuteSuccessNotification object:self];
+        //}
 		return YES;
 	}
 }
@@ -530,17 +389,16 @@ OSStatus AuthorizationExecuteWithPrivilegesStdErrAndPid (
     NSLog(@"killProcess-getPID: %@", pid);
 	
 	if( [pid intValue] > 0 ) {
-		[self executeCommand:@"/bin/kill" withArgs:[NSArray arrayWithObjects: pid, nil] andType:@"kill"];
-        NSLog(@"killProcess-we just killed: %@", pid);
+		[self executeCommand:@"/bin/kill" withArgs:[NSArray arrayWithObjects: @"-9", commandFromPS, nil] andType:nil];
+        NSLog(@"killProcess-killing: %@", pid);
 		return YES;
 	}
 	else {
 		//NSBeep();
-		NSLog(@"killProcess-Error killing process %@, invalid PID.",pid);
+		NSLog(@"Error killing process %@, invalid PID.",pid);
 		return NO;
 	}
-}
-
+}	
 @end
 
 // BLAuthentication sends these notifications are sent when the user  

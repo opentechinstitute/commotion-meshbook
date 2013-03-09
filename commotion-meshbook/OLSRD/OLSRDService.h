@@ -11,6 +11,8 @@
     NSBundle* myBundle;
     NSString* olsrdPath;
     NSString* olsrdConfPath;
+    dispatch_queue_t backgroundQueue;
+
 }
 
 #pragma mark -

@@ -77,17 +77,27 @@
     }
     
     // extract specific value...
-    NSArray *results = [json objectForKey:@"interfaces"];
+    NSArray *interfaces = [json objectForKey:@"interfaces"];
+    NSArray *links = [json objectForKey:@"links"];
     
     NSMutableDictionary *meshData;
     
-    for (NSDictionary *result in results) {
-        NSString *state = ([[result objectForKey:@"state"] isEqualToString:@"up"] ? @"Running" : @"Stopped");
+    for (NSDictionary *interface in interfaces) {
+        NSString *state = ([[interface objectForKey:@"state"] isEqualToString:@"up"] ? @"Running" : @"Stopped");
         
         meshData = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                     state, @"state",
                     nil];
-        //NSLog(@"state: %@", state);
+        NSLog(@"state: %@", state);
+    }
+    
+    for (NSDictionary *link in links) {
+        NSString *remoteip = [link objectForKey:@"remoteIP"];
+        
+        meshData = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                    remoteip, @"remoteIP",
+                    nil];
+        NSLog(@"remoteIP: %@", remoteip);
     }
     
     // send notification to all listening classes that data is ready -- as a json dict

@@ -12,6 +12,7 @@
 #import "ProfilesDoc.h"
 #import "ProfilesData.h"
 #import "ProfilesDatabase.h"
+#import "BLAuthentication.h"
 
 // view controllers
 #import "StatusViewController.h"
