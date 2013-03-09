@@ -278,7 +278,9 @@ OSStatus AuthorizationExecuteWithPrivilegesStdErrAndPid (
 	authorized = (errAuthorizationSuccess == err);
 	
     if (err != errAuthorizationSuccess) {
-        NSRunAlertPanel(@"Cannot run without admin privileges", @"This program cannot start olsrd without administrator access.", @"OK", nil, nil);
+        
+        // post alert on MAIN thread
+        [[self class] performSelectorOnMainThread:@selector(postAlert:) withObject:nil waitUntilDone:YES];
         return 1;
     }
     
@@ -290,6 +292,11 @@ OSStatus AuthorizationExecuteWithPrivilegesStdErrAndPid (
 	free(items);
 	
 	return authorized;
+}
+
++ (void)postAlert:(NSNotification *)aAlert
+{
+    NSRunAlertPanel(@"Cannot run without admin privileges", @"This program cannot start olsrd without administrator access.", @"OK", nil, nil);
 }
 
 //============================================================================
@@ -459,7 +466,7 @@ OSStatus AuthorizationExecuteWithPrivilegesStdErrAndPid (
         if ([type isEqualToString:@"olsrd"]) {
 
             // post notification on MAIN thread
-            [[self class] performSelectorOnMainThread:@selector(postNotification:) withObject:[NSNotification notificationWithName:@"BLshellCommandExecuteSuccessNotification" object:self] waitUntilDone:NO];
+            [[self class] performSelectorOnMainThread:@selector(postNotification:) withObject:[NSNotification notificationWithName:BLshellCommandExecuteSuccessNotification object:self] waitUntilDone:NO];
         }
 
         pid_t waitResult;

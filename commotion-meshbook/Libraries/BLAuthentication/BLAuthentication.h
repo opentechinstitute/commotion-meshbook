@@ -30,7 +30,7 @@
 - (BOOL)executeCommand:(NSString *)pathToCommand withArgs:(NSArray *)arguments andType:(NSString*)type andMessage:(NSString*)message;
 
 + (void)postNotification:(NSNotification *)aNotification;
-
++ (void)postAlert:(NSNotification *)aAlert;
 
 //-(BOOL)executeKillallCommand:(NSString *)pathToCommand withArgs:(NSArray *)arguments andType:(NSString*)type;
 // kills the process specified by commandFromPS
