@@ -295,7 +295,23 @@
     // BEGIN POLLING
     
     // Note: runs on main thread - I dont see any reason to spin up a new thread as no UI blocking occuring that I can tell
-    [NSTimer scheduledTimerWithTimeInterval:8 target:self selector:@selector(scanUserWifiSettings) userInfo:nil repeats:YES];
+    //[NSTimer scheduledTimerWithTimeInterval:8 target:self selector:@selector(scanUserWifiSettings) userInfo:nil repeats:YES];
+    
+    /** METHOD 1 of updating menu **/
+    
+    // use "scheduledTimer..." to have it already scheduled in NSRunLoopCommonModes, it will fire when the menu is closed
+    NSTimer *menuTimer = [NSTimer scheduledTimerWithTimeInterval:8 target:self selector:@selector(scanUserWifiSettings) userInfo:nil repeats:YES];
+    
+    // add the timer to the run loop in NSEventTrackingRunLoopMode to have it fired even when menu is open
+    [[NSRunLoop currentRunLoop] addTimer:menuTimer forMode:NSEventTrackingRunLoopMode];
+    
+    /** METHOD 2 of updating menu **/
+    /**
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature: [self methodSignatureForSelector:@selector(scanUserWifiSettings)]];
+    [invocation setTarget:self];
+    [invocation setSelector:@selector(scanUserWifiSettings)];
+    [[NSRunLoop mainRunLoop] addTimer:[NSTimer timerWithTimeInterval:5 invocation:invocation repeats:YES] forMode:NSRunLoopCommonModes];
+     **/
 }
 
 

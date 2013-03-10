@@ -14,6 +14,7 @@
 			<string>NSCustomObject</string>
 			<string>NSMenu</string>
 			<string>NSMenuItem</string>
+			<string>NSProgressIndicator</string>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -31,6 +32,15 @@
 			</object>
 			<object class="NSCustomObject" id="1050">
 				<string key="NSClassName">NSApplication</string>
+			</object>
+			<object class="NSProgressIndicator" id="362176662">
+				<reference key="NSNextResponder"/>
+				<int key="NSvFlags">268</int>
+				<string key="NSFrameSize">{16, 16}</string>
+				<reference key="NSSuperview"/>
+				<string key="NSReuseIdentifierKey">_NS:945</string>
+				<int key="NSpiFlags">20746</int>
+				<double key="NSMaxValue">100</double>
 			</object>
 			<object class="NSMenu" id="660030228">
 				<string key="NSTitle"/>
@@ -165,7 +175,7 @@
 						<reference key="NSMixedImage" ref="1026303971"/>
 						<int key="NSTag">1</int>
 					</object>
-					<object class="NSMenuItem" id="481360621">
+					<object class="NSMenuItem" id="815662153">
 						<reference key="NSMenu" ref="660030228"/>
 						<bool key="NSIsDisabled">YES</bool>
 						<bool key="NSIsHidden">YES</bool>
@@ -206,7 +216,7 @@
 						<reference key="NSMixedImage" ref="1026303971"/>
 						<int key="NSTag">2</int>
 					</object>
-					<object class="NSMenuItem" id="153759582">
+					<object class="NSMenuItem" id="754787661">
 						<reference key="NSMenu" ref="660030228"/>
 						<bool key="NSIsDisabled">YES</bool>
 						<bool key="NSIsHidden">YES</bool>
@@ -468,8 +478,8 @@
 							<reference ref="350772727"/>
 							<reference ref="820103136"/>
 							<reference ref="888680302"/>
-							<reference ref="481360621"/>
-							<reference ref="153759582"/>
+							<reference ref="815662153"/>
+							<reference ref="754787661"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Status Menu</string>
@@ -589,13 +599,18 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">904</int>
-						<reference key="object" ref="481360621"/>
+						<reference key="object" ref="815662153"/>
 						<reference key="parent" ref="660030228"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">905</int>
-						<reference key="object" ref="153759582"/>
+						<reference key="object" ref="754787661"/>
 						<reference key="parent" ref="660030228"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">907</int>
+						<reference key="object" ref="362176662"/>
+						<reference key="parent" ref="0"/>
 					</object>
 				</array>
 			</object>
@@ -629,12 +644,13 @@
 				<string key="900.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="904.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="905.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="907.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">906</int>
+			<int key="maxID">907</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>

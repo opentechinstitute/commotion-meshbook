@@ -47,8 +47,11 @@
     //NSURLRequest *downloadRequest=[NSURLRequest requestWithURL: downloadURL cachePolicy: NSURLRequestUseProtocolCachePolicy timeoutInterval: 10.0];
     
     //NSLog(@"%s: downloadRequest: %@", __FUNCTION__, downloadURL);
-    NSURLConnection *downloadConnection = [[NSURLConnection alloc] initWithRequest:downloadRequest delegate:self];
-
+    // we schedule this in NSEvent run mode main loop so the menu will update while holding it open
+    NSURLConnection *downloadConnection = [[NSURLConnection alloc] initWithRequest:downloadRequest delegate:self startImmediately:NO];
+    [downloadConnection scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSEventTrackingRunLoopMode];
+    [downloadConnection start];
+    
     if (downloadConnection) {
         //NSLog(@"downloadConnection SUCCEEDED");
     } else {
@@ -124,7 +127,7 @@
 
 // NSURLConnectionDelegate method: What to do once request is completed
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection {
-
+    
     /**
     //NSLog(@"%s: Download finished! File: %@", __FUNCTION__, downloadURL);
     NSFileManager *fileManager = [NSFileManager defaultManager];

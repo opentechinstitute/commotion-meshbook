@@ -82,7 +82,6 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
 // called every time the user opens the menu
 - (void)menuWillOpen:(NSMenu *)menu
 {
-    
     //NSLog(@"***********************************************************************");
 
     //NSLog(@"%s-menu: %@", __FUNCTION__, menu);
@@ -102,10 +101,10 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
     //NSLog(@"%s: scannedItems: %@", __FUNCTION__, scannedItems);
     
     // reverse the loop
-    for ( NSUInteger menuIndex = menu.numberOfItems; menuIndex > 0; --menuIndex ) {
+    for ( NSUInteger menuIndex = statusMenu.numberOfItems; menuIndex > 0; --menuIndex ) {
         NSUInteger i = menuIndex - 1;
         
-        NSMenuItem *menuItem = [menu itemAtIndex:i];
+        NSMenuItem *menuItem = [statusMenu itemAtIndex:i];
         //NSLog(@"%s-menuItem: index: %lu - tag: %lu - %@", __FUNCTION__, i, menuItem.tag, menuItem.title);
         
         tag1Index = i;
@@ -188,17 +187,17 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
     //NSLog(@"%s: menu.numberOfItems: %lu", __FUNCTION__, menu.numberOfItems);
     
     // reverse the loop
-    for ( NSUInteger loopIndex = menu.numberOfItems; loopIndex > 0; --loopIndex ) {
+    for ( NSUInteger loopIndex = statusMenu.numberOfItems; loopIndex > 0; --loopIndex ) {
         NSUInteger i = loopIndex - 1;
         
-        NSMenuItem *menuItem = [menu itemAtIndex:i];
+        NSMenuItem *menuItem = [statusMenu itemAtIndex:i];
         
         //NSLog(@"%s-menuItem: index: %lu - tag: %lu - %@", __FUNCTION__, i, menuItem.tag, menuItem.title);
         
         if ((menuItem.tag >= 100) && (menuItem.tag <= 300)) {
             //NSLog(@"%s-REMOVING menuItem: index: %lu - tag: %lu - %@", __FUNCTION__, i, menuItem.tag, menuItem.title);
 
-            [menu removeItemAtIndex: i];
+            [statusMenu removeItemAtIndex: i];
         }
     }
      
@@ -272,6 +271,9 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
 	[menuNetworkSSID setTitle:[NSString stringWithFormat:@"Network (SSID): %@", fetchedWifiSSID]];
 	[menuNetworkBSSID setTitle:[NSString stringWithFormat:@"BSSID: %@", fetchedWifiBSSID]];
     [menuNetworkChannel setTitle:[NSString stringWithFormat:@"Channel: %@", fetchedWifiChannel]];
+    
+    [self menuNeedsUpdate:nil];
+    [self menuWillOpen:nil];
 }
 
 
@@ -282,18 +284,13 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
     NSDictionary *meshData = [fetchedMeshData userInfo];
     NSString *meshState = [meshData valueForKey:@"state"];
     
-    // if wanting to update menu items dynamically while menu is shown
-    // http://stackoverflow.com/questions/6301338/update-nsmenuitem-while-the-host-menu-is-shown
-    /**
-    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:
-                                [self methodSignatureForSelector:@selector(doStuff)]];
-    [invocation setTarget:self];
-    [invocation setSelector:@selector(doStuff)];
-    [[NSRunLoop mainRunLoop] addTimer:[NSTimer timerWithTimeInterval:1 invocation:invocation repeats:YES] forMode:NSRunLoopCommonModes];
-    **/
+    //NSLog(@"%s: meshState: %@", __FUNCTION__, meshState);
     
     // update menu items with fetched info
     [menuMeshStatus setTitle:[NSString stringWithFormat:@"OLSRD: %@", (meshState ? : @"Stopped")]];
+    
+     [self menuNeedsUpdate:nil];
+     [self menuWillOpen:nil];
 }
 
 
