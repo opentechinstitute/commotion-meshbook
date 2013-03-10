@@ -116,7 +116,7 @@
 					<object class="NSMenuItem" id="645083052">
 						<reference key="NSMenu" ref="660030228"/>
 						<bool key="NSIsDisabled">YES</bool>
-						<string key="NSTitle">Network (SSID):</string>
+						<string key="NSTitle">&lt;Not Connected&gt;</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="457649730"/>
@@ -165,7 +165,7 @@
 						<reference key="NSMixedImage" ref="1026303971"/>
 						<int key="NSTag">1</int>
 					</object>
-					<object class="NSMenuItem" id="709313252">
+					<object class="NSMenuItem" id="630947749">
 						<reference key="NSMenu" ref="660030228"/>
 						<bool key="NSIsDisabled">YES</bool>
 						<bool key="NSIsHidden">YES</bool>
@@ -206,7 +206,7 @@
 						<reference key="NSMixedImage" ref="1026303971"/>
 						<int key="NSTag">2</int>
 					</object>
-					<object class="NSMenuItem" id="78537380">
+					<object class="NSMenuItem" id="577321529">
 						<reference key="NSMenu" ref="660030228"/>
 						<bool key="NSIsDisabled">YES</bool>
 						<bool key="NSIsHidden">YES</bool>
@@ -460,8 +460,8 @@
 							<reference ref="350772727"/>
 							<reference ref="820103136"/>
 							<reference ref="888680302"/>
-							<reference ref="709313252"/>
-							<reference ref="78537380"/>
+							<reference ref="630947749"/>
+							<reference ref="577321529"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Status Menu</string>
@@ -581,12 +581,12 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">904</int>
-						<reference key="object" ref="709313252"/>
+						<reference key="object" ref="630947749"/>
 						<reference key="parent" ref="660030228"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">905</int>
-						<reference key="object" ref="78537380"/>
+						<reference key="object" ref="577321529"/>
 						<reference key="parent" ref="660030228"/>
 					</object>
 				</array>

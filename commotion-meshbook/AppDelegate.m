@@ -24,8 +24,7 @@
 
 static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selected Identifier View";
 
-@implementation AppDelegate 
-
+@implementation AppDelegate
 
 //==========================================================
 #pragma mark Application Lifecycle
@@ -79,31 +78,35 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
 - (void)menuWillOpen:(NSMenu *)menu
 {
     
-    NSLog(@"***********************************************************************");
+    //NSLog(@"***********************************************************************");
 
     //NSLog(@"%s-menu: %@", __FUNCTION__, menu);
         
     NSMenuItem *selectedItem = [menu itemAtIndex:11];
-    NSLog(@"%s: selectedItem: %@", __FUNCTION__, selectedItem.title);
+    //NSLog(@"%s: selectedItem: %@", __FUNCTION__, selectedItem.title);
     
     // profiles
     self.profiles = [ProfilesDatabase loadProfilesDocs];
     profileCount = [self.profiles count];
-    NSLog(@"%s: profileCount: %lu", __FUNCTION__, profileCount);
-    NSLog(@"%s: menu.numberOfItems: %lu", __FUNCTION__, menu.numberOfItems);
+    //NSLog(@"%s: profileCount: %lu", __FUNCTION__, profileCount);
+    //NSLog(@"%s: menu.numberOfItems: %lu", __FUNCTION__, menu.numberOfItems);
     
     // scanned networks
-    self.scannedItems = [[NSMutableArray alloc] initWithObjects:@"BMGNet", @"TookieBoo", @"OhYHEANETWORK", nil];
+    //scannedItems = [[NSMutableArray alloc] initWithObjects:@"BMGNet", @"TookieBoo", @"OhYHEANETWORK", nil];
+    NetworkService *NetworkServiceClass = [[NetworkService alloc] init];
+    scannedItems = [NetworkServiceClass scanAvailableNetworks];
+
+    NSLog(@"%s: scannedItems: %@", __FUNCTION__, scannedItems);
     
     // reverse the loop
     for ( NSUInteger menuIndex = menu.numberOfItems; menuIndex > 0; --menuIndex ) {
         NSUInteger i = menuIndex - 1;
         
         NSMenuItem *menuItem = [menu itemAtIndex:i];
-        NSLog(@"%s-menuItem: index: %lu - tag: %lu - %@", __FUNCTION__, i, menuItem.tag, menuItem.title);
+        //NSLog(@"%s-menuItem: index: %lu - tag: %lu - %@", __FUNCTION__, i, menuItem.tag, menuItem.title);
         
         tag1Index = i;
-        NSLog(@"%s: tag1Index: %lu", __FUNCTION__, tag1Index);
+        //NSLog(@"%s: tag1Index: %lu", __FUNCTION__, tag1Index);
         
         // JOIN A MESH NETWORK (profile items from the file system)
         // get index of tag 1
@@ -122,7 +125,7 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
                 profileItem.tag = p + 100;
                 
                 //NSLog(@"%s: profileItem tag: %lu", __FUNCTION__, profileItem.tag);
-                NSLog(@"%s-profileItem: index: %lu - tag: %lu - %@", __FUNCTION__, i, profileItem.tag, profileItem.title);
+                //NSLog(@"%s-profileItem: index: %lu - tag: %lu - %@", __FUNCTION__, i, profileItem.tag, profileItem.title);
                 
                 if ([selectedItem.title isEqualToString:profileItem.title]) {
                     [profileItem setState: NSOnState];
@@ -137,11 +140,11 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
         if (menuItem.tag==2) {
             
             // reverse the loop
-            for ( NSUInteger scannedIndex = [self.scannedItems count]; scannedIndex > 0; --scannedIndex ) {
+            for ( NSUInteger scannedIndex = [scannedItems count]; scannedIndex > 0; --scannedIndex ) {
                 NSUInteger s = scannedIndex - 1;
                 
                 // get data from our scan
-                NSArray *scanItem = [self.scannedItems objectAtIndex:s];
+                NSArray *scanItem = [scannedItems objectAtIndex:s];
                 
                 // add menu item
                 NSMenuItem *scannedItem = [statusMenu insertItemWithTitle:[NSString stringWithFormat:@"%@", scanItem] action:@selector(setChosenNetwork:) keyEquivalent:@"" atIndex:(tag1Index+1)];
@@ -150,7 +153,7 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
                 scannedItem.tag = s + 200;
                 
                 //NSLog(@"%s: profileItem tag: %lu", __FUNCTION__, profileItem.tag);
-                NSLog(@"%s-profileItem: index: %lu - tag: %lu - %@", __FUNCTION__, i, scannedItem.tag, scannedItem.title);
+                //NSLog(@"%s-profileItem: index: %lu - tag: %lu - %@", __FUNCTION__, i, scannedItem.tag, scannedItem.title);
                 
                 if ([selectedItem.title isEqualToString:scannedItem.title]) {
                     [scannedItem setState: NSOnState];
@@ -165,12 +168,12 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
 // called when we need to update menu items
 - (void)menuNeedsUpdate:(NSMenu *)menu {
     
-    NSLog(@"***********************************************************************");
+    //NSLog(@"***********************************************************************");
     
     self.profiles = [ProfilesDatabase loadProfilesDocs];
     profileCount = [self.profiles count];
-    NSLog(@"%s: profileCount: %lu", __FUNCTION__, profileCount);
-    NSLog(@"%s: menu.numberOfItems: %lu", __FUNCTION__, menu.numberOfItems);
+    //NSLog(@"%s: profileCount: %lu", __FUNCTION__, profileCount);
+    //NSLog(@"%s: menu.numberOfItems: %lu", __FUNCTION__, menu.numberOfItems);
     
     // reverse the loop
     for ( NSUInteger loopIndex = menu.numberOfItems; loopIndex > 0; --loopIndex ) {
@@ -178,10 +181,10 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
         
         NSMenuItem *menuItem = [menu itemAtIndex:i];
         
-        NSLog(@"%s-menuItem: index: %lu - tag: %lu - %@", __FUNCTION__, i, menuItem.tag, menuItem.title);
+        //NSLog(@"%s-menuItem: index: %lu - tag: %lu - %@", __FUNCTION__, i, menuItem.tag, menuItem.title);
         
         if ((menuItem.tag >= 100) && (menuItem.tag <= 300)) {
-            NSLog(@"%s-REMOVING menuItem: index: %lu - tag: %lu - %@", __FUNCTION__, i, menuItem.tag, menuItem.title);
+            //NSLog(@"%s-REMOVING menuItem: index: %lu - tag: %lu - %@", __FUNCTION__, i, menuItem.tag, menuItem.title);
 
             [menu removeItemAtIndex: i];
         }
@@ -210,10 +213,13 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
 - (void)initNetworkInterface {
     
     NetworkService *NetworkServiceClass = [[NetworkService alloc] init];
-    NSDictionary *fetchedNetworkData = [NetworkServiceClass fetchNetworkData];
-    //NSLog(@"%s-fetchedNetworkData: %@", __FUNCTION__, fetchedNetworkData);
+    NSDictionary *fetchedUserWifiData = [NetworkServiceClass scanUserWifiSettings];
+    //NSDictionary *fetchedScannedNetworkData = [NetworkServiceClass scanAvailableNetworks];
+    //NSLog(@"%s-fetchedUserWifiData: %@", __FUNCTION__, fetchedUserWifiData);
+    //NSLog(@"%s-fetchedScannedNetworkData: %@", __FUNCTION__, fetchedScannedNetworkData);
     
-    [self updateNetworkMenuItems:fetchedNetworkData];
+    [self updateUserWifiMenuItems:fetchedUserWifiData];
+    //[self updateScannedNetworksMenuItems:fetchedScannedNetworkData];
 }
 
 - (void)initMeshInterface {
@@ -223,15 +229,22 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
     [olsrdProcess executeOLSRDService]; 
 }
 
--(void) updateNetworkMenuItems:(NSDictionary *)fetchedNetworkData {
+-(void) updateUserWifiMenuItems:(NSDictionary *)fetchedUserWifiData {
     
-    //NSLog(@"fetchedNetworkData: %@", fetchedNetworkData);
+    //NSLog(@"fetchedUserWifiData: %@", fetchedUserWifiData);
     
-    // update menu items with fetched info
-	[menuNetworkStatus setTitle:[NSString stringWithFormat:@"Power: %@", [fetchedNetworkData valueForKey:@"state"]]];
-	[menuNetworkSSID setTitle:[NSString stringWithFormat:@"Network (SSID): %@", [fetchedNetworkData valueForKey:@"ssid"]]];
-	[menuNetworkBSSID setTitle:[NSString stringWithFormat:@"BSSID: %@", [fetchedNetworkData valueForKey:@"bssid"]]];
-    [menuNetworkChannel setTitle:[NSString stringWithFormat:@"Channel: %@", [fetchedNetworkData valueForKey:@"channel"]]];
+    // update menu items with fetched data
+	[menuNetworkStatus setTitle:[NSString stringWithFormat:@"Power: %@", [fetchedUserWifiData valueForKey:@"state"]]];
+	[menuNetworkSSID setTitle:[NSString stringWithFormat:@"Network (SSID): %@", [fetchedUserWifiData valueForKey:@"ssid"]]];
+	[menuNetworkBSSID setTitle:[NSString stringWithFormat:@"BSSID: %@", [fetchedUserWifiData valueForKey:@"bssid"]]];
+    [menuNetworkChannel setTitle:[NSString stringWithFormat:@"Channel: %@", [fetchedUserWifiData valueForKey:@"channel"]]];
+}
+
+-(void) updateScannedNetworksMenuItems:(NSDictionary *)fetchedScannedNetworkData {
+    
+    //NSLog(@"fetchedScannedNetworkData: %@", fetchedScannedNetworkData);
+    
+    // update menu items with fetched data
 
 }
 

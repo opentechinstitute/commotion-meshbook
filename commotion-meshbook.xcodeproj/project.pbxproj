@@ -53,7 +53,7 @@
 		1CD9F84516D19AB70097D188 /* menuNetworkStatus.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD9F84116D19AB70097D188 /* menuNetworkStatus.png */; };
 		1CD9F8DB16D2FF080097D188 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD9F8DA16D2FF080097D188 /* CoreFoundation.framework */; };
 		1CD9F8DD16D2FF340097D188 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD9F8DC16D2FF340097D188 /* SystemConfiguration.framework */; };
-		1CE3A94016DF5A3A00D6C086 /* NetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CE3A93F16DF5A3A00D6C086 /* NetworkService.m */; };
+		1CE3A94016DF5A3A00D6C086 /* NetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CE3A93F16DF5A3A00D6C086 /* NetworkService.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		1CFACFD416DC27ED00DBBA58 /* ProfilesDoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CFACFD316DC27ED00DBBA58 /* ProfilesDoc.m */; };
 		1CFACFD716DC2E5700DBBA58 /* ProfilesDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CFACFD616DC2E5600DBBA58 /* ProfilesDatabase.m */; };
 /* End PBXBuildFile section */

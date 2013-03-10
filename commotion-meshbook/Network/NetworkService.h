@@ -13,15 +13,21 @@
     
     // Networking lib CoreWLAN
     CWInterface *currentInterface;
+    // User Wifi Data
     BOOL powerState;
     NSString *ip;
     NSString *ssid;
     NSString *bssid;
     NSNumber *channel;
+    // Scanned Networks Data
+    //NSDictionary *scannedNetworkData;
+    //NSMutableDictionary *scannedNetworks;
+    NSMutableArray *scannedNetworks;
     
 }
 
 @property (readwrite, retain) CWInterface *currentInterface;
+@property (readwrite, retain) NSMutableArray *scanResults;
 
 #pragma mark -
 #pragma mark Initialization
@@ -29,7 +35,8 @@
 
 #pragma mark -
 #pragma mark CoreWLAN Fetch & Processing
-- (NSMutableDictionary*) fetchNetworkData;
+- (NSDictionary *) scanUserWifiSettings;
+- (NSMutableArray *) scanAvailableNetworks;
 
 #pragma mark -
 #pragma mark Ifconfig Shell

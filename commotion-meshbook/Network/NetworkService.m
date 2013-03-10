@@ -14,6 +14,7 @@
 @implementation NetworkService
 
 @synthesize currentInterface = _currentInterface;
+@synthesize scanResults = scanResults;
 
 //==========================================================
 #pragma mark Initialization & Run Loop
@@ -53,9 +54,8 @@
 //==========================================================
 #pragma mark CoreWLAN Fetch & Processing
 //==========================================================
-- (NSMutableDictionary*) fetchNetworkData {
-    
-    //NSLog(@"NetworkService: fetchNetworkData");
+
+- (NSDictionary *) scanUserWifiSettings {
 
     // get data from CoreWLAN wireless interface
     powerState = [currentInterface power];
@@ -66,19 +66,65 @@
     bssid = ([currentInterface bssid] ? : @"");
     channel = ([currentInterface channel] ? : 0);
     
+    
     //NSLog(@"powerState: %i", powerState);
     //NSLog(@"Network (SSID): %@", ssid);
     //NSLog(@"BSSID: %@", bssid);
     //NSLog(@"CHANNEL: %@", channel);
     
-	NSMutableDictionary *networkItems = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+	NSDictionary *userWifiData = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                          power, @"state",
                                          ssid, @"ssid",
                                          bssid, @"bssid",
                                          (channel ? : @""), @"channel",
                                          nil];
-	return networkItems;
+    return userWifiData;
 }
+
+- (NSMutableArray *) scanAvailableNetworks {
+    NSError *err = nil;
+    CWNetwork *currentNetwork = nil;
+	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:nil];
+        
+	scanResults = [NSMutableArray arrayWithArray:[currentInterface scanForNetworksWithParameters:params error:&err]];
+    //NSLog(@"scanResults: %@",scanResults);
+    
+  	if( err ) {
+		NSLog(@"error: %@",err);
+        //[[NSAlert alertWithError:err] runModal];
+    }
+	else {
+		[scanResults sortUsingDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"ssid" ascending:YES selector:@selector(caseInsensitiveCompare:)]]];
+    }
+    
+    //scannedNetworkData = [NSDictionary dictionary];
+    //scannedNetworks = [NSMutableDictionary dictionary];
+    scannedNetworks = [[NSMutableArray alloc] init];
+        
+    for (currentNetwork in scanResults) {
+        
+        //NSLog(@"SSID %@ - BSSID %@ - CHANNEL %@", [currentNetwork ssid], [currentNetwork bssid], [currentNetwork channel]);
+        //NSLog(@"SSID %@ - IBSS %i", [currentNetwork ssid], [currentNetwork ibss]);
+        
+        // we only want to grab open adhoc (ibss) networks
+        if ([currentNetwork ibss]==1) {
+            
+            [scannedNetworks addObject:[currentNetwork ssid]];
+        
+            /**  IF WE WANT TO STORE MORE INFO ABOUT THE IBSS (BSSID AND CHANNEL)
+            scannedNetworkData = [NSDictionary dictionaryWithObjectsAndKeys: 
+                                           [currentNetwork bssid], @"bssid",
+                                           [currentNetwork channel], @"channel",
+                                           nil];
+            
+            [scannedNetworks setObject: scannedNetworkData forKey:[currentNetwork ssid]];
+             **/
+        }
+    }
+    
+    return scannedNetworks;
+} 
+
 
 //==========================================================
 #pragma mark Ifconfig Shell

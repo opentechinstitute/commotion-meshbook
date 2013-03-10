@@ -29,25 +29,26 @@
     
     NSInteger tag1Index;
     NSInteger profileCount;
-    NSInteger deleteIndexStart;
+    
+    NSArray *scannedItems;
 }
 
 @property (nonatomic, readonly) NSWindowController *settingsWindowController;
 @property (nonatomic) NSInteger focusedAdvancedControlIndex; // maspref 
 @property (strong) NSMutableArray *profiles; // dynamic menu items
-@property (strong) NSMutableArray *scannedItems; // dynamic menu items
 
 #pragma mark -
 #pragma mark NSMenu Delegate
 - (void)menuWillOpen:(NSMenu *)menu;
 - (void)menuNeedsUpdate:(NSMenu *)menu;
-- (void)setSelectedProfile:(NSMenuItem *)selectedNetwork;
+- (void)setChosenNetwork:(NSMenuItem *)selectedNetwork;
 
 #pragma mark -
 #pragma mark Network / Mesh Data Setup & Processing
 - (void)initNetworkInterface;
 - (void)initMeshInterface;
-- (void)updateNetworkMenuItems:(NSDictionary *)fetchedNetworkData;
+- (void)updateUserWifiMenuItems:(NSDictionary *)fetchedNetworkData;
+-(void) updateScannedNetworksMenuItems:(NSDictionary *)fetchedNetworkData;
 - (void)updateMeshMenuItems:(NSNotification *)fetchedMeshData;
 
 #pragma mark -

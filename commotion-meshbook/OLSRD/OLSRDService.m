@@ -57,10 +57,10 @@
     dispatch_async(backgroundQueue, ^(void) {
 
         NSArray *args1 = [NSArray arrayWithObjects:@"-9", @"olsrd", nil];
-        //[[BLAuthentication sharedInstance] executeCommand:@"/usr/bin/killall" withArgs:args1 andType:@"kill" andMessage:@"Killing existing olsrd processes"];
+        [[BLAuthentication sharedInstance] executeCommand:@"/usr/bin/killall" withArgs:args1 andType:@"kill" andMessage:@"Killing existing olsrd processes"];
         
         NSArray *args2 = [NSArray arrayWithObjects:@"-f", olsrdConfPath, @"-i", @"en1", @"-d", @"1", nil];
-        //[[BLAuthentication sharedInstance] executeCommand:olsrdPath withArgs:args2 andType:@"olsrd" andMessage:@"Starting a new olsrd process"];
+        [[BLAuthentication sharedInstance] executeCommand:olsrdPath withArgs:args2 andType:@"olsrd" andMessage:@"Starting a new olsrd process"];
         
     });
 }
@@ -75,7 +75,7 @@
 - (void) shellCommandExecuteSuccess:(NSNotification*)aNotification {
     
     [GrowlApplicationBridge notifyWithTitle:@"Executing Process"
-                                description:@"Begin network data polling"
+                                description:@"Starting network data polling"
                            notificationName:@"meshbookGrowlNotification"
                                    iconData:nil
                                    priority:0 // -2 == Low priority. +2 == High Priority. 0 == Neutral
