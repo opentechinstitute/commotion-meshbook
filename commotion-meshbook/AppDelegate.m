@@ -5,9 +5,9 @@
 //  Created by Brad : Scal.io, LLC - http://scal.io
 //
 
+#import <Growl/Growl.h>
 #import "AppDelegate.h"
 #import "MASPreferencesWindowController.h"
-#import "NetworkService.h"
 #import "OLSRDService.h"
 #import "ProfilesDoc.h"
 #import "ProfilesData.h"
@@ -38,6 +38,10 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
                                              selector:@selector(updateMeshMenuItems:)
                                                  name:@"meshDataProcessingComplete"
                                             object:nil];
+    
+    
+    // init wifi networking
+    NetworkServiceClass = [[NetworkService alloc] init];
     
     // setup menu settings for network
     [self initNetworkInterface];
@@ -93,10 +97,8 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
     
     // scanned networks
     //scannedItems = [[NSMutableArray alloc] initWithObjects:@"BMGNet", @"TookieBoo", @"OhYHEANETWORK", nil];
-    NetworkService *NetworkServiceClass = [[NetworkService alloc] init];
     scannedItems = [NetworkServiceClass scanAvailableNetworks];
-
-    NSLog(@"%s: scannedItems: %@", __FUNCTION__, scannedItems);
+    //NSLog(@"%s: scannedItems: %@", __FUNCTION__, scannedItems);
     
     // reverse the loop
     for ( NSUInteger menuIndex = menu.numberOfItems; menuIndex > 0; --menuIndex ) {
@@ -195,8 +197,49 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
 // connect to our network
 - (void)setChosenNetwork:(NSMenuItem *)selectedNetwork  {
     
-    NSLog(@"%s-selectedMenuItem: %@", __FUNCTION__, selectedNetwork.title);
+    
+    // try starting or connecting to ibss here
+    // if tag is in range of 100, we're creating a mesh
+    // if tag is in range of 200, we're joining a mesh
+    
+    if ((selectedNetwork.tag >= 100) && (selectedNetwork.tag <= 199)) {
+        
+        NSLog(@"%s-selectedMenuItem: %@ - tag: %lu", __FUNCTION__, selectedNetwork.title, selectedNetwork.tag);
+        
+        BOOL IBSSCreated = [NetworkServiceClass createIBSSNetwork:selectedNetwork.title];
+        
+        if (IBSSCreated) {
+            // growl notification
+            [GrowlApplicationBridge notifyWithTitle:@"Network Stauts"
+                                        description:[NSString stringWithFormat:@"Successfully created: %@", selectedNetwork.title]
+                                   notificationName:@"meshbookGrowlNotification"
+                                           iconData:nil
+                                           priority:0
+                                           isSticky:NO
+                                       clickContext:nil];
+        }
+    }
+    if ((selectedNetwork.tag >= 200) && (selectedNetwork.tag <= 299)) {
+        
+        NSLog(@"%s-selectedMenuItem: %@ - tag: %lu", __FUNCTION__, selectedNetwork.title, selectedNetwork.tag);
+        
+        BOOL IBSSJoined = [NetworkServiceClass joinIBSSNetwork:selectedNetwork.title];
+        
+        if (IBSSJoined) {
+            // growl notification
+            [GrowlApplicationBridge notifyWithTitle:@"Network Stauts"
+                                        description:[NSString stringWithFormat:@"Successfully joined: %@", selectedNetwork.title]
+                                   notificationName:@"meshbookGrowlNotification"
+                                           iconData:nil
+                                           priority:0 
+                                           isSticky:NO
+                                       clickContext:nil];
+        }
+    }
+    
+    // if success on connection, update active menu items
     [menuSelectedNetwork setTitle:selectedNetwork.title];
+    [menuActiveMesh setTitle:selectedNetwork.title];
 }
                                     
 
@@ -212,7 +255,6 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
 
 - (void)initNetworkInterface {
     
-    NetworkService *NetworkServiceClass = [[NetworkService alloc] init];
     NSDictionary *fetchedUserWifiData = [NetworkServiceClass scanUserWifiSettings];
     //NSDictionary *fetchedScannedNetworkData = [NetworkServiceClass scanAvailableNetworks];
     //NSLog(@"%s-fetchedUserWifiData: %@", __FUNCTION__, fetchedUserWifiData);

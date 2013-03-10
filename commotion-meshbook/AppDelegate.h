@@ -6,11 +6,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "NetworkService.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSMenuDelegate> {
 
     // view controller setup
     NSWindowController *_settingsWindowController;
+    NetworkService *NetworkServiceClass;
     
     // Menu Items
 	NSStatusItem *statusItem;
@@ -26,6 +28,7 @@
     IBOutlet NSMenuItem *menuMeshSSID;
     IBOutlet NSMenuItem *menuMeshStatus;
     IBOutlet NSMenuItem *menuSelectedNetwork;
+    IBOutlet NSMenuItem *menuActiveMesh;
     
     NSInteger tag1Index;
     NSInteger profileCount;

@@ -5,6 +5,7 @@
 //  Created by Brad : Scal.io, LLC - http://scal.io
 //
 
+#import <Growl/Growl.h>
 #import <CoreWLAN/CoreWLAN.h>
 #import <SecurityInterface/SFAuthorizationView.h>
 #import "BLAuthentication.h"
@@ -127,43 +128,34 @@
 
 
 //==========================================================
-#pragma mark Ifconfig Shell
+#pragma mark Network Management
 //==========================================================
-- (void) executeNetworkConfig {
+- (BOOL) createIBSSNetwork:(NSString *)networkName {
     
-    // BLAuthentication Method - using a deprecated api "AuthorizationExecuteWithPrivileges"
-    // as of 10.7!  Unfortunately, the "right" wayto auth as root is to sign the app and
-    // use SMJobBless() or equivalent.  Can't do that for this app, its open-source. Open to suggestions.
+    [GrowlApplicationBridge notifyWithTitle:@"Network Stauts"
+                                description:[NSString stringWithFormat:@"Attempting to create: %@", networkName]
+                           notificationName:@"meshbookGrowlNotification"
+                                   iconData:nil
+                                   priority:0
+                                   isSticky:NO
+                               clickContext:nil];
     
-    // kill existing process (if exists)
-    //[[BLAuthentication sharedInstance] killProcess:@"olsrd"];
-    
-    //NSArray *args = [NSArray arrayWithObjects:@"-f", olsrdConfPath, @"-i", @"en1", @"-d", @"1", nil];
-    //[[BLAuthentication sharedInstance] executeCommand:olsrdPath withArgs:args andType:@"olsrd"];
-    
+    return YES;
 }
 
 
-//==========================================================
-#pragma mark Authentication Notifications
-//==========================================================
-/**
-- (void) shellCommandExecuteSuccess:(NSNotification*)aNotification {
+- (BOOL) joinIBSSNetwork:(NSString *)networkName {
     
-    // our olsrd shell command executed successfully 
+    [GrowlApplicationBridge notifyWithTitle:@"Network Stauts"
+                                description:[NSString stringWithFormat:@"Attempting to join: %@", networkName]
+                           notificationName:@"meshbookGrowlNotification"
+                                   iconData:nil
+                                   priority:0
+                                   isSticky:NO
+                               clickContext:nil];
 
+    return YES;
 }
-
-- (void) shellCommandExecuteFailure:(NSNotification*)aNotification {
-    
-    // there was a (sporadic) problem with AuthorizationExecuteWithPriveldges auth
-    // (happens once every few auths -- nature of using deprecated call?  RETRY
-    //[self executeNetworkConfig];
-    
-}
- **/
-
-
 
 
 

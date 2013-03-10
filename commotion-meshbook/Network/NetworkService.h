@@ -39,14 +39,9 @@
 - (NSMutableArray *) scanAvailableNetworks;
 
 #pragma mark -
-#pragma mark Ifconfig Shell
-
-
-#pragma mark -
-#pragma mark Authentication Notifications
-//- (void) shellCommandExecuteSuccess:(NSNotification*)aNotification;
-//- (void) shellCommandExecuteFailure:(NSNotification*)aNotification;
-
+#pragma mark Network Management
+- (BOOL) createIBSSNetwork:(NSString *)networkName;
+- (BOOL) joinIBSSNetwork:(NSString *)networkName;
 
 
 @end

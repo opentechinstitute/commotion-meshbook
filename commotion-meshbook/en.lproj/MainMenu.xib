@@ -165,7 +165,7 @@
 						<reference key="NSMixedImage" ref="1026303971"/>
 						<int key="NSTag">1</int>
 					</object>
-					<object class="NSMenuItem" id="630947749">
+					<object class="NSMenuItem" id="481360621">
 						<reference key="NSMenu" ref="660030228"/>
 						<bool key="NSIsDisabled">YES</bool>
 						<bool key="NSIsHidden">YES</bool>
@@ -206,7 +206,7 @@
 						<reference key="NSMixedImage" ref="1026303971"/>
 						<int key="NSTag">2</int>
 					</object>
-					<object class="NSMenuItem" id="577321529">
+					<object class="NSMenuItem" id="153759582">
 						<reference key="NSMenu" ref="660030228"/>
 						<bool key="NSIsDisabled">YES</bool>
 						<bool key="NSIsHidden">YES</bool>
@@ -401,6 +401,14 @@
 					</object>
 					<int key="connectionID">901</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">menuActiveMesh</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="645083052"/>
+					</object>
+					<int key="connectionID">906</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -460,8 +468,8 @@
 							<reference ref="350772727"/>
 							<reference ref="820103136"/>
 							<reference ref="888680302"/>
-							<reference ref="630947749"/>
-							<reference ref="577321529"/>
+							<reference ref="481360621"/>
+							<reference ref="153759582"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Status Menu</string>
@@ -581,12 +589,12 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">904</int>
-						<reference key="object" ref="630947749"/>
+						<reference key="object" ref="481360621"/>
 						<reference key="parent" ref="660030228"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">905</int>
-						<reference key="object" ref="577321529"/>
+						<reference key="object" ref="153759582"/>
 						<reference key="parent" ref="660030228"/>
 					</object>
 				</array>
@@ -626,7 +634,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">905</int>
+			<int key="maxID">906</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
