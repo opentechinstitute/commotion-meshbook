@@ -132,6 +132,7 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
                 
                 if ([fetchedWifiSSID isEqualToString:profileItem.title]) {
                     [profileItem setState: NSOnState];
+                    [menuActiveMesh setTitle:profileItem.title];
                 }
                 else if ([selectedItem.title isEqualToString:profileItem.title]) {
                     [profileItem setState: NSOnState];
@@ -142,7 +143,7 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
         }
         
         // CREATE A MESH NETWORK (scanned items from corewlan)
-        // get index of tag 1 
+        // get index of tag 1
         if (menuItem.tag==2) {
             
             // reverse the loop
@@ -163,6 +164,7 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
                 
                 if ([fetchedWifiSSID isEqualToString:scannedItem.title]) {
                     [scannedItem setState: NSOnState];
+                    [menuActiveMesh setTitle:scannedItem.title];
                 }
                 else if ([selectedItem.title isEqualToString:scannedItem.title]) {
                     [scannedItem setState: NSOnState];

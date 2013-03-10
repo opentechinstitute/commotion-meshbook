@@ -238,8 +238,6 @@
     
     if (selectedNetwork) {
         
-        NSLog(@"selectedNetwork: %@", selectedNetwork);
-
         NSMutableDictionary *ibssParamsForJoin = [NSMutableDictionary dictionaryWithCapacity:0];
         if( networkName ) {
             [ibssParamsForJoin setValue:networkName forKey:kCWIBSSKeySSID];
@@ -283,6 +281,7 @@
 
 - (void) executeWifiDataPolling {
     
+    /**
     [GrowlApplicationBridge notifyWithTitle:@"Executing Process"
                                 description:@"Starting wifi data polling"
                            notificationName:@"meshbookGrowlNotification"
@@ -290,6 +289,7 @@
                                    priority:0 // -2 == Low priority. +2 == High Priority. 0 == Neutral
                                    isSticky:NO
                                clickContext:nil];
+    **/
     
     // our olsrd shell command executed successfully -- now ok to fetch (poll) json data from localhost:9090
     // BEGIN POLLING
