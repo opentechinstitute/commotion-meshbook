@@ -7,6 +7,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "NetworkService.h"
+#import "OLSRDService.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSMenuDelegate> {
 
@@ -20,11 +21,18 @@
 	IBOutlet NSMenuItem *menuQuit;
 
     // Menu Items - Network
+    NSDictionary *fetchedUserWifiData;
+    NSString *fetchedWifiState;
+    NSString *fetchedWifiSSID;
+    NSString *fetchedWifiBSSID;
+    NSString *fetchedWifiChannel;
+    
 	IBOutlet NSMenuItem *menuNetworkStatus;
     IBOutlet NSMenuItem *menuNetworkSSID;
     IBOutlet NSMenuItem *menuNetworkBSSID;
     IBOutlet NSMenuItem *menuNetworkChannel;
     // Menu Items - Mesh
+    OLSRDService *olsrdProcess;
     IBOutlet NSMenuItem *menuMeshSSID;
     IBOutlet NSMenuItem *menuMeshStatus;
     IBOutlet NSMenuItem *menuSelectedNetwork;
@@ -50,8 +58,7 @@
 #pragma mark Network / Mesh Data Setup & Processing
 - (void)initNetworkInterface;
 - (void)initMeshInterface;
-- (void)updateUserWifiMenuItems:(NSDictionary *)fetchedNetworkData;
-- (void)updateScannedNetworksMenuItems:(NSDictionary *)fetchedNetworkData;
+- (void)updateUserWifiMenuItems:(NSNotification *)fetchedWifiData;
 - (void)updateMeshMenuItems:(NSNotification *)fetchedMeshData;
 
 #pragma mark -

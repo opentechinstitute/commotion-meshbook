@@ -75,7 +75,7 @@
 - (void) shellCommandExecuteSuccess:(NSNotification*)aNotification {
     
     [GrowlApplicationBridge notifyWithTitle:@"Executing Process"
-                                description:@"Starting network data polling"
+                                description:@"Starting mesh data polling"
                            notificationName:@"meshbookGrowlNotification"
                                    iconData:nil
                                    priority:0 // -2 == Low priority. +2 == High Priority. 0 == Neutral

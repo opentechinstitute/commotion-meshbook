@@ -8,7 +8,6 @@
 #import <Growl/Growl.h>
 #import "AppDelegate.h"
 #import "MASPreferencesWindowController.h"
-#import "OLSRDService.h"
 #import "ProfilesDoc.h"
 #import "ProfilesData.h"
 #import "ProfilesDatabase.h"
@@ -39,14 +38,16 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
                                                  name:@"meshDataProcessingComplete"
                                             object:nil];
     
+    // listen for network wifi data poll
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateUserWifiMenuItems:)
+                                                 name:@"wifiDataProcessingComplete"
+                                               object:nil];
     
-    // init wifi networking
-    NetworkServiceClass = [[NetworkService alloc] init];
-    
-    // setup menu settings for network
+    // setup wifi network
     [self initNetworkInterface];
     
-    // setup menu settings for mesh
+    // setup mesh network
     [self initMeshInterface];
     
 	// 'Quit' menu item is enabled always
@@ -97,7 +98,7 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
     
     // scanned networks
     //scannedItems = [[NSMutableArray alloc] initWithObjects:@"BMGNet", @"TookieBoo", @"OhYHEANETWORK", nil];
-    scannedItems = [NetworkServiceClass scanAvailableNetworks:nil];
+    //scannedItems = [NetworkServiceClass scanAvailableNetworks];
     //NSLog(@"%s: scannedItems: %@", __FUNCTION__, scannedItems);
     
     // reverse the loop
@@ -129,7 +130,10 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
                 //NSLog(@"%s: profileItem tag: %lu", __FUNCTION__, profileItem.tag);
                 //NSLog(@"%s-profileItem: index: %lu - tag: %lu - %@", __FUNCTION__, i, profileItem.tag, profileItem.title);
                 
-                if ([selectedItem.title isEqualToString:profileItem.title]) {
+                if ([fetchedWifiSSID isEqualToString:profileItem.title]) {
+                    [profileItem setState: NSOnState];
+                }
+                else if ([selectedItem.title isEqualToString:profileItem.title]) {
                     [profileItem setState: NSOnState];
                 }
                 
@@ -157,9 +161,13 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
                 //NSLog(@"%s: profileItem tag: %lu", __FUNCTION__, profileItem.tag);
                 //NSLog(@"%s-profileItem: index: %lu - tag: %lu - %@", __FUNCTION__, i, scannedItem.tag, scannedItem.title);
                 
-                if ([selectedItem.title isEqualToString:scannedItem.title]) {
+                if ([fetchedWifiSSID isEqualToString:scannedItem.title]) {
                     [scannedItem setState: NSOnState];
                 }
+                else if ([selectedItem.title isEqualToString:scannedItem.title]) {
+                    [scannedItem setState: NSOnState];
+                }
+
                 
                 [scannedItem setTarget:self];
             }
@@ -203,15 +211,13 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
     
     if ((selectedNetwork.tag >= 100) && (selectedNetwork.tag <= 199)) {
         
-        NSLog(@"%s-selectedMenuItem: %@ - tag: %lu", __FUNCTION__, selectedNetwork.title, selectedNetwork.tag);
-        
+        //NSLog(@"%s-selectedMenuItem: %@ - tag: %lu", __FUNCTION__, selectedNetwork.title, selectedNetwork.tag);
         [NetworkServiceClass createIBSSNetwork:selectedNetwork.title];
 
     }
     if ((selectedNetwork.tag >= 200) && (selectedNetwork.tag <= 299)) {
-        
-        NSLog(@"%s-selectedMenuItem: %@ - tag: %lu", __FUNCTION__, selectedNetwork.title, selectedNetwork.tag);
-        
+
+        //NSLog(@"%s-selectedMenuItem: %@ - tag: %lu", __FUNCTION__, selectedNetwork.title, selectedNetwork.tag);
         [NetworkServiceClass joinIBSSNetwork:selectedNetwork.title];
     }
     
@@ -233,37 +239,39 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
 
 - (void)initNetworkInterface {
     
-    NSDictionary *fetchedUserWifiData = [NetworkServiceClass scanUserWifiSettings];
-    //NSLog(@"%s-fetchedUserWifiData: %@", __FUNCTION__, fetchedUserWifiData);
+    // init wifi networking
+    NetworkServiceClass = [[NetworkService alloc] init];
+    //fetchedUserWifiData = [NetworkServiceClass scanUserWifiSettings];
+    [NetworkServiceClass executeWifiDataPolling];
     
-    [self updateUserWifiMenuItems:fetchedUserWifiData];
+    //[self updateUserWifiMenuItems];
 }
 
 - (void)initMeshInterface {
     
     // Start olsrd process -- this should be started as early as possible
-    OLSRDService *olsrdProcess = [[OLSRDService alloc] init];
+    olsrdProcess = [[OLSRDService alloc] init];
     [olsrdProcess executeOLSRDService]; 
 }
 
--(void) updateUserWifiMenuItems:(NSDictionary *)fetchedUserWifiData {
+-(void) updateUserWifiMenuItems:(NSNotification *)fetchedWifiData {
     
-    //NSLog(@"fetchedUserWifiData: %@", fetchedUserWifiData);
+    NSDictionary *wifiData = [fetchedWifiData userInfo];
+    fetchedWifiState = [wifiData valueForKey:@"state"];
+    fetchedWifiSSID = [wifiData valueForKey:@"ssid"];
+    fetchedWifiBSSID = [wifiData valueForKey:@"bssid"];
+    fetchedWifiChannel = [wifiData valueForKey:@"channel"];
+    scannedItems = [wifiData valueForKey:@"openNetworks"];
     
-    // update menu items with fetched data
-	[menuNetworkStatus setTitle:[NSString stringWithFormat:@"Power: %@", [fetchedUserWifiData valueForKey:@"state"]]];
-	[menuNetworkSSID setTitle:[NSString stringWithFormat:@"Network (SSID): %@", [fetchedUserWifiData valueForKey:@"ssid"]]];
-	[menuNetworkBSSID setTitle:[NSString stringWithFormat:@"BSSID: %@", [fetchedUserWifiData valueForKey:@"bssid"]]];
-    [menuNetworkChannel setTitle:[NSString stringWithFormat:@"Channel: %@", [fetchedUserWifiData valueForKey:@"channel"]]];
-}
-
--(void) updateScannedNetworksMenuItems:(NSDictionary *)fetchedScannedNetworkData {
-    
-    //NSLog(@"fetchedScannedNetworkData: %@", fetchedScannedNetworkData);
+    //NSLog(@"%s: scannedItems: %@", __FUNCTION__, scannedItems);
     
     // update menu items with fetched data
-
+	[menuNetworkStatus setTitle:[NSString stringWithFormat:@"Power: %@", fetchedWifiState]];
+	[menuNetworkSSID setTitle:[NSString stringWithFormat:@"Network (SSID): %@", fetchedWifiSSID]];
+	[menuNetworkBSSID setTitle:[NSString stringWithFormat:@"BSSID: %@", fetchedWifiBSSID]];
+    [menuNetworkChannel setTitle:[NSString stringWithFormat:@"Channel: %@", fetchedWifiChannel]];
 }
+
 
 -(void) updateMeshMenuItems:(NSNotification *)fetchedMeshData {
   
@@ -271,7 +279,6 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
     
     NSDictionary *meshData = [fetchedMeshData userInfo];
     NSString *meshState = [meshData valueForKey:@"state"];
-    
     
     // if wanting to update menu items dynamically while menu is shown
     // http://stackoverflow.com/questions/6301338/update-nsmenuitem-while-the-host-menu-is-shown
@@ -283,11 +290,8 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
     [[NSRunLoop mainRunLoop] addTimer:[NSTimer timerWithTimeInterval:1 invocation:invocation repeats:YES] forMode:NSRunLoopCommonModes];
     **/
     
-    
     // update menu items with fetched info
-    //[menuMeshSSID setTitle:[NSString stringWithFormat:@"%@", [fetchedMeshData valueForKey:@"ssid"]]];
     [menuMeshStatus setTitle:[NSString stringWithFormat:@"OLSRD: %@", (meshState ? : @"Stopped")]];
-	//[menuMeshProfile setTitle:[NSString stringWithFormat:@"Profile: %@", [data valueForKey:@"profile"]]];
 }
 
 

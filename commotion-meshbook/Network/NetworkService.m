@@ -56,7 +56,7 @@
 #pragma mark CoreWLAN Fetch & Processing
 //==========================================================
 
-- (NSDictionary *) scanUserWifiSettings {
+- (void) scanUserWifiSettings {
 
     // get data from CoreWLAN wireless interface
     powerState = [currentInterface power];
@@ -67,22 +67,27 @@
     bssid = ([currentInterface bssid] ? : @"");
     channel = ([currentInterface channel] ? : 0);
     
+    // get scanned wifi networks
+    NSArray *availableNetworks = [self scanAvailableNetworks];
     
     //NSLog(@"powerState: %i", powerState);
     //NSLog(@"Network (SSID): %@", ssid);
     //NSLog(@"BSSID: %@", bssid);
-    //NSLog(@"CHANNEL: %@", channel);
+    //NSLog(@"Channel: %@", channel);
     
 	NSDictionary *userWifiData = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                          power, @"state",
                                          ssid, @"ssid",
                                          bssid, @"bssid",
                                          (channel ? : @""), @"channel",
+                                         availableNetworks, @"openNetworks",
                                          nil];
-    return userWifiData;
+    
+    // send notification to all listening classes that data is ready -- as a json dict
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"wifiDataProcessingComplete" object:nil userInfo:userWifiData];
 }
 
-- (NSMutableArray *)scanAvailableNetworks:(NSString *)networkName {
+- (NSMutableArray *)scanAvailableNetworks {
     NSError *err = nil;
     CWNetwork *currentNetwork = nil;
 	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:nil];
@@ -107,17 +112,12 @@
         //NSLog(@"SSID %@ - BSSID %@ - CHANNEL %@", [currentNetwork ssid], [currentNetwork bssid], [currentNetwork channel]);
         //NSLog(@"SSID %@ - IBSS %i", [currentNetwork ssid], [currentNetwork ibss]);
         
+        NSString * scannedSSIDString = [currentNetwork ssid];
+        
         // we only want to grab open adhoc (ibss) networks
         if ([currentNetwork ibss]==1) {
             
-            // we look at passed method var to see if we're trying to return a single object
-            if ((networkName != nil) && ([networkName isEqualToString:[currentNetwork ssid]]) ) {
-                
-                [scannedNetworks addObject:currentNetwork];
-                return scannedNetworks;
-            }
-            
-            [scannedNetworks addObject:[currentNetwork ssid]];
+            [scannedNetworks addObject:scannedSSIDString];
         
             /**  IF WE WANT TO STORE MORE INFO ABOUT THE IBSS (BSSID AND CHANNEL)
             scannedNetworkData = [NSDictionary dictionaryWithObjectsAndKeys: 
@@ -131,7 +131,39 @@
     }
     
     return scannedNetworks;
-} 
+}
+
+- (CWNetwork *)checkAvailableNetwork:(NSString *)networkName {
+    NSError *err = nil;
+    CWNetwork *currentNetwork = nil;
+	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:nil];
+    
+	scanResults = [NSMutableArray arrayWithArray:[currentInterface scanForNetworksWithParameters:params error:&err]];
+    //NSLog(@"scanResults: %@",scanResults);
+    
+  	if( err ) {
+		NSLog(@"error: %@",err);
+    }
+	else {
+		[scanResults sortUsingDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"ssid" ascending:YES selector:@selector(caseInsensitiveCompare:)]]];
+    }
+        
+    for (currentNetwork in scanResults) {
+        
+        NSString * scannedSSIDString = [currentNetwork ssid];
+        
+        // we only want to grab open adhoc (ibss) networks
+        if ([currentNetwork ibss]==1) {
+            
+            // we look at passed method var to see if we're trying to return a single object
+            if ((networkName != nil) && ([networkName isEqualToString:scannedSSIDString]) ) {
+                
+                return currentNetwork;
+            }
+        }
+    }
+    return nil;
+}
 
 
 //==========================================================
@@ -201,40 +233,69 @@
                                clickContext:nil];
     
     // we need to get a CW object for passed network name
-    NSArray *scannedItems = [self scanAvailableNetworks:networkName];
-    //NSLog(@"scannedItems: %@", scannedItems);
+    CWNetwork *selectedNetwork = [self checkAvailableNetwork:networkName];
+    //NSLog(@"selectedNetwork: %@", scannedItems);
     
-    CWNetwork *selectedNetwork = [scannedItems objectAtIndex:0];
-
-    NSMutableDictionary *ibssParamsForJoin = [NSMutableDictionary dictionaryWithCapacity:0];
-	if( networkName ) {
-		[ibssParamsForJoin setValue:networkName forKey:kCWIBSSKeySSID];
-    }
-    //[ibssParamsForJoin setValue:passphrase forKey:kCWAssocKeyPassphrase];
-    
-    //NSLog(@"networkName: %@", networkName);
-
-	NSError *error = nil;
-    BOOL joined = [currentInterface associateToNetwork:selectedNetwork parameters:[NSDictionary dictionaryWithDictionary:ibssParamsForJoin] error:&error];
-    
-	if( !joined )
-	{
-		[[NSAlert alertWithError:error] runModal];
+    if (selectedNetwork) {
         
-        return NO;
-	}
+        NSLog(@"selectedNetwork: %@", selectedNetwork);
+
+        NSMutableDictionary *ibssParamsForJoin = [NSMutableDictionary dictionaryWithCapacity:0];
+        if( networkName ) {
+            [ibssParamsForJoin setValue:networkName forKey:kCWIBSSKeySSID];
+        }
+        //[ibssParamsForJoin setValue:passphrase forKey:kCWAssocKeyPassphrase];
+        
+        //NSLog(@"networkName: %@", networkName);
+
+        NSError *error = nil;
+        BOOL joined = [currentInterface associateToNetwork:selectedNetwork parameters:[NSDictionary dictionaryWithDictionary:ibssParamsForJoin] error:&error];
+        
+        if( !joined )
+        {
+            [[NSAlert alertWithError:error] runModal];
+            
+            return NO;
+        }
+        else {
+            
+            // growl notification
+            [GrowlApplicationBridge notifyWithTitle:@"Network Stauts"
+                                        description:[NSString stringWithFormat:@"Successfully joined: %@", networkName]
+                                   notificationName:@"meshbookGrowlNotification"
+                                           iconData:nil
+                                           priority:0
+                                           isSticky:NO
+                                       clickContext:nil];
+            return YES;
+        }
+    }
     else {
-        
-        // growl notification
-        [GrowlApplicationBridge notifyWithTitle:@"Network Stauts"
-                                    description:[NSString stringWithFormat:@"Successfully joined: %@", networkName]
-                               notificationName:@"meshbookGrowlNotification"
-                                       iconData:nil
-                                       priority:0
-                                       isSticky:NO
-                                   clickContext:nil];
-        return YES;
+        // passed network didnt show up in scan, could it have disappeared?
+        NSRunAlertPanel(@"Network Connection Error", [NSString stringWithFormat:@"There was a problem connecting to %@. \n The network may now be out of range.", networkName], @"OK", nil, nil);
+        return NO;
     }
+}
+
+//==========================================================
+#pragma mark Wifi Network Data Polling
+//==========================================================
+
+- (void) executeWifiDataPolling {
+    
+    [GrowlApplicationBridge notifyWithTitle:@"Executing Process"
+                                description:@"Starting wifi data polling"
+                           notificationName:@"meshbookGrowlNotification"
+                                   iconData:nil
+                                   priority:0 // -2 == Low priority. +2 == High Priority. 0 == Neutral
+                                   isSticky:NO
+                               clickContext:nil];
+    
+    // our olsrd shell command executed successfully -- now ok to fetch (poll) json data from localhost:9090
+    // BEGIN POLLING
+    
+    // Note: runs on main thread - I dont see any reason to spin up a new thread as no UI blocking occuring that I can tell
+    [NSTimer scheduledTimerWithTimeInterval:8 target:self selector:@selector(scanUserWifiSettings) userInfo:nil repeats:YES];
 }
 
 

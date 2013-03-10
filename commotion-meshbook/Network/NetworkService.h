@@ -36,13 +36,17 @@
 
 #pragma mark -
 #pragma mark CoreWLAN Fetch & Processing
-- (NSDictionary *) scanUserWifiSettings;
-- (NSMutableArray *)scanAvailableNetworks:(NSString *)networkName;
+- (void) scanUserWifiSettings;
+- (NSMutableArray *)scanAvailableNetworks;
+- (CWNetwork *)checkAvailableNetwork:(NSString *)networkName;
 
 #pragma mark -
 #pragma mark Network Management
 - (BOOL) createIBSSNetwork:(NSString *)networkName;
 - (BOOL) joinIBSSNetwork:(NSString *)networkName;
 
+#pragma mark -
+#pragma mark Wifi Network Data Polling
+- (void) executeWifiDataPolling;
 
 @end
