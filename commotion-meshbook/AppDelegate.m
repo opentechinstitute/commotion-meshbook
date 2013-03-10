@@ -78,81 +78,124 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
 // called every time the user opens the menu
 - (void)menuWillOpen:(NSMenu *)menu
 {
-    NSLog(@"%s-menu: %@", __FUNCTION__, menu);
     
-    NSMenuItem *selectedItem = [menu itemAtIndex:11];
-    //NSLog(@"%s: selectedItem: %@", __FUNCTION__, selectedItem.title);
-    
-    // add available profiles/scanned networks to the menubar
-    
-    /** PROFILES LOOP **/
-    // load all profiles from our data store (dynamic adds based on data in plist directory)
-    self.profiles = [ProfilesDatabase loadProfilesDocs];
-    
-    // here we reverse the loop to display the correct order of profiles
-    for ( NSUInteger loopIndex = [self.profiles count]; loopIndex > 0; --loopIndex ) {
-        NSUInteger i = loopIndex - 1;
-        
-        // get data from our model
-        ProfilesDoc *profilesDoc = [self.profiles objectAtIndex:i];
-        // add menu item
-        NSMenuItem *profileItem = [statusMenu insertItemWithTitle:[NSString stringWithFormat:@"%@", profilesDoc.data.ssid] action:@selector(setChosenNetwork:) keyEquivalent:@"" atIndex:12];
-        
-        if ([selectedItem.title isEqualToString:profileItem.title]) {
-            [profileItem setState: NSOnState];
-        }
-        
-        [profileItem setTarget:self];
-    }
-    
-    /** SCANNED LOOP **/
-    self.scannedItems = [[NSMutableArray alloc] initWithObjects:@"BMGNet", @"TookieBoo", @"OhYHEANETWORK", nil];
+    NSLog(@"***********************************************************************");
 
-    // here we reverse the loop to display the correct order of scanned items
-    for ( NSUInteger loopIndex = [self.scannedItems count]; loopIndex > 0; --loopIndex ) {
-        NSUInteger i = loopIndex - 1;
+    //NSLog(@"%s-menu: %@", __FUNCTION__, menu);
         
-        // get data from our model
-        NSString *scannedNetwork = [self.scannedItems objectAtIndex:i];
-        // add menu item
-        NSMenuItem *scannedItem = [statusMenu insertItemWithTitle:[NSString stringWithFormat:@"%@", scannedNetwork] action:@selector(setChosenNetwork:) keyEquivalent:@"" atIndex:12];
+    NSMenuItem *selectedItem = [menu itemAtIndex:11];
+    NSLog(@"%s: selectedItem: %@", __FUNCTION__, selectedItem.title);
+    
+    // profiles
+    self.profiles = [ProfilesDatabase loadProfilesDocs];
+    profileCount = [self.profiles count];
+    NSLog(@"%s: profileCount: %lu", __FUNCTION__, profileCount);
+    NSLog(@"%s: menu.numberOfItems: %lu", __FUNCTION__, menu.numberOfItems);
+    
+    // scanned networks
+    self.scannedItems = [[NSMutableArray alloc] initWithObjects:@"BMGNet", @"TookieBoo", @"OhYHEANETWORK", nil];
+    
+    // reverse the loop
+    for ( NSUInteger menuIndex = menu.numberOfItems; menuIndex > 0; --menuIndex ) {
+        NSUInteger i = menuIndex - 1;
         
-        if ([selectedItem.title isEqualToString:scannedItem.title]) {
-            [scannedItem setState: NSOnState];
+        NSMenuItem *menuItem = [menu itemAtIndex:i];
+        NSLog(@"%s-menuItem: index: %lu - tag: %lu - %@", __FUNCTION__, i, menuItem.tag, menuItem.title);
+        
+        tag1Index = i;
+        NSLog(@"%s: tag1Index: %lu", __FUNCTION__, tag1Index);
+        
+        // JOIN A MESH NETWORK (profile items from the file system)
+        // get index of tag 1
+        if (menuItem.tag==1) {
+        
+            // reverse the loop
+            for ( NSUInteger profileIndex = profileCount; profileIndex > 0; --profileIndex ) {
+                NSUInteger p = profileIndex - 1;
+            
+                // get data from our model
+                ProfilesDoc *profilesDoc = [self.profiles objectAtIndex:p];
+                // add menu item
+                NSMenuItem *profileItem = [statusMenu insertItemWithTitle:[NSString stringWithFormat:@"%@", profilesDoc.data.ssid] action:@selector(setChosenNetwork:) keyEquivalent:@"" atIndex:(tag1Index+1)];
+                
+                // assign each profile a tag within the specified range
+                profileItem.tag = p + 100;
+                
+                //NSLog(@"%s: profileItem tag: %lu", __FUNCTION__, profileItem.tag);
+                NSLog(@"%s-profileItem: index: %lu - tag: %lu - %@", __FUNCTION__, i, profileItem.tag, profileItem.title);
+                
+                if ([selectedItem.title isEqualToString:profileItem.title]) {
+                    [profileItem setState: NSOnState];
+                }
+                
+                [profileItem setTarget:self];
+            }
         }
         
-        [scannedItem setTarget:self];
+        // CREATE A MESH NETWORK (scanned items from corewlan)
+        // get index of tag 1 
+        if (menuItem.tag==2) {
+            
+            // reverse the loop
+            for ( NSUInteger scannedIndex = [self.scannedItems count]; scannedIndex > 0; --scannedIndex ) {
+                NSUInteger s = scannedIndex - 1;
+                
+                // get data from our scan
+                NSArray *scanItem = [self.scannedItems objectAtIndex:s];
+                
+                // add menu item
+                NSMenuItem *scannedItem = [statusMenu insertItemWithTitle:[NSString stringWithFormat:@"%@", scanItem] action:@selector(setChosenNetwork:) keyEquivalent:@"" atIndex:(tag1Index+1)];
+                
+                // assign each profile a tag within the specified range
+                scannedItem.tag = s + 200;
+                
+                //NSLog(@"%s: profileItem tag: %lu", __FUNCTION__, profileItem.tag);
+                NSLog(@"%s-profileItem: index: %lu - tag: %lu - %@", __FUNCTION__, i, scannedItem.tag, scannedItem.title);
+                
+                if ([selectedItem.title isEqualToString:scannedItem.title]) {
+                    [scannedItem setState: NSOnState];
+                }
+                
+                [scannedItem setTarget:self];
+            }
+        }
     }
 }
 
 // called when we need to update menu items
 - (void)menuNeedsUpdate:(NSMenu *)menu {
     
-    NSLog(@"%s-menu: %@", __FUNCTION__, menu);
+    NSLog(@"***********************************************************************");
     
-    //NSLog(@"%s: menu %@", __FUNCTION__, menu);
-    //NSMenuItem *selectedItem = [menu itemAtIndex:11];
-    //NSLog(@"%s: selectedItem: %@", __FUNCTION__, selectedItem.title);
+    self.profiles = [ProfilesDatabase loadProfilesDocs];
+    profileCount = [self.profiles count];
+    NSLog(@"%s: profileCount: %lu", __FUNCTION__, profileCount);
+    NSLog(@"%s: menu.numberOfItems: %lu", __FUNCTION__, menu.numberOfItems);
+    
+    // reverse the loop
+    for ( NSUInteger loopIndex = menu.numberOfItems; loopIndex > 0; --loopIndex ) {
+        NSUInteger i = loopIndex - 1;
         
-    // remove dynamic menu items in between the static ones
-    for ( NSUInteger i = menu.numberOfItems-8; i >= 12; --i ) {
+        NSMenuItem *menuItem = [menu itemAtIndex:i];
         
-        //NSMenuItem *menuItem = [menu itemAtIndex:i];
-        //NSLog(@"%s: index: %lu -- menuItem: %@", __FUNCTION__, i, menuItem.title);
+        NSLog(@"%s-menuItem: index: %lu - tag: %lu - %@", __FUNCTION__, i, menuItem.tag, menuItem.title);
         
-        [menu removeItemAtIndex:i];
+        if ((menuItem.tag >= 100) && (menuItem.tag <= 300)) {
+            NSLog(@"%s-REMOVING menuItem: index: %lu - tag: %lu - %@", __FUNCTION__, i, menuItem.tag, menuItem.title);
+
+            [menu removeItemAtIndex: i];
+        }
     }
+     
 }
 
 // connect to our network
 - (void)setChosenNetwork:(NSMenuItem *)selectedNetwork  {
     
-    //NSLog(@"%s-selectedMenuItem: %@", __FUNCTION__, selectedNetwork.title);
+    NSLog(@"%s-selectedMenuItem: %@", __FUNCTION__, selectedNetwork.title);
     [menuSelectedNetwork setTitle:selectedNetwork.title];
 }
-                                         
-            
-
+                                    
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
 {

@@ -98,7 +98,7 @@
         //NSLog(@"remoteIP: %@", remoteip);
     }
     
-    NSLog(@"meshData: %@", meshData);
+    //NSLog(@"meshData: %@", meshData);
     
     // send notification to all listening classes that data is ready -- as a json dict
     [[NSNotificationCenter defaultCenter] postNotificationName:@"meshDataProcessingComplete" object:nil userInfo:meshData];

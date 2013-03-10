@@ -57,14 +57,12 @@
     dispatch_async(backgroundQueue, ^(void) {
 
         NSArray *args1 = [NSArray arrayWithObjects:@"-9", @"olsrd", nil];
-        [[BLAuthentication sharedInstance] executeCommand:@"/usr/bin/killall" withArgs:args1 andType:@"kill" andMessage:@"Killing existing olsrd processes"];
+        //[[BLAuthentication sharedInstance] executeCommand:@"/usr/bin/killall" withArgs:args1 andType:@"kill" andMessage:@"Killing existing olsrd processes"];
         
         NSArray *args2 = [NSArray arrayWithObjects:@"-f", olsrdConfPath, @"-i", @"en1", @"-d", @"1", nil];
-        [[BLAuthentication sharedInstance] executeCommand:olsrdPath withArgs:args2 andType:@"olsrd" andMessage:@"Starting a new olsrd process"];
+        //[[BLAuthentication sharedInstance] executeCommand:olsrdPath withArgs:args2 andType:@"olsrd" andMessage:@"Starting a new olsrd process"];
         
     });
-    
-    //[self shellCommandExecuteSuccess:nil];
 }
 
 - (void) executeMeshDataPolling {
@@ -101,7 +99,7 @@
 
 - (void)dealloc {
     
-    NSLog(@"dealloc Background Thread");
+    //NSLog(@"dealloc Background Thread");
     
     // release memory for grand central dispatch
 #if !OS_OBJECT_USE_OBJC

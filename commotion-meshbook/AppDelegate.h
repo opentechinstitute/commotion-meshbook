@@ -27,6 +27,9 @@
     IBOutlet NSMenuItem *menuMeshStatus;
     IBOutlet NSMenuItem *menuSelectedNetwork;
     
+    NSInteger tag1Index;
+    NSInteger profileCount;
+    NSInteger deleteIndexStart;
 }
 
 @property (nonatomic, readonly) NSWindowController *settingsWindowController;
