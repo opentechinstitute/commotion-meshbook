@@ -51,7 +51,7 @@
 - (void)initNetworkInterface;
 - (void)initMeshInterface;
 - (void)updateUserWifiMenuItems:(NSDictionary *)fetchedNetworkData;
--(void) updateScannedNetworksMenuItems:(NSDictionary *)fetchedNetworkData;
+- (void)updateScannedNetworksMenuItems:(NSDictionary *)fetchedNetworkData;
 - (void)updateMeshMenuItems:(NSNotification *)fetchedMeshData;
 
 #pragma mark -

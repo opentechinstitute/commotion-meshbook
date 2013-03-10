@@ -82,7 +82,7 @@
     return userWifiData;
 }
 
-- (NSMutableArray *) scanAvailableNetworks {
+- (NSMutableArray *)scanAvailableNetworks:(NSString *)networkName {
     NSError *err = nil;
     CWNetwork *currentNetwork = nil;
 	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:nil];
@@ -109,6 +109,13 @@
         
         // we only want to grab open adhoc (ibss) networks
         if ([currentNetwork ibss]==1) {
+            
+            // we look at passed method var to see if we're trying to return a single object
+            if ((networkName != nil) && ([networkName isEqualToString:[currentNetwork ssid]]) ) {
+                
+                [scannedNetworks addObject:currentNetwork];
+                return scannedNetworks;
+            }
             
             [scannedNetworks addObject:[currentNetwork ssid]];
         
@@ -140,7 +147,46 @@
                                    isSticky:NO
                                clickContext:nil];
     
-    return YES;
+    
+	//NSString *networkName = [ibssNetworkNameField stringValue];
+	NSNumber *passedChannel = [NSNumber numberWithInt:2];
+    // we set no security here?
+    NSString *passphrase = @"";
+    
+	NSMutableDictionary *ibssParamsForCreate = [NSMutableDictionary dictionaryWithCapacity:0];
+	if( networkName && [networkName length] )
+		[ibssParamsForCreate setValue:networkName forKey:kCWIBSSKeySSID];
+	if( passedChannel && [passedChannel intValue] > 0 )
+		[ibssParamsForCreate setValue:passedChannel forKey:kCWIBSSKeyChannel];
+    if( passphrase && [passphrase length] )
+		[ibssParamsForCreate setValue:passphrase forKey:kCWIBSSKeyPassphrase];
+    
+    //NSLog(@"networkName: %@", networkName);
+    //NSLog(@"channel: %@", passedChannel);
+    //NSLog(@"ibssParams: %@", ibssParamsForCreate);
+    
+    
+	NSError *error = nil;
+    BOOL created = [currentInterface enableIBSSWithParameters:[NSDictionary dictionaryWithDictionary:ibssParamsForCreate] error:&error];
+
+	if( !created )
+	{
+		[[NSAlert alertWithError:error] runModal];
+        
+        return NO;
+	}
+    else {
+    
+        // growl notification
+        [GrowlApplicationBridge notifyWithTitle:@"Network Stauts"
+                                    description:[NSString stringWithFormat:@"Successfully created: %@", networkName]
+                               notificationName:@"meshbookGrowlNotification"
+                                       iconData:nil
+                                       priority:0
+                                       isSticky:NO
+                                   clickContext:nil];
+        return YES;
+    }
 }
 
 
@@ -153,13 +199,43 @@
                                    priority:0
                                    isSticky:NO
                                clickContext:nil];
+    
+    // we need to get a CW object for passed network name
+    NSArray *scannedItems = [self scanAvailableNetworks:networkName];
+    //NSLog(@"scannedItems: %@", scannedItems);
+    
+    CWNetwork *selectedNetwork = [scannedItems objectAtIndex:0];
 
-    return YES;
+    NSMutableDictionary *ibssParamsForJoin = [NSMutableDictionary dictionaryWithCapacity:0];
+	if( networkName ) {
+		[ibssParamsForJoin setValue:networkName forKey:kCWIBSSKeySSID];
+    }
+    //[ibssParamsForJoin setValue:passphrase forKey:kCWAssocKeyPassphrase];
+    
+    //NSLog(@"networkName: %@", networkName);
+
+	NSError *error = nil;
+    BOOL joined = [currentInterface associateToNetwork:selectedNetwork parameters:[NSDictionary dictionaryWithDictionary:ibssParamsForJoin] error:&error];
+    
+	if( !joined )
+	{
+		[[NSAlert alertWithError:error] runModal];
+        
+        return NO;
+	}
+    else {
+        
+        // growl notification
+        [GrowlApplicationBridge notifyWithTitle:@"Network Stauts"
+                                    description:[NSString stringWithFormat:@"Successfully joined: %@", networkName]
+                               notificationName:@"meshbookGrowlNotification"
+                                       iconData:nil
+                                       priority:0
+                                       isSticky:NO
+                                   clickContext:nil];
+        return YES;
+    }
 }
-
-
-
-
 
 
 @end

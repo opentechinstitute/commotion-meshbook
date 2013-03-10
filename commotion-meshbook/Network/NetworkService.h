@@ -13,6 +13,7 @@
     
     // Networking lib CoreWLAN
     CWInterface *currentInterface;
+    
     // User Wifi Data
     BOOL powerState;
     NSString *ip;
@@ -36,7 +37,7 @@
 #pragma mark -
 #pragma mark CoreWLAN Fetch & Processing
 - (NSDictionary *) scanUserWifiSettings;
-- (NSMutableArray *) scanAvailableNetworks;
+- (NSMutableArray *)scanAvailableNetworks:(NSString *)networkName;
 
 #pragma mark -
 #pragma mark Network Management

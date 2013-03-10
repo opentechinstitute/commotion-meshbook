@@ -97,7 +97,7 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
     
     // scanned networks
     //scannedItems = [[NSMutableArray alloc] initWithObjects:@"BMGNet", @"TookieBoo", @"OhYHEANETWORK", nil];
-    scannedItems = [NetworkServiceClass scanAvailableNetworks];
+    scannedItems = [NetworkServiceClass scanAvailableNetworks:nil];
     //NSLog(@"%s: scannedItems: %@", __FUNCTION__, scannedItems);
     
     // reverse the loop
@@ -197,7 +197,6 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
 // connect to our network
 - (void)setChosenNetwork:(NSMenuItem *)selectedNetwork  {
     
-    
     // try starting or connecting to ibss here
     // if tag is in range of 100, we're creating a mesh
     // if tag is in range of 200, we're joining a mesh
@@ -206,35 +205,14 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
         
         NSLog(@"%s-selectedMenuItem: %@ - tag: %lu", __FUNCTION__, selectedNetwork.title, selectedNetwork.tag);
         
-        BOOL IBSSCreated = [NetworkServiceClass createIBSSNetwork:selectedNetwork.title];
-        
-        if (IBSSCreated) {
-            // growl notification
-            [GrowlApplicationBridge notifyWithTitle:@"Network Stauts"
-                                        description:[NSString stringWithFormat:@"Successfully created: %@", selectedNetwork.title]
-                                   notificationName:@"meshbookGrowlNotification"
-                                           iconData:nil
-                                           priority:0
-                                           isSticky:NO
-                                       clickContext:nil];
-        }
+        [NetworkServiceClass createIBSSNetwork:selectedNetwork.title];
+
     }
     if ((selectedNetwork.tag >= 200) && (selectedNetwork.tag <= 299)) {
         
         NSLog(@"%s-selectedMenuItem: %@ - tag: %lu", __FUNCTION__, selectedNetwork.title, selectedNetwork.tag);
         
-        BOOL IBSSJoined = [NetworkServiceClass joinIBSSNetwork:selectedNetwork.title];
-        
-        if (IBSSJoined) {
-            // growl notification
-            [GrowlApplicationBridge notifyWithTitle:@"Network Stauts"
-                                        description:[NSString stringWithFormat:@"Successfully joined: %@", selectedNetwork.title]
-                                   notificationName:@"meshbookGrowlNotification"
-                                           iconData:nil
-                                           priority:0 
-                                           isSticky:NO
-                                       clickContext:nil];
-        }
+        [NetworkServiceClass joinIBSSNetwork:selectedNetwork.title];
     }
     
     // if success on connection, update active menu items
@@ -242,7 +220,7 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
     [menuActiveMesh setTitle:selectedNetwork.title];
 }
                                     
-
+// dont exit the app unless the user explicitly Quits
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
 {
     return NO;
@@ -256,12 +234,9 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
 - (void)initNetworkInterface {
     
     NSDictionary *fetchedUserWifiData = [NetworkServiceClass scanUserWifiSettings];
-    //NSDictionary *fetchedScannedNetworkData = [NetworkServiceClass scanAvailableNetworks];
     //NSLog(@"%s-fetchedUserWifiData: %@", __FUNCTION__, fetchedUserWifiData);
-    //NSLog(@"%s-fetchedScannedNetworkData: %@", __FUNCTION__, fetchedScannedNetworkData);
     
     [self updateUserWifiMenuItems:fetchedUserWifiData];
-    //[self updateScannedNetworksMenuItems:fetchedScannedNetworkData];
 }
 
 - (void)initMeshInterface {
