@@ -202,21 +202,31 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
     // if tag is in range of 100, we're creating a mesh
     // if tag is in range of 200, we're joining a mesh
     
-    if ((selectedNetwork.tag >= 100) && (selectedNetwork.tag <= 199)) {
-        
-        //NSLog(@"%s-selectedMenuItem: %@ - tag: %lu", __FUNCTION__, selectedNetwork.title, selectedNetwork.tag);
-        [NetworkServiceClass createIBSSNetwork:selectedNetwork.title];
-
-    }
-    if ((selectedNetwork.tag >= 200) && (selectedNetwork.tag <= 299)) {
-
-        //NSLog(@"%s-selectedMenuItem: %@ - tag: %lu", __FUNCTION__, selectedNetwork.title, selectedNetwork.tag);
-        [NetworkServiceClass joinIBSSNetwork:selectedNetwork.title];
-    }
+    wifiOn = [self isWifiOn];
+    //NSLog(@"%s-wifiOn: %i", __FUNCTION__, wifiOn);
     
-    // if success on connection, update active menu items
-    [menuSelectedNetwork setTitle:selectedNetwork.title];
-    [menuActiveMesh setTitle:selectedNetwork.title];
+    // network reachability to detect wifi - user must be connected to make selection
+    if (wifiOn) {
+    
+        if ((selectedNetwork.tag >= 100) && (selectedNetwork.tag <= 199)) {
+            
+            //NSLog(@"%s-selectedMenuItem: %@ - tag: %lu", __FUNCTION__, selectedNetwork.title, selectedNetwork.tag);
+            [NetworkServiceClass createIBSSNetwork:selectedNetwork.title];
+
+        }
+        if ((selectedNetwork.tag >= 200) && (selectedNetwork.tag <= 299)) {
+
+            //NSLog(@"%s-selectedMenuItem: %@ - tag: %lu", __FUNCTION__, selectedNetwork.title, selectedNetwork.tag);
+            [NetworkServiceClass joinIBSSNetwork:selectedNetwork.title];
+        }
+        
+        // if success on connection, update active menu items
+        [menuSelectedNetwork setTitle:selectedNetwork.title];
+        [menuActiveMesh setTitle:selectedNetwork.title];
+    }
+    else {
+        NSRunAlertPanel(@"No Wifi Detected", @"You must have your wifi powered on to connect to a mesh network.", @"OK", nil, nil);
+    }
 }
                                     
 // dont exit the app unless the user explicitly Quits
