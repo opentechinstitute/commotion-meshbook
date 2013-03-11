@@ -54,7 +54,7 @@
     [olsrdStatus setStringValue:[NSString stringWithFormat:@"OLSRD: %@", olsrdState]];
 
     
-    NSLog(@"%s: meshData: %@", __FUNCTION__, meshData);
+    //NSLog(@"%s: meshData: %@", __FUNCTION__, meshData);
     
 
 }
@@ -75,11 +75,7 @@
     [networkBSSID setStringValue:[NSString stringWithFormat:@"BSSID: %@", wifiBSSID]];
     [networkChannel setStringValue:[NSString stringWithFormat:@"Channel: %@", wifiChannel]];
 
-
-    
-    
-    NSLog(@"%s: wifiData: %@", __FUNCTION__, wifiData);
-    
+    //NSLog(@"%s: wifiData: %@", __FUNCTION__, wifiData);
     
 }
 

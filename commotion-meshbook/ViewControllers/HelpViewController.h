@@ -6,11 +6,13 @@
 //
 
 #import "MASPreferencesViewController.h"
+#import <WebKit/WebKit.h>
 
 @interface HelpViewController : NSViewController  <MASPreferencesViewController> {
-    
-    WEAK_IMPORT_ATTRIBUTE
+    	WebView *webView;
 }
+
+//@property(nonatomic, retain) WebView *webView;
 
 #pragma mark -
 #pragma mark Init

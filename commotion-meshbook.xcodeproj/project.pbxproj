@@ -35,9 +35,10 @@
 		1C83031D16CF880D003A59FB /* profileThumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C83031B16CF880D003A59FB /* profileThumb.png */; };
 		1C83031E16CF880D003A59FB /* profileThumb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C83031C16CF880D003A59FB /* profileThumb@2x.png */; };
 		1C83035016D087D0003A59FB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C83034F16D087CF003A59FB /* Security.framework */; };
-		1C83036B16D0CC35003A59FB /* BLAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C83036A16D0CC35003A59FB /* BLAuthentication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		1C83036B16D0CC35003A59FB /* BLAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C83036A16D0CC35003A59FB /* BLAuthentication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-deprecated"; }; };
 		1C8656F016ED813300F9F201 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8656EF16ED813300F9F201 /* Reachability.m */; };
 		1C8656F616ED898600F9F201 /* GCNetworkReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8656F516ED898600F9F201 /* GCNetworkReachability.m */; };
+		1C8656F816EDCD9100F9F201 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C8656F716EDCD9100F9F201 /* WebKit.framework */; };
 		1C890ABC16C7337F002CE42F /* icons.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 1C890ABB16C7337F002CE42F /* icons.iconset */; };
 		1C988E3B16DEB64C0045324B /* olsrd.conf in Resources */ = {isa = PBXBuildFile; fileRef = 1C988E3816DEB64C0045324B /* olsrd.conf */; };
 		1C988E3C16DEB64C0045324B /* olsrd in Resources */ = {isa = PBXBuildFile; fileRef = 1C988E3916DEB64C0045324B /* olsrd */; };
@@ -116,6 +117,7 @@
 		1C8656EF16ED813300F9F201 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "commotion-meshbook/Libraries/Reachability/Reachability.m"; sourceTree = SOURCE_ROOT; };
 		1C8656F416ED898600F9F201 /* GCNetworkReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCNetworkReachability.h; path = "commotion-meshbook/Libraries/Reachability/GCNetworkReachability.h"; sourceTree = SOURCE_ROOT; };
 		1C8656F516ED898600F9F201 /* GCNetworkReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCNetworkReachability.m; path = "commotion-meshbook/Libraries/Reachability/GCNetworkReachability.m"; sourceTree = SOURCE_ROOT; };
+		1C8656F716EDCD9100F9F201 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		1C890ABB16C7337F002CE42F /* icons.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; name = icons.iconset; path = "commotion-meshbook/Images/icons.iconset"; sourceTree = SOURCE_ROOT; };
 		1C988E3816DEB64C0045324B /* olsrd.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = olsrd.conf; path = "commotion-meshbook/OLSRD/olsrd.conf"; sourceTree = SOURCE_ROOT; };
 		1C988E3916DEB64C0045324B /* olsrd */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = olsrd; path = "commotion-meshbook/OLSRD/olsrd"; sourceTree = SOURCE_ROOT; };
@@ -154,6 +156,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C8656F816EDCD9100F9F201 /* WebKit.framework in Frameworks */,
 				1C53A3F416EBE2F100E861A9 /* Growl.framework in Frameworks */,
 				1CD9F8DD16D2FF340097D188 /* SystemConfiguration.framework in Frameworks */,
 				1CD9F8DB16D2FF080097D188 /* CoreFoundation.framework in Frameworks */,
@@ -377,6 +380,7 @@
 		1CD9F83D16D18C520097D188 /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1C8656F716EDCD9100F9F201 /* WebKit.framework */,
 				1C53A3F216EBE2AD00E861A9 /* Growl.framework */,
 				1CD9F8DC16D2FF340097D188 /* SystemConfiguration.framework */,
 				1CD9F8DA16D2FF080097D188 /* CoreFoundation.framework */,
