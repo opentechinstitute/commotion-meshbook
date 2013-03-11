@@ -12,14 +12,13 @@
 #import "ProfilesData.h"
 #import "ProfilesDatabase.h"
 #import "BLAuthentication.h"
+#import "Reachability.h"
 
 // view controllers
 #import "StatusViewController.h"
 #import "ProfilesViewController.h"
 #import "HelpViewController.h"
 #import "LogViewController.h"
-
-
 
 static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selected Identifier View";
 
@@ -37,25 +36,25 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
                                              selector:@selector(updateMeshMenuItems:)
                                                  name:@"meshDataProcessingComplete"
                                             object:nil];
-    
     // listen for network wifi data poll
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateUserWifiMenuItems:)
                                                  name:@"wifiDataProcessingComplete"
                                                object:nil];
-    
+
     // setup wifi network
     [self initNetworkInterface];
     
     // setup mesh network
     [self initMeshInterface];
+
     
-	// 'Quit' menu item is enabled always
-	[menuQuit setEnabled:YES];
+    // 'Quit' menu item is enabled always
+    [menuQuit setEnabled:YES];
     
     // Enables or disables the receiver’s menu items and sizes the menu to fit its current menu items if necessary.
-	[statusMenu update];
-    
+    [statusMenu update];
+
 }
 
 - (void) awakeFromNib {
@@ -86,7 +85,7 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
 
     //NSLog(@"%s-menu: %@", __FUNCTION__, menu);
         
-    NSMenuItem *selectedItem = [menu itemAtIndex:11];
+    //NSMenuItem *selectedItem = [menu itemAtIndex:11];
     //NSLog(@"%s: selectedItem: %@", __FUNCTION__, selectedItem.title);
     
     // profiles
@@ -233,19 +232,21 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
 
 - (void)initNetworkInterface {
     
+
     // init wifi networking
     NetworkServiceClass = [[NetworkService alloc] init];
     //fetchedUserWifiData = [NetworkServiceClass scanUserWifiSettings];
     [NetworkServiceClass executeWifiDataPolling];
-    
+
     //[self updateUserWifiMenuItems];
 }
 
 - (void)initMeshInterface {
-    
+        
     // Start olsrd process -- this should be started as early as possible
     olsrdProcess = [[OLSRDService alloc] init];
-    [olsrdProcess executeOLSRDService]; 
+    [olsrdProcess executeOLSRDService];
+
 }
 
 -(void) updateUserWifiMenuItems:(NSNotification *)fetchedWifiData {
@@ -334,6 +335,19 @@ NSString *const kFocusedAdvancedControlIndex = @"FocusedAdvancedControlIndex";
     [[NSUserDefaults standardUserDefaults] setInteger:focusedAdvancedControlIndex forKey:kFocusedAdvancedControlIndex];
 }
 
+//==========================================================
+#pragma mark Reachability
+//==========================================================
+
+// check if wifi power is on
+- (BOOL)isWifiOn {
+    Reachability* wifiReach = [Reachability reachabilityForLocalWiFi];
+    
+    NetworkStatus netStatus = [wifiReach currentReachabilityStatus];
+    //NSLog(@"%i == %i", netStatus, ReachableViaWiFi);
+    
+    return (netStatus==ReachableViaWiFi);
+}
 
 
 @end

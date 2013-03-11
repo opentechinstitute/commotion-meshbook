@@ -26,6 +26,7 @@
     NSString *fetchedWifiSSID;
     NSString *fetchedWifiBSSID;
     NSString *fetchedWifiChannel;
+    BOOL wifiOn;
     
 	IBOutlet NSMenuItem *menuNetworkStatus;
     IBOutlet NSMenuItem *menuNetworkSSID;
@@ -36,7 +37,7 @@
     IBOutlet NSMenuItem *menuMeshSSID;
     IBOutlet NSMenuItem *menuMeshStatus;
     IBOutlet NSMenuItem *menuSelectedNetwork;
-    IBOutlet NSMenuItem *menuActiveMesh;
+    IBOutlet NSMenuItem *menuActiveMesh;    
     
     NSInteger tag1Index;
     NSInteger profileCount;
@@ -67,5 +68,9 @@
 - (IBAction) openSettings:(id)sender;
 - (NSInteger)focusedAdvancedControlIndex;
 - (void)setFocusedAdvancedControlIndex:(NSInteger)focusedAdvancedControlIndex;
+
+#pragma mark -
+#pragma mark Reachability
+- (BOOL)isWifiOn;
 
 @end

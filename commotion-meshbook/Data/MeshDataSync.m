@@ -164,7 +164,7 @@
 
 // NSURLConnectionDelegate method: Handle the connection failing
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    NSLog(@"%s: didFailWithErrorError: %@ \n %@", __FUNCTION__, [error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
+    NSLog(@"%s: Connection Problem.  Was wifi power lost?  Error: %@ \n %@", __FUNCTION__, [error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
 
     // send a nil dict to indicate the process failed
     [[NSNotificationCenter defaultCenter] postNotificationName:@"meshDataProcessingComplete" object:nil userInfo:nil];

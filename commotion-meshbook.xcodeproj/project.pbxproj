@@ -36,6 +36,8 @@
 		1C83031E16CF880D003A59FB /* profileThumb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C83031C16CF880D003A59FB /* profileThumb@2x.png */; };
 		1C83035016D087D0003A59FB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C83034F16D087CF003A59FB /* Security.framework */; };
 		1C83036B16D0CC35003A59FB /* BLAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C83036A16D0CC35003A59FB /* BLAuthentication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		1C8656F016ED813300F9F201 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8656EF16ED813300F9F201 /* Reachability.m */; };
+		1C8656F616ED898600F9F201 /* GCNetworkReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8656F516ED898600F9F201 /* GCNetworkReachability.m */; };
 		1C890ABC16C7337F002CE42F /* icons.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 1C890ABB16C7337F002CE42F /* icons.iconset */; };
 		1C988E3B16DEB64C0045324B /* olsrd.conf in Resources */ = {isa = PBXBuildFile; fileRef = 1C988E3816DEB64C0045324B /* olsrd.conf */; };
 		1C988E3C16DEB64C0045324B /* olsrd in Resources */ = {isa = PBXBuildFile; fileRef = 1C988E3916DEB64C0045324B /* olsrd */; };
@@ -110,6 +112,10 @@
 		1C83035616D092CB003A59FB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1C83036916D0CC35003A59FB /* BLAuthentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLAuthentication.h; sourceTree = "<group>"; };
 		1C83036A16D0CC35003A59FB /* BLAuthentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLAuthentication.m; sourceTree = "<group>"; };
+		1C8656EE16ED813300F9F201 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = "commotion-meshbook/Libraries/Reachability/Reachability.h"; sourceTree = SOURCE_ROOT; };
+		1C8656EF16ED813300F9F201 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "commotion-meshbook/Libraries/Reachability/Reachability.m"; sourceTree = SOURCE_ROOT; };
+		1C8656F416ED898600F9F201 /* GCNetworkReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCNetworkReachability.h; path = "commotion-meshbook/Libraries/Reachability/GCNetworkReachability.h"; sourceTree = SOURCE_ROOT; };
+		1C8656F516ED898600F9F201 /* GCNetworkReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCNetworkReachability.m; path = "commotion-meshbook/Libraries/Reachability/GCNetworkReachability.m"; sourceTree = SOURCE_ROOT; };
 		1C890ABB16C7337F002CE42F /* icons.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; name = icons.iconset; path = "commotion-meshbook/Images/icons.iconset"; sourceTree = SOURCE_ROOT; };
 		1C988E3816DEB64C0045324B /* olsrd.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = olsrd.conf; path = "commotion-meshbook/OLSRD/olsrd.conf"; sourceTree = SOURCE_ROOT; };
 		1C988E3916DEB64C0045324B /* olsrd */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = olsrd; path = "commotion-meshbook/OLSRD/olsrd"; sourceTree = SOURCE_ROOT; };
@@ -284,6 +290,17 @@
 			path = "commotion-meshbook/Libraries/BLAuthentication";
 			sourceTree = SOURCE_ROOT;
 		};
+		1C8656ED16ED811500F9F201 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				1C8656EE16ED813300F9F201 /* Reachability.h */,
+				1C8656EF16ED813300F9F201 /* Reachability.m */,
+				1C8656F416ED898600F9F201 /* GCNetworkReachability.h */,
+				1C8656F516ED898600F9F201 /* GCNetworkReachability.m */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
 		1CC520E016B66128001951D8 = {
 			isa = PBXGroup;
 			children = (
@@ -349,6 +366,7 @@
 		1CC5210C16B66247001951D8 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				1C8656ED16ED811500F9F201 /* Reachability */,
 				1C83034B16D08774003A59FB /* BLAuthentication */,
 				1C8302EB16CF21F5003A59FB /* MASPreferences */,
 			);
@@ -483,6 +501,8 @@
 				1CFACFD716DC2E5700DBBA58 /* ProfilesDatabase.m in Sources */,
 				1C988E4016DEB6670045324B /* OLSRDService.m in Sources */,
 				1CE3A94016DF5A3A00D6C086 /* NetworkService.m in Sources */,
+				1C8656F016ED813300F9F201 /* Reachability.m in Sources */,
+				1C8656F616ED898600F9F201 /* GCNetworkReachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

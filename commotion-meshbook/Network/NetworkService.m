@@ -96,8 +96,7 @@
     //NSLog(@"scanResults: %@",scanResults);
     
   	if( err ) {
-		NSLog(@"error: %@",err);
-        //[[NSAlert alertWithError:err] runModal];
+		NSLog(@"%s-Cannot scan networks.  Was wifi power lost?  %@", __FUNCTION__, err);
     }
 	else {
 		[scanResults sortUsingDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"ssid" ascending:YES selector:@selector(caseInsensitiveCompare:)]]];
