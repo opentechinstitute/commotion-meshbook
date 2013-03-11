@@ -7,6 +7,19 @@
 
 #import "MASPreferencesViewController.h"
 
-@interface HelpViewController : NSViewController  <MASPreferencesViewController>
+@interface HelpViewController : NSViewController  <MASPreferencesViewController> {
+    
+    WEAK_IMPORT_ATTRIBUTE
+}
+
+#pragma mark -
+#pragma mark Init
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
+
+
+
+
+
+
 
 @end

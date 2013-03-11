@@ -71,18 +71,6 @@
     NSError *myError = nil;
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableLeaves error:&myError];
     
-    // show all values
-    for(id key in json) {
-        
-        //id value = [json objectForKey:key];
-        
-        //NSString *keyAsString = (NSString *)key;
-        //NSString *valueAsString = (NSString *)value;
-        
-        //NSLog(@"key: %@", keyAsString);
-        //NSLog(@"value: %@", valueAsString);
-    }
-    
     // extract specific value...
     NSArray *interfaces = [json objectForKey:@"interfaces"];
     NSArray *links = [json objectForKey:@"links"];
@@ -91,14 +79,17 @@
         NSString *state = ([[interface objectForKey:@"state"] isEqualToString:@"up"] ? @"Running" : @"Stopped");
         
         [meshData setObject:state forKey:@"state"];
-        //NSLog(@"state: %@", state);
     }
     
     for (NSDictionary *link in links) {
+        
         NSString *remoteip = [link objectForKey:@"remoteIP"];
+        NSString *localip = [link objectForKey:@"localIP"];
+        NSString *linkquality = [link objectForKey:@"linkQuality"];
         
         [meshData setObject:remoteip forKey:@"remoteIP"];
-        //NSLog(@"remoteIP: %@", remoteip);
+        [meshData setObject:localip forKey:@"localIP"];
+        [meshData setObject:linkquality forKey:@"linkQuality"];
     }
     
     //NSLog(@"meshData: %@", meshData);

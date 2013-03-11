@@ -9,13 +9,38 @@
 
 @implementation HelpViewController
 
-- (id)init
+
+//==========================================================
+#pragma mark Init
+//==========================================================
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    return [super initWithNibName:@"HelpViewController" bundle:nil];
+    self = [super initWithNibName:@"HelpViewController" bundle:nil];
+    if (self) {
+        
+
+    }
+    
+    return self;
 }
 
-#pragma mark -
+//==========================================================
+#pragma mark 
+//==========================================================
+
+
+
+
+
+
+
+
+
+
+//==========================================================
 #pragma mark MASPreferencesViewController
+//==========================================================
 
 - (NSString *)identifier
 {
