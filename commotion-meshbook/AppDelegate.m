@@ -93,7 +93,6 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
     self.profiles = [ProfilesDatabase loadProfilesDocs];
     profileCount = [self.profiles count];
     //NSLog(@"%s: profileCount: %lu", __FUNCTION__, profileCount);
-    //NSLog(@"%s: menu.numberOfItems: %lu", __FUNCTION__, menu.numberOfItems);
     
     // scanned networks
     //scannedItems = [[NSMutableArray alloc] initWithObjects:@"BMGNet", @"TookieBoo", @"OhYHEANETWORK", nil];
@@ -109,6 +108,7 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
         
         tag1Index = i;
         //NSLog(@"%s: tag1Index: %lu", __FUNCTION__, tag1Index);
+    
         
         // JOIN A MESH NETWORK (profile items from the file system)
         // get index of tag 1
@@ -133,10 +133,7 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
                     [profileItem setState: NSOnState];
                     [menuActiveMesh setTitle:profileItem.title];
                 }
-                else if ([selectedItem.title isEqualToString:profileItem.title]) {
-                    [profileItem setState: NSOnState];
-                }
-                
+
                 [profileItem setTarget:self];
             }
         }
@@ -165,11 +162,7 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
                     [scannedItem setState: NSOnState];
                     [menuActiveMesh setTitle:scannedItem.title];
                 }
-                else if ([selectedItem.title isEqualToString:scannedItem.title]) {
-                    [scannedItem setState: NSOnState];
-                }
 
-                
                 [scannedItem setTarget:self];
             }
         }
@@ -205,7 +198,7 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
 
 // connect to our network
 - (void)setChosenNetwork:(NSMenuItem *)selectedNetwork  {
-    
+        
     // try starting or connecting to ibss here
     // if tag is in range of 100, we're creating a mesh
     // if tag is in range of 200, we're joining a mesh
