@@ -53,7 +53,6 @@
 						<string key="NSFrame">{{322, 21}, {200, 25}}</string>
 						<reference key="NSSuperview" ref="373649677"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="242829304">
 							<int key="NSCellFlags">-1804599231</int>
@@ -67,14 +66,9 @@
 							<string key="NSPlaceholderString">8.8.8.8</string>
 							<reference key="NSControlView" ref="183771886"/>
 							<bool key="NSDrawsBackground">YES</bool>
-							<object class="NSColor" key="NSBackgroundColor" id="397252408">
-								<int key="NSColorSpace">6</int>
-								<string key="NSCatalogName">System</string>
-								<string key="NSColorName">textBackgroundColor</string>
-								<object class="NSColor" key="NSColor" id="708655461">
-									<int key="NSColorSpace">3</int>
-									<bytes key="NSWhite">MQA</bytes>
-								</object>
+							<object class="NSColor" key="NSBackgroundColor" id="346008339">
+								<int key="NSColorSpace">2</int>
+								<bytes key="NSRGB">MC44ODIzNTMwMDc4IDAuODg2Mjc0NTc2MiAwLjg5ODAzOTI4MTQAA</bytes>
 							</object>
 							<object class="NSColor" key="NSTextColor" id="907406448">
 								<int key="NSColorSpace">6</int>
@@ -137,7 +131,7 @@
 							<string key="NSPlaceholderString">255.255.0.0</string>
 							<reference key="NSControlView" ref="471813710"/>
 							<bool key="NSDrawsBackground">YES</bool>
-							<reference key="NSBackgroundColor" ref="397252408"/>
+							<reference key="NSBackgroundColor" ref="346008339"/>
 							<reference key="NSTextColor" ref="907406448"/>
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -177,7 +171,7 @@
 							<string key="NSPlaceholderString">true</string>
 							<reference key="NSControlView" ref="1024142166"/>
 							<bool key="NSDrawsBackground">YES</bool>
-							<reference key="NSBackgroundColor" ref="397252408"/>
+							<reference key="NSBackgroundColor" ref="346008339"/>
 							<reference key="NSTextColor" ref="907406448"/>
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -217,7 +211,7 @@
 							<string key="NSPlaceholderString">172.29.0.0</string>
 							<reference key="NSControlView" ref="553225150"/>
 							<bool key="NSDrawsBackground">YES</bool>
-							<reference key="NSBackgroundColor" ref="397252408"/>
+							<reference key="NSBackgroundColor" ref="346008339"/>
 							<reference key="NSTextColor" ref="907406448"/>
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -244,7 +238,7 @@
 					<object class="NSTextField" id="1053981207">
 						<reference key="NSNextResponder" ref="373649677"/>
 						<int key="NSvFlags">266</int>
-						<string key="NSFrame">{{322, 238}, {58, 25}}</string>
+						<string key="NSFrame">{{322, 292}, {58, 25}}</string>
 						<reference key="NSSuperview" ref="373649677"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="519638711"/>
@@ -257,7 +251,15 @@
 							<string key="NSPlaceholderString">5</string>
 							<reference key="NSControlView" ref="1053981207"/>
 							<bool key="NSDrawsBackground">YES</bool>
-							<reference key="NSBackgroundColor" ref="397252408"/>
+							<object class="NSColor" key="NSBackgroundColor" id="397252408">
+								<int key="NSColorSpace">6</int>
+								<string key="NSCatalogName">System</string>
+								<string key="NSColorName">textBackgroundColor</string>
+								<object class="NSColor" key="NSColor" id="708655461">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MQA</bytes>
+								</object>
+							</object>
 							<reference key="NSTextColor" ref="907406448"/>
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -265,7 +267,7 @@
 					<object class="NSTextField" id="587322615">
 						<reference key="NSNextResponder" ref="373649677"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{319, 267}, {214, 17}}</string>
+						<string key="NSFrame">{{319, 321}, {214, 17}}</string>
 						<reference key="NSSuperview" ref="373649677"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1053981207"/>
@@ -311,7 +313,7 @@
 					<object class="NSTextField" id="928263124">
 						<reference key="NSNextResponder" ref="373649677"/>
 						<int key="NSvFlags">266</int>
-						<string key="NSFrame">{{322, 292}, {200, 25}}</string>
+						<string key="NSFrame">{{322, 238}, {200, 25}}</string>
 						<reference key="NSSuperview" ref="373649677"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="587322615"/>
@@ -324,7 +326,7 @@
 							<string key="NSPlaceholderString">02:CA:FF:EE:BA:BE</string>
 							<reference key="NSControlView" ref="928263124"/>
 							<bool key="NSDrawsBackground">YES</bool>
-							<reference key="NSBackgroundColor" ref="397252408"/>
+							<reference key="NSBackgroundColor" ref="346008339"/>
 							<reference key="NSTextColor" ref="907406448"/>
 						</object>
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -332,7 +334,7 @@
 					<object class="NSTextField" id="158966440">
 						<reference key="NSNextResponder" ref="373649677"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{319, 321}, {214, 17}}</string>
+						<string key="NSFrame">{{319, 267}, {214, 17}}</string>
 						<reference key="NSSuperview" ref="373649677"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="928263124"/>
@@ -919,11 +921,7 @@
 							<reference ref="410353110"/>
 							<reference ref="867537994"/>
 							<reference ref="187666544"/>
-							<reference ref="158966440"/>
-							<reference ref="928263124"/>
 							<reference ref="1041520193"/>
-							<reference ref="587322615"/>
-							<reference ref="1053981207"/>
 							<reference ref="519638711"/>
 							<reference ref="553225150"/>
 							<reference ref="593082815"/>
@@ -934,6 +932,10 @@
 							<reference ref="733887481"/>
 							<reference ref="183771886"/>
 							<reference ref="1002526812"/>
+							<reference ref="158966440"/>
+							<reference ref="928263124"/>
+							<reference ref="587322615"/>
+							<reference ref="1053981207"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -1407,10 +1409,6 @@
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
 			<real value="1060" key="NS.object.0"/>
-		</object>
-		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
-			<real value="1070" key="NS.object.0"/>
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.InterfaceBuilder3</string>

@@ -168,7 +168,7 @@
 //==========================================================
 #pragma mark Network Management
 //==========================================================
-- (BOOL) createIBSSNetwork:(NSString *)networkName {
+- (BOOL) createIBSSNetwork:(NSString *)networkName withChannel:(NSString*)passedChannel {
     
     [GrowlApplicationBridge notifyWithTitle:@"Network Stauts"
                                 description:[NSString stringWithFormat:@"Attempting to create: %@", networkName]
@@ -178,19 +178,29 @@
                                    isSticky:NO
                                clickContext:nil];
     
+    // convert channel to number
+    NSNumberFormatter * format = [[NSNumberFormatter alloc] init];
+    [format setNumberStyle:NSNumberFormatterDecimalStyle];
+    NSNumber * channelNumber = [format numberFromString:passedChannel];
     
-	//NSString *networkName = [ibssNetworkNameField stringValue];
-	NSNumber *passedChannel = [NSNumber numberWithInt:2];
     // we set no security here?
     NSString *passphrase = @"";
     
 	NSMutableDictionary *ibssParamsForCreate = [NSMutableDictionary dictionaryWithCapacity:0];
-	if( networkName && [networkName length] )
+	if( networkName && [networkName length] ) {
 		[ibssParamsForCreate setValue:networkName forKey:kCWIBSSKeySSID];
-	if( passedChannel && [passedChannel intValue] > 0 )
-		[ibssParamsForCreate setValue:passedChannel forKey:kCWIBSSKeyChannel];
-    if( passphrase && [passphrase length] )
+    }
+    
+	if( channelNumber && [channelNumber intValue] > 0 ) {
+		[ibssParamsForCreate setValue:channelNumber forKey:kCWIBSSKeyChannel];
+    }
+    else {
+        NSRunAlertPanel(@"Error: Can't Create Mesh", @"Invalid Channel. Please ensure you entered a channel, 1-11.", @"OK", nil, nil);
+        return NO;
+    }
+    if( passphrase && [passphrase length] ) {
 		[ibssParamsForCreate setValue:passphrase forKey:kCWIBSSKeyPassphrase];
+    }
     
     //NSLog(@"networkName: %@", networkName);
     //NSLog(@"channel: %@", passedChannel);

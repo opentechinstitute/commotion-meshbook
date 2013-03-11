@@ -210,13 +210,22 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
     
         if ((selectedNetwork.tag >= 100) && (selectedNetwork.tag <= 199)) {
             
-            //NSLog(@"%s-selectedMenuItem: %@ - tag: %lu", __FUNCTION__, selectedNetwork.title, selectedNetwork.tag);
-            [NetworkServiceClass createIBSSNetwork:selectedNetwork.title];
-
+            /*** WE ARE CREATING A MESH ***/
+            // if creating, we need to find the associated network metadata
+            self.profiles = [ProfilesDatabase loadProfilesDocs];
+            
+            for (ProfilesDoc *profile in self.profiles) {
+                //NSLog(@"%s-ssid: %@", __FUNCTION__, profile.data.ssid);
+                
+                if ([profile.data.ssid isEqualToString:selectedNetwork.title]) {
+                    //NSLog(@"%s-profile data: %@", __FUNCTION__, profile.data.channel);
+                    [NetworkServiceClass createIBSSNetwork:selectedNetwork.title withChannel:profile.data.channel];
+                }
+            }
         }
         if ((selectedNetwork.tag >= 200) && (selectedNetwork.tag <= 299)) {
 
-            //NSLog(@"%s-selectedMenuItem: %@ - tag: %lu", __FUNCTION__, selectedNetwork.title, selectedNetwork.tag);
+            /*** WE ARE JOINING A MESH ***/
             [NetworkServiceClass joinIBSSNetwork:selectedNetwork.title];
         }
         

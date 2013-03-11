@@ -42,7 +42,7 @@
 
 #pragma mark -
 #pragma mark Network Management
-- (BOOL) createIBSSNetwork:(NSString *)networkName;
+- (BOOL) createIBSSNetwork:(NSString *)networkName withChannel:(NSString*)passedChannel;
 - (BOOL) joinIBSSNetwork:(NSString *)networkName;
 
 #pragma mark -
