@@ -283,7 +283,7 @@ static NSString *const kMASPreferencesSelectedViewKey = @"MASPreferences Selecte
 	[menuNetworkStatus setTitle:[NSString stringWithFormat:@"Power: %@", fetchedWifiState]];
 	[menuNetworkSSID setTitle:[NSString stringWithFormat:@"Network (SSID): %@", fetchedWifiSSID]];
 	[menuNetworkBSSID setTitle:[NSString stringWithFormat:@"BSSID: %@", fetchedWifiBSSID]];
-    [menuNetworkChannel setTitle:[NSString stringWithFormat:@"Channel: %@", fetchedWifiChannel]];
+    [menuNetworkChannel setTitle:[NSString stringWithFormat:@"Channel: %@", [fetchedWifiChannel valueForKey:@"channelNumber"]]];
     
     [self menuNeedsUpdate:nil];
     [self menuWillOpen:nil];

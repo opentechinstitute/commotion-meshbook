@@ -9,6 +9,7 @@
 #import <CoreWLAN/CoreWLAN.h>
 #import <SecurityInterface/SFAuthorizationView.h>
 #import "BLAuthentication.h"
+#import <Foundation/Foundation.h>
 
 #import "NetworkService.h"
 
@@ -42,11 +43,12 @@
     
     
     // get interface array (common == 'en1')
-    NSArray *supportedInterfaces = [CWInterface supportedInterfaces];
+    
+    NSSet *supportedInterfaces = [CWInterface interfaceNames];
     //NSLog(@"[supportedInterfaces objectAtIndex:0: %@", [supportedInterfaces objectAtIndex:0]);
     
     // init network interface with 'en1'
-    currentInterface = [CWInterface interfaceWithName:[supportedInterfaces objectAtIndex:0]];
+    currentInterface = [CWInterface interfaceWithName:[[supportedInterfaces allObjects] objectAtIndex:0]];
     //NSLog(@"currentInterface: %@", currentInterface);
     
     return self;
@@ -59,13 +61,13 @@
 - (void) scanUserWifiSettings {
 
     // get data from CoreWLAN wireless interface
-    powerState = [currentInterface power];
+    powerState = [currentInterface powerOn];
     NSString *power;
     if (powerState==NO) { power=@"Off"; } else { power=@"On";}
     
     ssid = ([currentInterface ssid] ? : @"");
     bssid = ([currentInterface bssid] ? : @"");
-    channel = ([currentInterface channel] ? : 0);
+    channel = ([currentInterface wlanChannel] ? : 0);
     
     // get scanned wifi networks
     NSArray *availableNetworks = [self scanAvailableNetworks];
@@ -87,24 +89,25 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"wifiDataProcessingComplete" object:nil userInfo:userWifiData];
 }
 
-- (NSMutableArray *)scanAvailableNetworks {
+- (NSMutableSet *)scanAvailableNetworks {
     NSError *err = nil;
     CWNetwork *currentNetwork = nil;
-	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:nil];
+	//NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:nil]; //unneeded now?
         
-	scanResults = [NSMutableArray arrayWithArray:[currentInterface scanForNetworksWithParameters:params error:&err]];
+
+    scanResults = [[currentInterface scanForNetworksWithSSID:nil error:nil] mutableCopy];
     //NSLog(@"scanResults: %@",scanResults);
     
   	if( err ) {
 		NSLog(@"%s-Cannot scan networks.  Was wifi power lost?  %@", __FUNCTION__, err);
     }
 	else {
-		[scanResults sortUsingDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"ssid" ascending:YES selector:@selector(caseInsensitiveCompare:)]]];
+		[scanResults sortedArrayUsingDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"ssid" ascending:YES selector:@selector(caseInsensitiveCompare:)]]];
     }
     
     //scannedNetworkData = [NSDictionary dictionary];
     //scannedNetworks = [NSMutableDictionary dictionary];
-    scannedNetworks = [[NSMutableArray alloc] init];
+    scannedNetworks = [[NSMutableSet alloc] init];
         
     for (currentNetwork in scanResults) {
         
@@ -135,16 +138,16 @@
 - (CWNetwork *)checkAvailableNetwork:(NSString *)networkName {
     NSError *err = nil;
     CWNetwork *currentNetwork = nil;
-	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:nil];
+	//NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:nil]; //unneeded now?
     
-	scanResults = [NSMutableArray arrayWithArray:[currentInterface scanForNetworksWithParameters:params error:&err]];
+	scanResults = [[currentInterface scanForNetworksWithSSID:nil error:nil] mutableCopy];
     //NSLog(@"scanResults: %@",scanResults);
     
   	if( err ) {
 		NSLog(@"error: %@",err);
     }
 	else {
-		[scanResults sortUsingDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"ssid" ascending:YES selector:@selector(caseInsensitiveCompare:)]]];
+		[scanResults sortedArrayUsingDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"ssid" ascending:YES selector:@selector(caseInsensitiveCompare:)]]];
     }
         
     for (currentNetwork in scanResults) {
@@ -188,18 +191,18 @@
     
 	NSMutableDictionary *ibssParamsForCreate = [NSMutableDictionary dictionaryWithCapacity:0];
 	if( networkName && [networkName length] ) {
-		[ibssParamsForCreate setValue:networkName forKey:kCWIBSSKeySSID];
+		[ibssParamsForCreate setValue:networkName forKey:@"kCWIBSSKeySSID"];
     }
     
 	if( channelNumber && [channelNumber intValue] > 0 ) {
-		[ibssParamsForCreate setValue:channelNumber forKey:kCWIBSSKeyChannel];
+		[ibssParamsForCreate setValue:channelNumber forKey:@"kCWIBSSKeyChannel"];
     }
     else {
         NSRunAlertPanel(@"Error: Can't Create Mesh", @"Invalid Channel. Please ensure you entered a channel, 1-11.", @"OK", nil, nil);
         return NO;
     }
     if( passphrase && [passphrase length] ) {
-		[ibssParamsForCreate setValue:passphrase forKey:kCWIBSSKeyPassphrase];
+		[ibssParamsForCreate setValue:passphrase forKey:@"kCWIBSSKeyPassphrase"];
     }
     
     //NSLog(@"networkName: %@", networkName);
@@ -208,8 +211,9 @@
     
     
 	NSError *error = nil;
-    BOOL created = [currentInterface enableIBSSWithParameters:[NSDictionary dictionaryWithDictionary:ibssParamsForCreate] error:&error];
-
+    //BOOL created = [currentInterface enableIBSSWithParameters:[NSDictionary dictionaryWithDictionary:ibssParamsForCreate] error:&error];
+    BOOL created = [currentInterface startIBSSModeWithSSID:[ibssParamsForCreate objectForKey:@"kCWIBSSKeySSID"] security:kCWIBSSModeSecurityWEP104 channel:[ibssParamsForCreate objectForKey:@"kCWIBSSKeyChannel"] password:[ibssParamsForCreate objectForKey:@"kCWIBSSKeyPassphrase"] error:nil];
+    
 	if( !created )
 	{
 		[[NSAlert alertWithError:error] runModal];
@@ -249,14 +253,17 @@
         
         NSMutableDictionary *ibssParamsForJoin = [NSMutableDictionary dictionaryWithCapacity:0];
         if( networkName ) {
-            [ibssParamsForJoin setValue:networkName forKey:kCWIBSSKeySSID];
+            [ibssParamsForJoin setValue:networkName forKey:@"kCWIBSSKeySSID"];
         }
         //[ibssParamsForJoin setValue:passphrase forKey:kCWAssocKeyPassphrase];
         
         //NSLog(@"networkName: %@", networkName);
 
         NSError *error = nil;
-        BOOL joined = [currentInterface associateToNetwork:selectedNetwork parameters:[NSDictionary dictionaryWithDictionary:ibssParamsForJoin] error:&error];
+        //BOOL joined = [currentInterface associateToNetwork:selectedNetwork parameters:[NSDictionary dictionaryWithDictionary:ibssParamsForJoin] error:&error];
+#warning need to handle password somehow
+        BOOL joined = [currentInterface associateToNetwork:selectedNetwork password:nil error:nil];
+        //BOOL joined = [currentInterface associateToNetwork:selectedNetwork password:[ibssParamsForJoin objectForKey:kCWAssocKeyPassphrase] error:nil];
         
         if( !joined )
         {

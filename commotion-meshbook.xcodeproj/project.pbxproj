@@ -50,15 +50,15 @@
 		1CD4E9AF16C5CDD300BDF1B3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD4E9AC16C5CDD300BDF1B3 /* AppDelegate.m */; };
 		1CD4E9B316C5CDFF00BDF1B3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD4E9B216C5CDFF00BDF1B3 /* main.m */; };
 		1CD4E9BB16C5CE1100BDF1B3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1CD4E9B816C5CE1100BDF1B3 /* InfoPlist.strings */; };
-		1CD9F83A16D18C2B0097D188 /* CoreWLAN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD9F83916D18C2B0097D188 /* CoreWLAN.framework */; };
-		1CD9F83C16D18C3C0097D188 /* SecurityInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD9F83B16D18C3C0097D188 /* SecurityInterface.framework */; };
 		1CD9F84316D19AB70097D188 /* menuMeshStatus.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD9F83F16D19AB70097D188 /* menuMeshStatus.png */; };
 		1CD9F84516D19AB70097D188 /* menuNetworkStatus.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CD9F84116D19AB70097D188 /* menuNetworkStatus.png */; };
-		1CD9F8DB16D2FF080097D188 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD9F8DA16D2FF080097D188 /* CoreFoundation.framework */; };
-		1CD9F8DD16D2FF340097D188 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD9F8DC16D2FF340097D188 /* SystemConfiguration.framework */; };
 		1CE3A94016DF5A3A00D6C086 /* NetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CE3A93F16DF5A3A00D6C086 /* NetworkService.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated"; }; };
 		1CFACFD416DC27ED00DBBA58 /* ProfilesDoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CFACFD316DC27ED00DBBA58 /* ProfilesDoc.m */; };
 		1CFACFD716DC2E5700DBBA58 /* ProfilesDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CFACFD616DC2E5600DBBA58 /* ProfilesDatabase.m */; };
+		7FAA1A1B178BA02A00DE22DA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FAA1A1A178BA02A00DE22DA /* SystemConfiguration.framework */; };
+		7FAA1A1D178BA03700DE22DA /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FAA1A1C178BA03700DE22DA /* CoreFoundation.framework */; };
+		7FAA1A1F178BA04100DE22DA /* SecurityInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FAA1A1E178BA04100DE22DA /* SecurityInterface.framework */; };
+		7FAA1A21178BA04900DE22DA /* CoreWLAN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FAA1A20178BA04900DE22DA /* CoreWLAN.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -137,18 +137,18 @@
 		1CD4E9B716C5CE1100BDF1B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = "commotion-meshbook/en.lproj/Credits.rtf"; sourceTree = SOURCE_ROOT; };
 		1CD4E9B916C5CE1100BDF1B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "commotion-meshbook/en.lproj/InfoPlist.strings"; sourceTree = SOURCE_ROOT; };
 		1CD4E9BF16C5CF1C00BDF1B3 /* commotion-meshbook-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "commotion-meshbook-Info.plist"; path = "commotion-meshbook/commotion-meshbook-Info.plist"; sourceTree = SOURCE_ROOT; };
-		1CD9F83916D18C2B0097D188 /* CoreWLAN.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreWLAN.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/CoreWLAN.framework; sourceTree = DEVELOPER_DIR; };
-		1CD9F83B16D18C3C0097D188 /* SecurityInterface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SecurityInterface.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/SecurityInterface.framework; sourceTree = DEVELOPER_DIR; };
 		1CD9F83F16D19AB70097D188 /* menuMeshStatus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menuMeshStatus.png; path = "commotion-meshbook/Images/menuMeshStatus.png"; sourceTree = SOURCE_ROOT; };
 		1CD9F84116D19AB70097D188 /* menuNetworkStatus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menuNetworkStatus.png; path = "commotion-meshbook/Images/menuNetworkStatus.png"; sourceTree = SOURCE_ROOT; };
-		1CD9F8DA16D2FF080097D188 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/CoreFoundation.framework; sourceTree = DEVELOPER_DIR; };
-		1CD9F8DC16D2FF340097D188 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		1CE3A93E16DF5A3A00D6C086 /* NetworkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkService.h; path = "commotion-meshbook/Network/NetworkService.h"; sourceTree = SOURCE_ROOT; };
 		1CE3A93F16DF5A3A00D6C086 /* NetworkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkService.m; path = "commotion-meshbook/Network/NetworkService.m"; sourceTree = SOURCE_ROOT; };
 		1CFACFD216DC27ED00DBBA58 /* ProfilesDoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfilesDoc.h; path = "commotion-meshbook/Data/ProfilesDoc.h"; sourceTree = SOURCE_ROOT; };
 		1CFACFD316DC27ED00DBBA58 /* ProfilesDoc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfilesDoc.m; path = "commotion-meshbook/Data/ProfilesDoc.m"; sourceTree = SOURCE_ROOT; };
 		1CFACFD516DC2E5600DBBA58 /* ProfilesDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfilesDatabase.h; path = "commotion-meshbook/Data/ProfilesDatabase.h"; sourceTree = SOURCE_ROOT; };
 		1CFACFD616DC2E5600DBBA58 /* ProfilesDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfilesDatabase.m; path = "commotion-meshbook/Data/ProfilesDatabase.m"; sourceTree = SOURCE_ROOT; };
+		7FAA1A1A178BA02A00DE22DA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		7FAA1A1C178BA03700DE22DA /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		7FAA1A1E178BA04100DE22DA /* SecurityInterface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SecurityInterface.framework; path = System/Library/Frameworks/SecurityInterface.framework; sourceTree = SDKROOT; };
+		7FAA1A20178BA04900DE22DA /* CoreWLAN.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreWLAN.framework; path = System/Library/Frameworks/CoreWLAN.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,12 +156,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FAA1A21178BA04900DE22DA /* CoreWLAN.framework in Frameworks */,
+				7FAA1A1F178BA04100DE22DA /* SecurityInterface.framework in Frameworks */,
+				7FAA1A1D178BA03700DE22DA /* CoreFoundation.framework in Frameworks */,
+				7FAA1A1B178BA02A00DE22DA /* SystemConfiguration.framework in Frameworks */,
 				1C8656F816EDCD9100F9F201 /* WebKit.framework in Frameworks */,
 				1C53A3F416EBE2F100E861A9 /* Growl.framework in Frameworks */,
-				1CD9F8DD16D2FF340097D188 /* SystemConfiguration.framework in Frameworks */,
-				1CD9F8DB16D2FF080097D188 /* CoreFoundation.framework in Frameworks */,
-				1CD9F83C16D18C3C0097D188 /* SecurityInterface.framework in Frameworks */,
-				1CD9F83A16D18C2B0097D188 /* CoreWLAN.framework in Frameworks */,
 				1C83035016D087D0003A59FB /* Security.framework in Frameworks */,
 				1CC5211416B66BEC001951D8 /* libicucore.dylib in Frameworks */,
 				1CC520F016B66128001951D8 /* Cocoa.framework in Frameworks */,
@@ -327,6 +327,10 @@
 		1CC520EE16B66128001951D8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7FAA1A20178BA04900DE22DA /* CoreWLAN.framework */,
+				7FAA1A1E178BA04100DE22DA /* SecurityInterface.framework */,
+				7FAA1A1C178BA03700DE22DA /* CoreFoundation.framework */,
+				7FAA1A1A178BA02A00DE22DA /* SystemConfiguration.framework */,
 				1CD9F83D16D18C520097D188 /* Linked Frameworks */,
 				1CD9F83E16D18C650097D188 /* Other Frameworks */,
 			);
@@ -382,12 +386,8 @@
 			children = (
 				1C8656F716EDCD9100F9F201 /* WebKit.framework */,
 				1C53A3F216EBE2AD00E861A9 /* Growl.framework */,
-				1CD9F8DC16D2FF340097D188 /* SystemConfiguration.framework */,
-				1CD9F8DA16D2FF080097D188 /* CoreFoundation.framework */,
 				1CC520EF16B66128001951D8 /* Cocoa.framework */,
 				1C83034F16D087CF003A59FB /* Security.framework */,
-				1CD9F83B16D18C3C0097D188 /* SecurityInterface.framework */,
-				1CD9F83916D18C2B0097D188 /* CoreWLAN.framework */,
 				1CC520F316B66128001951D8 /* CoreData.framework */,
 				1CC5211316B66BEC001951D8 /* libicucore.dylib */,
 			);

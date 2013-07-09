@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class CWInterface, CWConfiguration, CWNetwork, SFAuthorizationView;
+@class CWInterface, CWConfiguration, CWNetwork, SFAuthorizationView, CWChannel;
 
 @interface NetworkService : NSObject {
     
@@ -19,16 +19,16 @@
     NSString *ip;
     NSString *ssid;
     NSString *bssid;
-    NSNumber *channel;
+    CWChannel *channel;
     // Scanned Networks Data
     //NSDictionary *scannedNetworkData;
     //NSMutableDictionary *scannedNetworks;
-    NSMutableArray *scannedNetworks;
+    NSMutableSet *scannedNetworks;
     
 }
 
 @property (readwrite, retain) CWInterface *currentInterface;
-@property (readwrite, retain) NSMutableArray *scanResults;
+@property (readwrite, retain) NSMutableSet *scanResults;
 
 #pragma mark -
 #pragma mark Initialization

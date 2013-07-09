@@ -73,7 +73,7 @@
     [networkName setStringValue:[NSString stringWithFormat:@"%@", wifiSSID]];
     [networkSSID setStringValue:[NSString stringWithFormat:@"SSID: %@", wifiSSID]];
     [networkBSSID setStringValue:[NSString stringWithFormat:@"BSSID: %@", wifiBSSID]];
-    [networkChannel setStringValue:[NSString stringWithFormat:@"Channel: %@", wifiChannel]];
+    [networkChannel setStringValue:[NSString stringWithFormat:@"Channel: %@", [wifiChannel valueForKey:@"channelNumber"]]];
 
     //NSLog(@"%s: wifiData: %@", __FUNCTION__, wifiData);
     
